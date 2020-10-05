@@ -1,0 +1,2 @@
+class Tagentry < ApplicationRecord
+end
