@@ -19,6 +19,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'kaminari'
 gem 'jp_prefecture'
+gem 'font-awesome-sass'
 
 
 group :development, :test do

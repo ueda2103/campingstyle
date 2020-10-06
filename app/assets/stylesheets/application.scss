@@ -10,8 +10,12 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require_tree .
+ *= require_self
  */
  @import "bootstrap";
+ @import "font-awesome-sprockets";
+ @import "font-awesome";
 
 * {
   font-size: 16px;
@@ -41,6 +45,24 @@
   }
 }
 
+.btn_red {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background-color: #e65757;
+  text-decoration: none;
+  
+  &:hover {
+    color: #000000;
+    text-decoration: none;
+  }
+}
+
 .btn_green {
   display: inline-block;
   font-size: 0.75rem;
@@ -57,6 +79,18 @@
     color: #000000;
     text-decoration: none;
   }
+}
+
+.fa-pink:before {
+  color: #f727c3;
+}
+
+.fa-blue:before {
+  color: #2350e0;
+}
+
+.fa-brown:before {
+  color: #e4a51d;
 }
 
 header {

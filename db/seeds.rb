@@ -46,6 +46,14 @@ Post.create!(
   footprint: 3
 )
 
+Post.create!(
+  user_id: User.find(1).id,
+  post_images: 2,
+  title: "車中泊",
+  body: "雨だったー",
+  footprint: 4
+)
+
 Recipe.create!(
   user_id: User.find(1).id,
   recipe_images: 1,

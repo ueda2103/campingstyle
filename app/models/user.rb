@@ -1,9 +1,12 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable
+
   mount_uploader :user_image, UserImageUploader
 
   validates :family_name, :given_name, :family_name_kana, :given_name_kana, :postal_code, :prefecture_code, :city, :street, :building, :telephone_number, :email, :encrypted_password, presence: true
+
+  has_many :posts, foreign_key: "post_id"
 
   include JpPrefecture
   jp_prefecture :prefecture_code
