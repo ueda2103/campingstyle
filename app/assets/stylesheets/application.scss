@@ -17,10 +17,46 @@
   font-size: 16px;
 }
 
-.btn {
+.btn_yellow {
   border: 1px solid #000000;
   border-radius: 5px;
   background-color: #e2e961;
+}
+
+.btn_blue {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background-color: #5ddbe4;
+  text-decoration: none;
+  
+  &:hover {
+    color: #000000;
+    text-decoration: none;
+  }
+}
+
+.btn_green {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background-color: #33db5d;
+  text-decoration: none;
+  
+  &:hover {
+    color: #000000;
+    text-decoration: none;
+  }
 }
 
 header {
@@ -116,7 +152,7 @@ main {
               margin-bottom: 10px;
             }
             
-            .btn {
+            .btn_yellow {
               margin-top: 10px;
             }
           }
@@ -136,51 +172,61 @@ main {
           
           .login-form__link {
             text-align: center;
+
+            .login-form__guest-btn {
+              margin-left: 10px;
+            }
             
             .password-forget__link {
               display: inline-block;
               font-size: 0.75rem;
               margin-top: 10px;
             }
-            
-            .login-form__link_btn {
-              display: inline-block;
-              font-size: 0.75rem;
-              padding: 5px;
-              padding-left: 15px;
-              padding-right: 15px;
-              color: #000000;
-              border: 1px solid #000000;
-              border-radius: 5px;
-              background-color: #5ddbe4;
-              text-decoration: none;
-              
-              &:hover {
-                color: #000000;
-                text-decoration: none;
-              }
-            }
-            
-            .login-form__link_guest-btn {
-              display: inline-block;
-              font-size: 0.75rem;
-              padding: 5px;
-              padding-left: 15px;
-              padding-right: 15px;
-              margin-left: 10px;
-              color: #000000;
-              border: 1px solid #000000;
-              border-radius: 5px;
-              background-color: #33db5d;
-              text-decoration: none;
-              
-              &:hover {
-                color: #000000;
-                text-decoration: none;
-              }
-            }
           }
         }
+      }
+    }
+  }
+
+  .sign-up-form {
+    width: 100%;
+
+    .user-image {
+      text-align: center;
+      margin-bottom: 30px;
+
+      img {
+        margin-right: 50px;
+        border-radius: 50%;
+      }
+    }
+    
+    table {
+      margin: 0 auto;
+      
+      td {
+        padding-top: 20px;
+        vertical-align: center;
+        
+        label {
+          margin: auto;
+        }
+        
+        input {
+          margin: auto;
+          height: 25px;
+        }
+      }
+    }
+    
+    .sign-up-form__field {
+      text-align: center;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      
+      .btn_green {
+        font-size: 1rem;
+        width: 200px;
       }
     }
   }

@@ -1,0 +1,12 @@
+<div class="header-inner d-flex justify-content-between">
+  <%= link_to root_path, class: "header-logo-wrapper" do %>
+    <%= image_tag "logo.png", class: "header-logo" %>
+  <% end %>
+  <nav class="header-nav">
+    <%= link_to "Mypage", "#", class: "header-nav__link" %>
+    <%= link_to "Users", "#", class: "header-nav__link" %>
+    <%= link_to "Posts", "#", class: "header-nav__link" %>
+    <%= link_to "Camping Meals", "#", class: "header-nav__link" %>
+    <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "header-nav__link" %>
+  </nav>
+</div>

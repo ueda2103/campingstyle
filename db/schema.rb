@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 2020_10_04_020130) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "user_images"
+    t.string "user_image"
     t.string "family_name", null: false
     t.string "given_name", null: false
     t.string "family_name_kana", null: false
