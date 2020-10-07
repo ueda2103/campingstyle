@@ -6,7 +6,8 @@ class User < ApplicationRecord
 
   validates :family_name, :given_name, :family_name_kana, :given_name_kana, :postal_code, :prefecture_code, :city, :street, :building, :telephone_number, :email, :encrypted_password, presence: true
 
-  has_many :posts, foreign_key: "post_id"
+  has_many :comments
+  has_many :posts
 
   include JpPrefecture
   jp_prefecture :prefecture_code

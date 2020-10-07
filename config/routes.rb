@@ -11,17 +11,17 @@ Rails.application.routes.draw do
   scope module: :users do
     get   "/users/:id/withdrawal"   => "users#withdrawal",    as: "users_withdrawal"
     patch "/users/:id/unsubscribe"  => "users#unsubscribe",   as: "users_unsubscribe"
-    get   "/search"                 => "search#search",       as: "search"
     resources :users,         only: [:index, :show, :edit, :update]
-    resources :recipes
-    resource  :comments,      only: [:create, :destroy]
-    resource  :foods,         only: [:create, :update, :destroy]
-    resource  :flows,         only: [:create, :update, :destroy]
-    resource  :favorites,     only: [:create, :destroy]
-    resource  :bookmarks,     only: [:create, :destroy]
-    resource  :relationships, only: [:create, :destroy]
-    resource  :items,         only: [:create, :update, :destroy]
   end
 
+  get   "/search"                   => "search#search",       as: "search"
   resources :posts
+  resources :recipes
+  resources :comments,        only: [:create, :destroy]
+  resources :foods,           only: [:create, :update, :destroy]
+  resources :flows,           only: [:create, :update, :destroy]
+  resources :favorites,       only: [:create, :destroy]
+  resources :bookmarks,       only: [:create, :destroy]
+  resources :relationships,   only: [:create, :destroy]
+  resource  :items,           only: [:create, :update, :destroy]
 end

@@ -1,11 +1,23 @@
 .card-box {
   display: flex;
+  flex-wrap: wrap;
   
   .card {
+    margin: 4px;
+    padding: 5px;
+    text-align: center;
+    border: 3px solid #4edb1f;
+    border-radius: 20px;
+    background-color: #ffffff;
+
+    .post-image {
+      border-radius: 20px;
+    }
     
     .card-body {
-      width: 300px;
+      width: 280px;
       margin: 0 auto;
+      padding-bottom: 0;
       
       .card-title {
         margin-bottom: 0;
@@ -26,10 +38,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-
-        img {
-          border-radius: 50%;
-        }
 
         .user-body__text {
           margin-left: 30px;
