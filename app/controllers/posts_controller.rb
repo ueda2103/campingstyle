@@ -12,6 +12,7 @@ class PostsController < ApplicationController
     @post.update(footprint: @footprint)
     @comments = Comment.where(post_id: params[:id])
     @favorite = Favorite.find_by(user_id: current_user.id, post_id: params[:id])
+    @bookmark = Bookmark.find_by(user_id: current_user.id, post_id: params[:id])
   end
 
   def new

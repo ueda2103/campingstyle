@@ -45,13 +45,19 @@
         </div>
         <div class="title-wrapper">
           <h2><%= @post.title %></h2>
-          <div class="bookmark">
-            <% if Bookmark.find_by(user_id: current_user.id, post_id: @post.id) %>
-              <%= link_to "ブックマークを外す", bookmark_path, method: :destroy, class: "btn_red" %>
-            <% else %>
-              <%= link_to "ブックマーク", bookmarks_path, method: :post, class: "btn_blue" %>
-            <% end %>
-          </div>
+          <% if @post.user == current_user %>
+            <div class="post-edit">
+              <%= link_to "編集", edit_post_path(@post.id), class: "btn_blue" %>
+            </div>
+          <% else %>
+            <div class="bookmark">
+              <% if @bookmark %>
+                <%= link_to "ブックマークを外す", bookmark_path(@bookmark), method: :delete, class: "btn_red" %>
+              <% else %>
+                <%= link_to "ブックマーク", bookmarks_path(post_id: @post.id), method: :post, class: "btn_blue" %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
         <div class="body-wrapper">
           <p><%= @post.body %></p>

@@ -62,16 +62,16 @@
                     <p><%= p.user.family_name + p.user.given_name %></p>
                     <div class="follow">
                       <% if Relationship.find_by(followed_id: current_user.id, follower_id: p.user_id) %>
-                        <%= link_to "フォローを外す", relationships_path, method: :destroy, class: "btn_red" %>
+                        <%= link_to "フォローを外す", relationship_path(Relationship.find_by(followed_id: current_user.id, follower_id: p.user_id), user_id: p.user_id), method: :delete, class: "btn_red" %>
                       <% else %>
-                        <%= link_to "フォロー", relationships_path, method: :post, class: "btn_blue" %>
+                        <%= link_to "フォロー", relationships_path(user_id: p.user_id), method: :post, class: "btn_blue" %>
                       <% end %>
                     </div>
                     <div class="bookmark">
                       <% if Bookmark.find_by(user_id: current_user.id, post_id: p.id) %>
-                        <%= link_to "ブックマークを外す", bookmarks_path, method: :destroy, class: "btn_red" %>
+                        <%= link_to "ブックマークを外す", bookmark_path(Bookmark.find_by(user_id: current_user.id, post_id: p.id)), method: :delete, class: "btn_red" %>
                       <% else %>
-                        <%= link_to "ブックマーク", bookmarks_path, method: :post, class: "btn_blue" %>
+                        <%= link_to "ブックマーク", bookmarks_path(post_id: p.id), method: :post, class: "btn_blue" %>
                       <% end %>
                     </div>
                   </div>
