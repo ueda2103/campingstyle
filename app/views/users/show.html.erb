@@ -1,0 +1,11 @@
+<main>
+  <div class="container">
+    <div class="row">
+      <% if @user == current_user %>
+        <%= render "mypage", user: @user, posts: @posts_bookmark, recipes: @recipes_bookmark, items: @items %>
+      <% else %>
+        <%= render "show", user: @user, posts: @posts, recipes: @recipes %>
+      <% end %>
+    </div>
+  </div>
+</main>

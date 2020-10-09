@@ -1,0 +1,11 @@
+<main class="withdrawal">
+  <h2 class="mt-5">本当に退会しますか？</h2>
+  <p>
+    退会すると会員情報やブックマーク、持ち物リストが削除されます。<br>
+    退会する場合は「退会する」をクリックしてください
+  </p>
+  <div class="withdrawal-btn mt-4">
+    <%= link_to "退会しない", user_path(current_user.id), class: "btn_blue" %>
+    <%= link_to "退会する", users_unsubscribe_path(current_user.id), method: :patch, class: "btn_red" %>
+  </div>
+</main>

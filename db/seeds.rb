@@ -18,8 +18,7 @@ User.create!(
   building: "インフラトップ 4F",
   telephone_number: "09011112222",
   email: "test@gmail.com",
-  password: "password",
-  is_deleted: false
+  password: "password"
 )
 
 User.create!(
@@ -34,13 +33,12 @@ User.create!(
   building: "インフラトップ 4F",
   telephone_number: "09033332222",
   email: "test2@gmail.com",
-  password: "password",
-  is_deleted: false
+  password: "password"
 )
 
 Post.create!(
   user_id: User.find(1).id,
-  post_images: 1,
+  post_images: "1",
   title: "久々のソロキャンプ",
   body: "今日は楽しむぞ〜！",
   footprint: 3
@@ -48,7 +46,7 @@ Post.create!(
 
 Post.create!(
   user_id: User.find(1).id,
-  post_images: 2,
+  post_images: "2",
   title: "車中泊",
   body: "雨だったー",
   footprint: 4
@@ -103,7 +101,6 @@ Relationship.create!(
 Item.create!(
   user_id: User.find(1).id,
   name: "ファイヤスターター",
-  quantity: "1つ",
   status: 0
 )
 

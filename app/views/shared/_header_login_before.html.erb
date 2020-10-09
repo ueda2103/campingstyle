@@ -3,9 +3,9 @@
     <%= image_tag "logo.png", class: "header-logo" %>
   <% end %>
   <nav class="header-nav">
-    <%= link_to "About", "#", class: "header-nav__link" %>
-    <%= link_to "Users", "#", class: "header-nav__link" %>
-    <%= link_to "Posts", "#", class: "header-nav__link" %>
-    <%= link_to "Camping Meals", "#", class: "header-nav__link" %>
+    <%= link_to "About", root_path, class: "header-nav__link" %>
+    <%= link_to "Users", users_path, class: "header-nav__link" %>
+    <%= link_to "Posts", posts_path, class: "header-nav__link" %>
+    <%= link_to "Camping Meals", recipes_path, class: "header-nav__link" %>
   </nav>
 </div>

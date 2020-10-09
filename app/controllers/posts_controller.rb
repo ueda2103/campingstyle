@@ -22,6 +22,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+
     if @post.save
       redirect_to post_path(@post.id), notice: "投稿が保存されました"
     else
@@ -35,17 +36,23 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
+    
     if @post.update(post_params)
       redirect_to post_path(@post.id), notice: "編集が保存されました"
     else
-      redirect_back fallback_location: edit_post_path(params[:id]), notice: "保存に失敗しました"
+      redirect_back fallback_location: edit_post_path(@post.id), notice: "保存に失敗しました"
     end
   end
 
   def destroy
     @post = Post.find(params[:id])
-    @post.destroy
-    redirect_to posts_path, notice: "正常に削除されました"
+
+    if @post.user == current_user
+      @post.destroy
+      redirect_to posts_path, notice: "正常に削除されました"
+    else
+      redirect_back fallback_location: post_path(@post.id), notice: "他のユーザーの投稿は削除できません"  
+    end
   end
 
   private

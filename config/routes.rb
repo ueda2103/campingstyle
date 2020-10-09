@@ -8,12 +8,9 @@ Rails.application.routes.draw do
     root  "homes#top"
   end
 
-  scope module: :users do
-    get   "/users/:id/withdrawal"   => "users#withdrawal",    as: "users_withdrawal"
-    patch "/users/:id/unsubscribe"  => "users#unsubscribe",   as: "users_unsubscribe"
-    resources :users,         only: [:index, :show, :edit, :update]
-  end
-
+  get   "/users/:id/withdrawal"   => "users#withdrawal",    as: "users_withdrawal"
+  patch "/users/:id/unsubscribe"  => "users#unsubscribe",   as: "users_unsubscribe"
+  resources :users,         only: [:index, :show, :edit, :update]
   get   "/search"                   => "search#search",       as: "search"
   resources :posts
   resources :recipes
@@ -23,5 +20,5 @@ Rails.application.routes.draw do
   resources :favorites,       only: [:create, :destroy]
   resources :bookmarks,       only: [:create, :destroy]
   resources :relationships,   only: [:create, :destroy]
-  resource  :items,           only: [:create, :update, :destroy]
+  resources :items,           only: [:create, :update, :destroy]
 end
