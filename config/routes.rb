@@ -8,17 +8,17 @@ Rails.application.routes.draw do
     root  "homes#top"
   end
 
-  get   "/users/:id/withdrawal"   => "users#withdrawal",    as: "users_withdrawal"
-  patch "/users/:id/unsubscribe"  => "users#unsubscribe",   as: "users_unsubscribe"
-  resources :users,         only: [:index, :show, :edit, :update]
-  get   "/search"                   => "search#search",       as: "search"
+  get   "/users/:id/withdrawal"           => "users#withdrawal",          as: "users_withdrawal"
+  patch "/users/:id/unsubscribe"          => "users#unsubscribe",         as: "users_unsubscribe"
+  get   "/search"                         => "search#search",             as: "search"
+  resources :users,           only: [:index, :show, :edit, :update]
   resources :posts
   resources :recipes
   resources :comments,        only: [:create, :destroy]
-  resources :foods,           only: [:create, :update, :destroy]
-  resources :flows,           only: [:create, :update, :destroy]
+  resources :foods,           only: [:create, :destroy]
+  resources :flows,           only: [:create, :destroy]
   resources :favorites,       only: [:create, :destroy]
   resources :bookmarks,       only: [:create, :destroy]
   resources :relationships,   only: [:create, :destroy]
-  resources :items,           only: [:create, :update, :destroy]
+  resources :items,           only: [:create, :destroy]
 end

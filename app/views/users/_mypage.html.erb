@@ -22,7 +22,7 @@
 
     <% items.each do |i| %>
       <%= link_to i.name,  class: "btn_blue" %>
-      <%= link_to "X", item_path(i.id), method: :delete, class: "btn_red" %>
+      <%= link_to "削除", item_path(i.id), method: :delete, class: "btn_red" %>
     <% end %>
   </div>
 
