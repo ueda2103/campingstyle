@@ -1,91 +1,85 @@
-<main>
-  <div class="container">
-    <div class="row my-4">
-      <div class="col-6">
-        <%= image_tag @post.post_images.thumb.url, size: "500x350" %>
-        <div class="post-body px-4 my-5">
-          <%= link_to user_path(@post.user_id) do %>
-            <%= image_tag @post.user.user_image.thumb.url, size: "70x70", class: "user-icon" %>
-          <% end %>
-          <div class="post-body__info">
-            <p><%= @post.user.family_name + @post.user.given_name %></p>
-            <div class="follow">
-              <% if Relationship.find_by(followed_id: current_user.id, follower_id: @post.user_id) %>
-                <%= link_to "フォローを外す", relationships_path, method: :destroy, class: "btn_red" %>
-              <% else %>
-                <%= link_to "フォロー", relationships_path, method: :post, class: "btn_blue" %>
-              <% end %>
-            </div>
-            <div class="post-body__info_link">
-              <% if @favorite %>
-                <p>
-                  <%= link_to favorite_path(@favorite), method: :delete do %>
-                    <i class="fas fa-heart fa-pink"></i>いいね　
-                  <% end %>
-                  <%= @post.favorite_users.count %>件
-                </p>
-              <% else %>
-                <%= link_to favorites_path(post_id: @post.id), method: :post do %>
-                  <p>
-                    <i class="far fa-heart fa-pink"></i>いいね　
-                    <%= @post.favorite_users.count %>件
-                  </p>
-                <% end %>
-              <% end %>
-              <p>
-                <i class="fas fa-comment fa-blue"></i>コメント
-                <%= @post.comments.count %>件
-              </p>
-              <p>
-                <i class="fas fa-paw fa-brown"></i>足あと　
-                <%= @post.footprint %>件
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="title-wrapper">
-          <h2><%= @post.title %></h2>
-          <% if @post.user == current_user %>
-            <div class="post-edit">
-              <%= link_to "編集", edit_post_path(@post.id), class: "btn_blue" %>
-            </div>
-          <% else %>
-            <div class="bookmark">
-              <% if @bookmark %>
-                <%= link_to "ブックマークを外す", bookmark_path(@bookmark), method: :delete, class: "btn_red" %>
-              <% else %>
-                <%= link_to "ブックマーク", bookmarks_path(post_id: @post.id), method: :post, class: "btn_blue" %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-        <div class="body-wrapper">
-          <p><%= @post.body %></p>
-        </div>
+<div class="col-6">
+  <%= image_tag @post.post_images.thumb.url, size: "500x350" %>
+  <div class="post-body px-4 my-5">
+    <%= link_to user_path(@post.user_id) do %>
+      <%= image_tag @post.user.user_image.thumb.url, size: "70x70", class: "user-icon" %>
+    <% end %>
+    <div class="post-body__info">
+      <p><%= @post.user.family_name + @post.user.given_name %></p>
+      <div class="follow">
+        <% if Relationship.find_by(followed_id: current_user.id, follower_id: @post.user_id) %>
+          <%= link_to "フォローを外す", relationships_path, method: :destroy, class: "btn_red" %>
+        <% else %>
+          <%= link_to "フォロー", relationships_path, method: :post, class: "btn_blue" %>
+        <% end %>
       </div>
-      <div class="col-6">
-        <h2 class="mt-5">Comment</h2>
-        <%= form_with model: @comment, url: comments_path, local: true do |f| %>
-          <%= f.text_area :body %>
-          <%= f.hidden_field :user_id, value: current_user.id %>
-          <%= f.hidden_field :post_id, value: @post.id %>
-          <%= f.submit "送信" %>
-        <% end %>
-        <% @comments.each do |c| %>
-          <div class="user-info">
-            <%= link_to user_path(c.user_id) do %>
-              <%= image_tag c.user.user_image.thumb.url, size: "70x70", class: "user-icon" %>
+      <div class="post-body__info_link">
+        <% if @favorite %>
+          <p>
+            <%= link_to favorite_path(@favorite), method: :delete do %>
+              <i class="fas fa-heart fa-pink"></i>いいね　
             <% end %>
-            <p><%= c.user.family_name + c.user.given_name %></p>
-            <% if c.user_id == current_user.id %>
-              <%= link_to "削除", comment_path(id: c.id), method: :delete, data: {cofirm: "本当に削除しますが？"}, class: "btn_red" %>
-            <% end %>
-          </div>
-          <div class="comment-body">
-            <p><%= c.body %></p>
-          </div>
+            <%= @post.favorite_users.count %>件
+          </p>
+        <% else %>
+          <%= link_to favorites_path(post_id: @post.id), method: :post do %>
+            <p>
+              <i class="far fa-heart fa-pink"></i>いいね　
+              <%= @post.favorite_users.count %>件
+            </p>
+          <% end %>
         <% end %>
+        <p>
+          <i class="fas fa-comment fa-blue"></i>コメント
+          <%= @post.comments.count %>件
+        </p>
+        <p>
+          <i class="fas fa-paw fa-brown"></i>足あと　
+          <%= @post.footprint %>件
+        </p>
       </div>
     </div>
   </div>
-</main>
+  <div class="title-wrapper">
+    <h2><%= @post.title %></h2>
+    <% if @post.user == current_user %>
+      <div class="post-edit">
+        <%= link_to "編集", edit_post_path(@post.id), class: "btn_blue" %>
+      </div>
+    <% else %>
+      <div class="bookmark">
+        <% if @bookmark %>
+          <%= link_to "ブックマークを外す", bookmark_path(@bookmark), method: :delete, class: "btn_red" %>
+        <% else %>
+          <%= link_to "ブックマーク", bookmarks_path(post_id: @post.id), method: :post, class: "btn_blue" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="body-wrapper">
+    <p><%= @post.body %></p>
+  </div>
+</div>
+<div class="col-6">
+  <h2 class="mt-5">Comment</h2>
+  <%= form_with model: @comment, url: comments_path, local: true do |f| %>
+    <%= f.text_area :body %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :post_id, value: @post.id %>
+    <%= f.submit "送信" %>
+  <% end %>
+  <% @comments.each do |c| %>
+    <div class="user-info">
+      <%= link_to user_path(c.user_id) do %>
+        <%= image_tag c.user.user_image.thumb.url, size: "70x70", class: "user-icon" %>
+      <% end %>
+      <p><%= c.user.family_name + c.user.given_name %></p>
+      <% if c.user_id == current_user.id %>
+        <%= link_to "削除", comment_path(id: c.id), method: :delete, data: {cofirm: "本当に削除しますが？"}, class: "btn_red" %>
+      <% end %>
+    </div>
+    <div class="comment-body">
+      <p><%= c.body %></p>
+    </div>
+  <% end %>
+</div>

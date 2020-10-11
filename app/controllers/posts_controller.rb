@@ -1,9 +1,20 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @posts = Post.all
     @tags = Tag.all
+    if params[:search].present?
+      @posts = Post.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC")
+      if @posts.present?
+        @title = "検索結果：#{params[:search]}"
+      else
+        @title = "ALL"
+        redirect_to posts_path, notice: "検索結果がありません"
+      end
+    else
+      @posts = Post.all.order(id: "DESC")
+      @title = "ALL"
+    end
   end
 
   def show

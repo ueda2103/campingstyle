@@ -1,0 +1,14 @@
+<%# タグ検索フォーム %>
+<table>
+
+  <thead>
+    <tr><td>タグ検索</td></tr>
+  </thead>
+
+  <tbody>
+    <% tags.each do |t| %>
+      <tr><td><%= link_to t.name, posts_path(tag_id: t.id) %></td></tr>
+    <% end %>
+  </tbody>
+
+</table>

@@ -1,86 +1,12 @@
-<main>
-  <div class="container">
-    <div class="row">
-      <div class="col-2 my-4 px-3">
-        <table>
-          <thead>
-            <tr>
-              <td>タグ検索</td>
-            </tr>
-          </thead>
-          <tbody>
-            <% @tags.each do |t| %>
-              <tr>
-                <td>
-                  <%= link_to t.name, posts_path(tag_id: t.id) %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-10 my-4 px-3">
-        <h2>ALL</h2>
-        <div class="card-box">
-          <% @recipes.each do |r| %>
-            <div class="card py-4">
-              <%= link_to recipe_path(r.id) do %>
-                <%= image_tag r.recipe_images.thumb.url, size: "250x200", class: "recipe-image" %>
-              <% end %>
-              <div class="card-body">
-                <p class="card-title"><%= r.title %></p>
-                <div class="card-body__link">
-                  <% if Favorite.find_by(user_id: current_user.id, recipe_id: r.id) %>
-                    <%= link_to favorite_path(Favorite.find_by(user_id: current_user.id, recipe_id: r.id)), method: :delete do %>
-                      <p class="d-inline-block">
-                        <i class="fas fa-heart fa-pink"></i>
-                        <%= r.favorite_users.count %>件　
-                      </p>
-                    <% end %>
-                  <% else %>
-                    <%= link_to favorites_path(recipe_id: r.id), method: :recipe do %>
-                      <p class="d-inline-block">
-                        <i class="far fa-heart fa-pink"></i>
-                        <%= r.favorite_users.count %>件　
-                      </p>
-                    <% end %>
-                  <% end %>
-                  <p class="d-inline-block">
-                    <i class="fas fa-comment fa-blue"></i>
-                    <%= r.comments.count %>件　
-                  </p>
-                  <p class="d-inline-block">
-                    <i class="fas fa-paw fa-brown"></i>
-                    <%= r.footprint %>件
-                  </p>
-                </div>
-                <div class="user-body px-4">
-                  <%= link_to user_path(r.user_id) do %>
-                    <%= image_tag r.user.user_image.thumb.url, size: "70x70", class: "user-icon" %>
-                  <% end %>
-                  <div class="user-body__text">
-                    <p><%= r.user.family_name + r.user.given_name %></p>
-                    <div class="follow">
-                      <% if Relationship.find_by(followed_id: current_user.id, follower_id: r.user_id) %>
-                        <%= link_to "フォローを外す", relationship_path(Relationship.find_by(followed_id: current_user.id, follower_id: r.user_id), user_id: r.user_id), method: :delete, class: "btn_red" %>
-                      <% else %>
-                        <%= link_to "フォロー", relationships_path(user_id: r.user_id), method: :recipe, class: "btn_blue" %>
-                      <% end %>
-                    </div>
-                    <div class="bookmark">
-                      <% if Bookmark.find_by(user_id: current_user.id, recipe_id: r.id) %>
-                        <%= link_to "ブックマークを外す", bookmark_path(Bookmark.find_by(user_id: current_user.id, recipe_id: r.id)), method: :delete, class: "btn_red" %>
-                      <% else %>
-                        <%= link_to "ブックマーク", bookmarks_path(recipe_id: r.id), method: :post, class: "btn_blue" %>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
+<%# レシピタグ検索フォーム %>
+<div class="col-2 my-4 px-3">
+  <%= render "/shared/index_sidebar", tags: @tags %>
+</div>
+
+<%# レシピ一覧メイン %>
+<div class="col-10 my-4 px-3">
+
+  <%# レシピ検索フォーム %>
+  <%= render "/shared/recipe_index", title: @title, recipes: @recipes %>
+
+</div>

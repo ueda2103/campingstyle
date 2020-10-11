@@ -8,9 +8,10 @@ Rails.application.routes.draw do
     root  "homes#top"
   end
 
-  get   "/users/:id/withdrawal"           => "users#withdrawal",          as: "users_withdrawal"
-  patch "/users/:id/unsubscribe"          => "users#unsubscribe",         as: "users_unsubscribe"
-  get   "/search"                         => "search#search",             as: "search"
+  get   "/users/:id/posts"        => "users#posts",       as: "users_posts"
+  get   "/users/:id/recipes"      => "users#recipes",     as: "users_recipes"
+  get   "/users/:id/withdrawal"   => "users#withdrawal",  as: "users_withdrawal"
+  patch "/users/:id/unsubscribe"  => "users#unsubscribe", as: "users_unsubscribe"
   resources :users,           only: [:index, :show, :edit, :update]
   resources :posts
   resources :recipes

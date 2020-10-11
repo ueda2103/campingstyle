@@ -1,0 +1,12 @@
+<%# ユーザー詳細サイドバー %>
+<h2>User</h2>
+<%= image_tag user.user_image.thumb.url, size: "70x70", class: "user-icon mb-1" %>
+<p class="mb-1"><%= user.family_name + user.given_name %></p>
+<p class="mb-4"><%= user.family_name_kana + user.given_name_kana %></p>
+
+<%# フォローリンク %>
+<% if Relationship.find_by(followed_id: current_user.id, follower_id: user.id) %>
+  <%= link_to "フォローを外す", relationship_path(Relationship.find_by(followed_id: current_user.id, follower_id: user.id), user_id: user.id), method: :delete, class: "btn_red mb-3" %>
+<% else %>
+  <%= link_to "フォロー", relationships_path(user_id: user.id), method: :post, class: "btn_blue mb-3" %>
+<% end %>

@@ -1,11 +1,24 @@
-<main>
-  <div class="container">
-    <div class="row">
-      <% if @user == current_user %>
-        <%= render "mypage", user: @user, posts: @posts_bookmark, recipes: @recipes_bookmark, items: @items %>
-      <% else %>
-        <%= render "show", user: @user, posts: @posts, recipes: @recipes %>
-      <% end %>
-    </div>
+<%# マイページサイドバー %>
+<div class="current-user-info col-2">
+  <%= render "mypage_sidebar", user: @user %>
+</div>
+
+<%# マイページ持ち物リスト %>
+<div class="current-user-body col-10">
+  <div class="items">
+
+    <%# 持ち物リスト入力フォーム %>
+    <%= form_with model: @item, url: items_path do |f| %>
+      <%= f.label :name, "持ち物" %>
+      <%= f.text_field :name %>
+      <%= f.submit "登録", class: "btn_blue" %>
+    <% end %>
+
+    <%# 持ち物リスト表示画面 %>
+    <% @items.each do |i| %>
+      <%= link_to i.name,  class: "btn_blue" %>
+      <%= link_to "削除", item_path(i.id), method: :delete, class: "btn_red" %>
+    <% end %>
+
   </div>
-</main>
+</div>

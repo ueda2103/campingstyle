@@ -2,15 +2,30 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @recipes = Recipe.all
     @tags = Tag.all
+    if params[:search].present?
+      @recipes = Recipe.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC")
+      if @recipes.present?
+        @title = "検索結果：#{params[:search]}"
+      else
+        @title = "ALL"
+        redirect_to recipes_path, notice: "検索結果がありません"
+      end
+    else
+      @recipes = Recipe.all.order(id: "DESC")
+      @title = "ALL"
+    end
   end
 
   def show
     @recipe = Recipe.find(params[:id])
+    @footprint = @recipe.footprint + 1
+    @recipe.update(footprint: @footprint)
     @foods = Food.where(recipe_id: @recipe.id)
     @flows = Flow.where(recipe_id: @recipe.id)
     @comments = Comment.where(recipe_id: @recipe.id)
+    @favorite = Favorite.find_by(user_id: current_user.id, recipe_id: params[:id])
+    @bookmark = Bookmark.find_by(user_id: current_user.id, recipe_id: params[:id])
   end
 
   def new

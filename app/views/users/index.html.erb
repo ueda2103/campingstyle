@@ -1,56 +1,55 @@
-<main>
-  <div class="container">
-    <div class="row">
-      <div class="users offset-2 col-8 my-4 px-3">
-        <h2 class="mb-4">Users</h2>
-          <% @users.each do |u| %>
-            <div class="user-body d-flex py-2">
-              <%= link_to user_path(u.id) do %>
-                <%= image_tag u.user_image.thumb.url, size: "70x70", class: "user-icon mx-4" %>
-              <% end %>
+<div class="users offset-2 col-8 my-4 px-3">
+  <h2 class="mb-4">Users　<%= @title %></h2>
 
-              <div class="user-body__text mx-4">
-                <p class="mb-2"><%= u.family_name + u.given_name %></p>
-                <div class="follow">
-                  <% if u == current_user %>
-                    <%= link_to "マイページ", user_path(current_user.id), class: "btn_green" %>
-                  <% else %>
-                    <% if Relationship.find_by(followed_id: current_user.id, follower_id: u.id) %>
-                      <%= link_to "フォローを外す", relationship_path(Relationship.find_by(followed_id: current_user.id, follower_id: u.id), user_id: u.id), method: :delete, class: "btn_red" %>
-                    <% else %>
-                      <%= link_to "フォロー", relationships_path(user_id: u.id), method: :post, class: "btn_blue" %>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
+  <%= form_with url: users_path, method: :get, local: true do |f| %>
+    <%= f.text_field :search %>
+    <%= f.submit "検索", class: "btn_blue" %>
+  <% end %>
+  
+  <% @users.each do |u| %>
+    <div class="user-body d-flex py-2">
+      <%= link_to user_path(u.id) do %>
+        <%= image_tag u.user_image.thumb.url, size: "70x70", class: "user-icon mx-4" %>
+      <% end %>
 
-              <div class="follow-count__wrapper mx-4">
-                <div class="follow-count mb-2">
-                  <p>フォロー</p>
-                  <p><%= u.follower.count %>件</p>
-                </div>
-                <div class="follow-count">
-                  <p>フォロワー</p>
-                  <p><%= u.followed.count %>件</p>
-                </div>
-              </div>
-
-              <div class="post-count__wrapper mx-4">
-                <div class="post-count mb-2">
-                  <span><i class="fas fa-campground fa-green fa-size__m"></i></span>
-                  <p>Posts</p>
-                  <p><%= u.posts.count %>件</p>
-                </div>
-                <div class="post-count">
-                  <span><i class="fas fa-utensils fa-brown fa-size__m"></i></span>
-                  <p>Camping Meals</p>
-                  <p><%= u.recipes.count %>件</p>
-                </div>
-              </div>
-            </div>
+      <div class="user-body__text mx-4">
+        <p class="mb-2"><%= u.family_name + u.given_name %></p>
+        <div class="follow">
+          <% if u == current_user %>
+            <%= link_to "マイページ", user_path(current_user.id), class: "btn_green" %>
+          <% else %>
+            <% if Relationship.find_by(followed_id: current_user.id, follower_id: u.id) %>
+              <%= link_to "フォローを外す", relationship_path(Relationship.find_by(followed_id: current_user.id, follower_id: u.id), user_id: u.id), method: :delete, class: "btn_red" %>
+            <% else %>
+              <%= link_to "フォロー", relationships_path(user_id: u.id), method: :post, class: "btn_blue" %>
+            <% end %>
           <% end %>
         </div>
       </div>
+
+      <div class="follow-count__wrapper mx-4">
+        <div class="follow-count mb-2">
+          <p>フォロー</p>
+          <p><%= u.follower.count %>件</p>
+        </div>
+        <div class="follow-count">
+          <p>フォロワー</p>
+          <p><%= u.followed.count %>件</p>
+        </div>
+      </div>
+
+      <div class="post-count__wrapper mx-4">
+        <div class="post-count mb-2">
+          <span><i class="fas fa-campground fa-green fa-size__m"></i></span>
+          <p>Posts</p>
+          <p><%= u.posts.count %>件</p>
+        </div>
+        <div class="post-count">
+          <span><i class="fas fa-utensils fa-brown fa-size__m"></i></span>
+          <p>Camping Meals</p>
+          <p><%= u.recipes.count %>件</p>
+        </div>
+      </div>
     </div>
-  </div>
-</main>
+  <% end %>
+</div>

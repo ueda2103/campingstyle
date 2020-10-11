@@ -1,6 +1,19 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :update, :withdrawal, :unsubscribe]
+
   def index
     @users = User.where(is_deleted: "有効")
+    if params[:search].present?
+      @users = @users.where("family_name LIKE ?", "%#{params[:search]}%")
+      if @users.present?
+        @title = "検索結果：#{params[:search]}"
+      else
+        @title = "ALL"
+        redirect_to users_path, notice: "検索結果がありません"
+      end
+    else
+      @title = "ALL"
+    end
   end
 
   def show
@@ -11,14 +24,21 @@ class UsersController < ApplicationController
     end
     
     if @user == current_user
-      @posts_bookmark = current_user.bookmark_post
-      @recipes_bookmark = current_user.bookmark_recipe
       @item = Item.new
       @items = current_user.items
     else
-      @posts = Post.where(user_id: params[:id])
-      @recipes = Post.where(user_id: params[:id])
+      redirect_to users_posts_path(params[:id])
     end
+  end
+
+  def posts
+    @user = User.find(params[:id])
+    @posts = Post.where(user_id: params[:id])
+  end
+  
+  def recipes
+    @user = User.find(params[:id])
+    @recipes = Recipe.where(user_id: params[:id])
   end
 
   def edit
