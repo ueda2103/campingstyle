@@ -3,28 +3,25 @@ class FavoritesController < ApplicationController
   before_action :check_user, only: [:destroy]
 
   def create
-    @favorite = Favorite.new
-    @favorite.user_id = current_user.id
     if params[:post_id].present?
-      @favorite.post_id = params[:post_id]
-      @favorite.save
-      redirect_back fallback_location: posts_path
+      @post_recipe = Post.find(params[:post_id])
+      @favorite = Favorite.new(user_id: current_user.id, post_id: @post_recipe.id)
     else
-      @favorite.recipe_id = params[:recipe_id]
-      @favorite.save
-      redirect_back fallback_location: recipes_path
+      @post_recipe = Recipe.find(params[:recipe_id])
+      @favorite = Favorite.new(user_id: current_user.id, recipe_id: @post_recipe.id)
     end
+    @favorite.save
   end
 
   def destroy
-    @favorite = Favorite.find(params[:id])
-    if @favorite.post_id.nil?
-      @favorite.destroy
-      redirect_back fallback_location: recipes_path
+    if params[:post_id].present?
+      @post_recipe = Post.find(params[:post_id])
+      @favorite = Favorite.find_by(user_id: current_user.id, post_id: @post_recipe.id)
     else
-      @favorite.destroy
-      redirect_back fallback_location: posts_path
+      @post_recipe = Recipe.find(params[:recipe_id])
+      @favorite = Favorite.find_by(user_id: current_user.id, recipe_id: @post_recipe.id)
     end
+    @favorite.destroy
   end
 
   private

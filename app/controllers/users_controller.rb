@@ -33,12 +33,12 @@ class UsersController < ApplicationController
 
   def posts
     @user = User.find(params[:id])
-    @posts = Post.where(user_id: params[:id])
+    @posts = Post.where(user_id: params[:id]).page(params[:page]).per(9)
   end
   
   def recipes
     @user = User.find(params[:id])
-    @recipes = Recipe.where(user_id: params[:id])
+    @recipes = Recipe.where(user_id: params[:id]).page(params[:page]).per(9)
   end
 
   def edit

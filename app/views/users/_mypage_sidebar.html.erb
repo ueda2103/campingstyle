@@ -5,7 +5,7 @@
 <p class="mb-4"><%= current_user.family_name_kana + current_user.given_name_kana %></p>
 <%= link_to "プロフィール編集", edit_user_path(current_user.id), class: "btn_blue mb-1" %>
 <%= link_to "パスワード変更", edit_user_registration_path(current_user.id), class: "btn_blue mb-1" %>
-<%= link_to "My Posts", posts_path(user_id: current_user.id), class: "btn_blue mb-1" %>
+<%= link_to "My Posts", users_posts_path(current_user.id), class: "btn_blue mb-1" %>
 <%= link_to "New Post", new_post_path, class: "btn_green mb-1" %>
-<%= link_to "My Camping Meals", recipes_path, class: "btn_blue mb-1" %>
+<%= link_to "My Camping Meals", users_recipes_path(current_user.id), class: "btn_blue mb-1" %>
 <%= link_to "New Camping Meal", new_recipe_path, class: "btn_green mb-1" %>

@@ -1,0 +1,38 @@
+<% if /post/ =~ request.fullpath %>
+
+  <% if post.post_favorited_by?(current_user) %>
+    <%= link_to favorite_path(post.post_favorited_by(current_user), post_id: post.id), method: :delete, remote: true do %>
+      <p class="d-inline-block">
+        <i class="fas fa-heart fa-pink"></i>
+        <%= post.favorite_users.count %>件
+      </p>
+    <% end %>
+
+  <% else %>
+    <%= link_to favorites_path(post_id: post.id), method: :post, remote: true do %>
+      <p class="d-inline-block">
+        <i class="far fa-heart fa-pink"></i>
+        <%= post.favorite_users.count %>件
+      </p>
+    <% end %>
+  <% end %>
+
+<% else %>
+
+  <% if recipe.recipe_favorited_by?(current_user) %>
+    <%= link_to favorite_path(recipe.recipe_favorited_by(current_user), recipe_id: recipe.id), method: :delete, remote: true do %>
+      <p class="d-inline-block">
+        <i class="fas fa-heart fa-pink"></i>
+        <%= recipe.favorite_users.count %>件
+      </p>
+    <% end %>
+
+  <% else %>
+    <%= link_to favorites_path(recipe_id: recipe.id), method: :post, remote: true do %>
+      <p class="d-inline-block">
+        <i class="far fa-heart fa-pink"></i>
+        <%= recipe.favorite_users.count %>件
+      </p>
+    <% end %>
+  <% end %>
+<% end %>

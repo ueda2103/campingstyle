@@ -1,0 +1,9 @@
+<% if Relationship.find_by(followed_id: current_user.id, follower_id: recipe.user_id) %>
+
+  <%= link_to "フォローを外す", relationship_path(Relationship.find_by(followed_id: current_user.id, follower_id: recipe.user_id), user_id: recipe.user_id), method: :delete, class: "btn_red" %>
+
+<% else %>
+
+  <%= link_to "フォロー", relationships_path(user_id: recipe.user_id), method: :post, class: "btn_blue" %>
+
+<% end %>

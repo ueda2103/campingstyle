@@ -3,28 +3,25 @@ class BookmarksController < ApplicationController
   before_action :check_user, only: [:destroy]
 
   def create
-    @bookmark = Bookmark.new
-    @bookmark.user_id = current_user.id
     if params[:post_id].present?
-      @bookmark.post_id = params[:post_id]
-      @bookmark.save
-      redirect_back fallback_location: posts_path
+      @post_recipe = Post.find(params[:post_id])
+      @bookmark = Bookmark.new(user_id: current_user.id, post_id: @post_recipe.id)
     else
-      @bookmark.recipe_id = params[:recipe_id]
-      @bookmark.save
-      redirect_back fallback_location: recipes_path
+      @post_recipe = Recipe.find(params[:recipe_id])
+      @bookmark = Bookmark.new(user_id: current_user.id, recipe_id: @post_recipe.id)
     end
+    @bookmark.save
   end
 
   def destroy
-    @bookmark = Bookmark.find(params[:id])
-    if @bookmark.post_id.nil?
-      @bookmark.destroy
-      redirect_back fallback_location: recipes_path
+    if params[:post_id].present?
+      @post_recipe = Post.find(params[:post_id])
+      @bookmark = Bookmark.find_by(user_id: current_user.id, post_id: @post_recipe.id)
     else
-      @bookmark.destroy
-      redirect_back fallback_location: posts_path
+      @post_recipe = Recipe.find(params[:recipe_id])
+      @bookmark = Bookmark.find_by(user_id: current_user.id, recipe_id: @post_recipe.id)
     end
+    @bookmark.destroy
   end
 
   private

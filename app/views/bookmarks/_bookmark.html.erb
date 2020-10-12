@@ -1,0 +1,19 @@
+<% if /post/ =~ request.fullpath %>
+
+  <% if post.post_bookmark_by?(current_user) %>
+    <%= link_to "ブックマークを外す", bookmark_path(post.post_bookmark_by(current_user), post_id: post.id), method: :delete, remote: true, class: "btn_red" %>
+
+  <% else %>
+    <%= link_to "ブックマーク", bookmarks_path(post_id: post.id), method: :post, remote: true, class: "btn_blue" %>
+  <% end %>
+
+<% else %>
+
+  <% if recipe.recipe_bookmark_by?(current_user) %>
+    <%= link_to "ブックマークを外す", bookmark_path(recipe.recipe_bookmark_by(current_user), recipe_id: recipe.id), method: :delete, remote: true, class: "btn_red" %>
+
+  <% else %>
+    <%= link_to "ブックマーク", bookmarks_path(recipe_id: recipe.id), method: :post, remote: true, class: "btn_blue" %>
+  <% end %>
+
+<% end %>

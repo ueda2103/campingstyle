@@ -3,16 +3,19 @@ class RecipesController < ApplicationController
 
   def index
     @tags = Tag.all
+
     if params[:search].present?
-      @recipes = Recipe.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC")
+      @recipes = Recipe.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(9)
+
       if @recipes.present?
         @title = "検索結果：#{params[:search]}"
       else
         @title = "ALL"
         redirect_to recipes_path, notice: "検索結果がありません"
       end
+
     else
-      @recipes = Recipe.all.order(id: "DESC")
+      @recipes = Recipe.all.order(id: "DESC").page(params[:page]).per(9)
       @title = "ALL"
     end
   end
