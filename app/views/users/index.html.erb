@@ -14,28 +14,14 @@
 
       <div class="user-body__text mx-4">
         <p class="mb-2"><%= u.family_name + u.given_name %></p>
-        <div class="follow">
-          <% if u == current_user %>
-            <%= link_to "マイページ", user_path(current_user.id), class: "btn_green" %>
-          <% else %>
-            <% if Relationship.find_by(followed_id: current_user.id, follower_id: u.id) %>
-              <%= link_to "フォローを外す", relationship_path(Relationship.find_by(followed_id: current_user.id, follower_id: u.id), user_id: u.id), method: :delete, class: "btn_red" %>
-            <% else %>
-              <%= link_to "フォロー", relationships_path(user_id: u.id), method: :post, class: "btn_blue" %>
-            <% end %>
-          <% end %>
+
+        <div class="relationship_<%= u.id %>">
+          <%= render "relationships/relationship", follower: u %>
         </div>
       </div>
 
-      <div class="follow-count__wrapper mx-4">
-        <div class="follow-count mb-2">
-          <p>フォロー</p>
-          <p><%= u.follower.count %>件</p>
-        </div>
-        <div class="follow-count">
-          <p>フォロワー</p>
-          <p><%= u.followed.count %>件</p>
-        </div>
+      <div class="follow-count_<%= u.id %>">
+        <%= render "relationships/relationship_count", follow: u %>
       </div>
 
       <div class="post-count__wrapper mx-4">

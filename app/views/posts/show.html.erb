@@ -6,13 +6,11 @@
     <% end %>
     <div class="post-body__info">
       <p><%= @post.user.family_name + @post.user.given_name %></p>
-      <div class="follow">
-        <% if Relationship.find_by(followed_id: current_user.id, follower_id: @post.user_id) %>
-          <%= link_to "フォローを外す", relationships_path, method: :destroy, class: "btn_red" %>
-        <% else %>
-          <%= link_to "フォロー", relationships_path, method: :post, class: "btn_blue" %>
-        <% end %>
+
+      <div class="relationship_<%= @post.id %>">
+        <%= render "relationships/relationship", follower: @post.user %>
       </div>
+
       <div class="post-body__info_link">
 
         <div class="favorite_<%= @post.id %>">
@@ -32,15 +30,9 @@
   </div>
   <div class="title-wrapper">
     <h2><%= @post.title %></h2>
-    <% if @post.user == current_user %>
-      <div class="post-edit">
-        <%= link_to "編集", edit_post_path(@post.id), class: "btn_blue" %>
-      </div>
-    <% else %>
-      <div class="bookmark_<%= @post.id %>">
-        <%= render "bookmarks/bookmark", post: @post %>
-      </div>
-    <% end %>
+    <div class="bookmark_<%= @post.id %>">
+      <%= render "bookmarks/bookmark", post: @post %>
+    </div>
   </div>
   <div class="body-wrapper">
     <p><%= @post.body %></p>

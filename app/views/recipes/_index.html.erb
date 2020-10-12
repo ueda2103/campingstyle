@@ -33,8 +33,8 @@
 
     <p><%= recipe.user.family_name + recipe.user.given_name %></p>
 
-    <div class="relationship_<%= recipe.id %>">
-      <%# render "relationship", recipe: recipe %>
+    <div class="relationship_<%= recipe.user.id %>">
+      <%= render "relationships/relationship", follower: recipe.user %>
     </div>
 
     <div class="bookmark_<%= recipe.id %>">

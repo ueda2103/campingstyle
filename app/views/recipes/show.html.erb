@@ -6,13 +6,11 @@
     <% end %>
     <div class="recipe-body__info">
       <p><%= @recipe.user.family_name + @recipe.user.given_name %></p>
-      <div class="follow">
-        <% if Relationship.find_by(followed_id: current_user.id, follower_id: @recipe.user_id) %>
-          <%= link_to "フォローを外す", relationships_path, method: :destroy, class: "btn_red" %>
-        <% else %>
-          <%= link_to "フォロー", relationships_path, method: :post, class: "btn_blue" %>
-        <% end %>
+
+      <div class="relationship_<%= @recipe.id %>">
+        <%= render "relationships/relationship", follower: @recipe.user %>
       </div>
+
       <div class="recipe-body__info_link">
 
         <div class="favorite_<%= @recipe.id %>">
@@ -34,16 +32,9 @@
   </div>
   <div class="title-wrapper">
     <h2><%= @recipe.title %></h2>
-    <% if @recipe.user == current_user %>
-      <div class="recipe-edit">
-        <%= link_to "編集", edit_recipe_path(@recipe.id), class: "btn_blue" %>
-      </div>
-    <% else %>
-      <div class="bookmark_<%= @recipe.id %>">
-        <%= render "bookmarks/bookmark", recipe: @recipe %>
-      </div>
-      </div>
-    <% end %>
+    <div class="bookmark_<%= @recipe.id %>">
+      <%= render "bookmarks/bookmark", recipe: @recipe %>
+    </div>
   </div>
   <div class="body-wrapper">
     <p><%= @recipe.body %></p>

@@ -1,9 +1,14 @@
-<% if Relationship.find_by(followed_id: current_user.id, follower_id: recipe.user_id) %>
-
-  <%= link_to "フォローを外す", relationship_path(Relationship.find_by(followed_id: current_user.id, follower_id: recipe.user_id), user_id: recipe.user_id), method: :delete, class: "btn_red" %>
+<% if follower == current_user %>
+  <div class="user-edit">
+    <%= link_to "マイページ", user_path(current_user.id), class: "btn_green" %>
+  </div>
 
 <% else %>
 
-  <%= link_to "フォロー", relationships_path(user_id: recipe.user_id), method: :post, class: "btn_blue" %>
+  <% if follower.follower_by?(current_user) %>
+    <%= link_to "フォローを外す", relationship_path(follower.follower_by(current_user), user_id: follower.id), method: :delete, remote: true, class: "btn_red" %>
 
+  <% else %>
+    <%= link_to "フォロー", relationships_path(user_id: follower.id), method: :post, remote: true, class: "btn_blue" %>
+  <% end %>
 <% end %>
