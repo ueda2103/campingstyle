@@ -7,7 +7,7 @@
     <div class="post-body__info">
       <p><%= @post.user.family_name + @post.user.given_name %></p>
 
-      <div class="relationship_<%= @post.id %>">
+      <div class="relationship_<%= @post.user.id %>">
         <%= render "relationships/relationship", follower: @post.user %>
       </div>
 
@@ -40,24 +40,13 @@
 </div>
 <div class="col-6">
   <h2 class="mt-5">Comment</h2>
-  <%= form_with model: @comment, url: comments_path, local: true do |f| %>
+  <%= form_with model: @comment, url: comments_path do |f| %>
     <%= f.text_area :body %>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :post_id, value: @post.id %>
     <%= f.submit "送信" %>
   <% end %>
-  <% @comments.each do |c| %>
-    <div class="user-info">
-      <%= link_to user_path(c.user_id) do %>
-        <%= image_tag c.user.user_image.thumb.url, size: "70x70", class: "user-icon" %>
-      <% end %>
-      <p><%= c.user.family_name + c.user.given_name %></p>
-      <% if c.user_id == current_user.id %>
-        <%= link_to "削除", comment_path(id: c.id), method: :delete, data: {cofirm: "本当に削除しますが？"}, class: "btn_red" %>
-      <% end %>
-    </div>
-    <div class="comment-body">
-      <p><%= c.body %></p>
-    </div>
-  <% end %>
+  <div class="comment__list">
+    <%= render "comments/commentlist", comments: @comments %>
+  </div>
 </div>

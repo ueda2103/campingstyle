@@ -4,21 +4,21 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.create(comment_params)
-    if @comment.post_id.nil?
-      redirect_back fallback_location: recipe_path(@comment.recipe_id)
+    if @comment.post_id.present?
+      @comments = Comment.where(post_id: @comment.post_id)
     else
-      redirect_back fallback_location: post_path(@comment.post_id)
+      @comments = Comment.where(recipe_id: @comment.recipe_id)
     end
   end
 
   def destroy
     @comment = Comment.find(params[:id])
-    if @comment.post_id.nil?
+    if @comment.post_id.present?
+      @comments = Comment.where(post_id: @comment.post_id)
       @comment.destroy
-      redirect_back fallback_location: recipe_path(@comment.recipe_id)
     else
+      @comments = Comment.where(recipe_id: @comment.recipe_id)
       @comment.destroy
-      redirect_back fallback_location: post_path(@comment.post_id)
     end
   end
 
