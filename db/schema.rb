@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2020_10_04_020130) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.string "post_images", null: false
+    t.json "post_images", null: false
     t.string "title", null: false
     t.text "body", null: false
     t.integer "footprint", default: 0, null: false
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 2020_10_04_020130) do
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "recipe_images", null: false
+    t.integer "user_id", null: false
+    t.json "recipe_images", null: false
     t.string "title", null: false
     t.text "body", null: false
     t.integer "status", default: 0, null: false

@@ -8,7 +8,7 @@
 <div class="card-box">
   <% recipes.each do |recipe| %>
     <%= link_to recipe_path(recipe.id) do %>
-      <%= image_tag recipe.recipe_images.thumb.url, size: "250x200", class: "recipe-image" %>
+      <%= image_tag recipe.recipe_images[0].to_s, size: "250x200", class: "recipe-image" %>
     <% end %>
 
     <p class="card-title"><%= recipe.title %></p>

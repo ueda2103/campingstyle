@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  mount_uploader  :post_images, PostImagesUploader
+  mount_uploaders :post_images, PostImagesUploader
 
   belongs_to  :user
 

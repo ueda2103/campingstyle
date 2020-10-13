@@ -1,5 +1,5 @@
 <div class="col-6">
-  <%= image_tag @recipe.recipe_images.thumb.url, size: "500x350" %>
+  <%= image_tag @recipe.recipe_images[0].to_s, size: "500x350" %>
   <div class="recipe-body px-4 my-5">
     <%= link_to user_path(@recipe.user_id) do %>
       <%= image_tag @recipe.user.user_image.thumb.url, size: "70x70", class: "user-icon" %>

@@ -1,5 +1,5 @@
 <div class="col-6">
-  <%= image_tag @post.post_images.thumb.url, size: "500x350" %>
+  <%= image_tag @post.post_images[0].to_s, size: "500x350" %>
   <div class="post-body px-4 my-5">
     <%= link_to user_path(@post.user_id) do %>
       <%= image_tag @post.user.user_image.thumb.url, size: "70x70", class: "user-icon" %>
