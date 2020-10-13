@@ -1,0 +1,113 @@
+.users {
+
+  .user-body {
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #df7716;
+
+    .user-body__text {
+      width: 120px;
+    }
+
+    .follow-count {
+
+      span {
+        display: inline-block;
+        width: 20px;
+        text-align: center;
+      }
+
+      p {
+        display: inline-block;
+        margin: 0;
+
+        &:nth-child(odd) {
+          width: 90px;
+        }
+      }
+    }
+
+    .post-count {
+
+      span {
+        display: inline-block;
+        width: 20px;
+        text-align: center;
+      }
+
+      p {
+        display: inline-block;
+        margin: 0;
+
+        &:nth-child(even) {
+          width: 120px;
+        }
+      }
+    }
+  }
+}
+
+.user-info {
+  text-align: center;
+
+  a {
+    width: 140px;
+  }
+}
+
+.user-edit-form {
+  width: 100%;
+
+  .user-icon__wrapper {
+    text-align: center;
+    margin-bottom: 30px;
+
+    .user-icon {
+      margin-right: 50px;
+    }
+  }
+  
+  table {
+    margin: 0 auto;
+    
+    td {
+      padding-top: 20px;
+      vertical-align: center;
+      
+      label {
+        margin: auto;
+      }
+      
+      input {
+        margin: auto;
+        height: 25px;
+      }
+    }
+  }
+  
+  .user-edit-form__field {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    
+    .btn_green {
+      font-size: 1rem;
+      width: 200px;
+    }
+  }
+}
+
+.withdrawal {
+
+  h2 {
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  .withdrawal-btn {
+    text-align: center;
+  }
+}

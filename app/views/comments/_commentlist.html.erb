@@ -1,0 +1,18 @@
+<% comments.each do |c| %>
+
+  <div class="user-info">
+    <%= link_to user_path(c.user_id) do %>
+      <%= image_tag c.user.user_image.thumb.url, size: "70x70", class: "user-icon" %>
+    <% end %>
+
+    <p><%= c.user.family_name + c.user.given_name %></p>
+
+    <% if c.user_id == current_user.id %>
+      <%= link_to "削除", comment_path(id: c.id), method: :delete, remote: true, class: "btn_red" %>
+    <% end %>
+  </div>
+
+  <div class="comment-body">
+    <p><%= c.body %></p>
+  </div>
+<% end %>

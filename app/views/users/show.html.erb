@@ -1,0 +1,22 @@
+<%# マイページサイドバー %>
+<div class="current-user-info col-2">
+  <%= render "mypage_sidebar", user: @user %>
+</div>
+
+<%# マイページ持ち物リスト %>
+<div class="current-user-body col-10">
+  <div class="items">
+
+    <%# 持ち物リスト入力フォーム %>
+    <%= form_with model: @item, url: items_path do |f| %>
+      <%= f.label :name, "持ち物" %>
+      <%= f.text_field :name %>
+      <%= f.submit "登録", class: "btn_blue" %>
+    <% end %>
+
+    <%# 持ち物リスト表示画面 %>
+    <div class="item__list">
+      <%= render "items/itemlist", items: @items %>
+    </div>
+  </div>
+</div>

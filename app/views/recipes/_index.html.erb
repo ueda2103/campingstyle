@@ -1,0 +1,44 @@
+<h2><%= title %></h2>
+
+<%= form_with url: recipes_path, method: :get, local: true do |f| %>
+  <%= f.text_field :search %>
+  <%= f.submit "検索", class: "btn_blue" %>
+<% end %>
+
+<div class="card-box">
+  <% recipes.each do |recipe| %>
+    <%= link_to recipe_path(recipe.id) do %>
+      <%= image_tag recipe.recipe_images[0].to_s, size: "250x200", class: "recipe-image" %>
+    <% end %>
+
+    <p class="card-title"><%= recipe.title %></p>
+
+    <div class="favorite_<%= recipe.id %>">
+      <%= render "favorites/favorite", recipe: recipe %>
+    </div>
+
+    <p class="d-inline-block">
+      <i class="fas fa-comment fa-blue"></i>
+      <%= recipe.comments.count %>件　
+    </p>
+
+    <p class="d-inline-block">
+      <i class="fas fa-paw fa-brown"></i>
+      <%= recipe.footprint %>件
+    </p>
+
+    <%= link_to user_path(recipe.user_id) do %>
+      <%= image_tag recipe.user.user_image.thumb.url, size: "70x70", class: "user-icon" %>
+    <% end %>
+
+    <p><%= recipe.user.family_name + recipe.user.given_name %></p>
+
+    <div class="relationship_<%= recipe.user.id %>">
+      <%= render "relationships/relationship", follower: recipe.user %>
+    </div>
+
+    <div class="bookmark_<%= recipe.id %>">
+      <%= render "bookmarks/bookmark", recipe: recipe %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,14 @@
+<%= form_with model: @recipe, url: recipes_path(@recipe.id), local: true, html: {class: "col-12 d-flex my-5"} do |f| %>
+  <div class="recipe__left">
+    <button>
+      <%= f.file_field :recipe_images, multiple: true, accept: 'image/jpeg,image/gif,image/png' %>
+    </button>
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, autofocus: true %>
+    <%= f.label :body, "内容" %>
+    <%= f.text_field :body, autofocus: true %>
+    <%= f.submit "次へ", class: "btn_blue" %>
+  </div>
+  <div class="recipe__right">
+  </div>
+<% end %>

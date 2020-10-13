@@ -1,0 +1,22 @@
+<%= form_with model: @post, html: {class: "col-12 d-flex my-5"} do |f| %>
+  <div class="post__left">
+    <div class="post-title__wrapper">
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title, autofocus: true %>
+    </div>
+    <%= image_tag @post.post_images.thumb.url, size: "500x350" %>
+    <button>
+      <%= f.file_field :post_images, accept: 'image/jpeg,image/gif,image/png' %>
+    </button>
+  </div>
+  <div class="post__right">
+    <div class="post-body__wrapper">
+      <%= f.label :body, "内容" %><br>
+      <%= f.text_area :body, autofocus: true %>
+    </div>
+    <div class="post-form__field">
+      <%= f.submit "編集", class: "btn_blue" %>
+      <%= link_to "削除", post_path(@post.id), method: :delete, data: {confirm: "本当に削除しますか"}, class: "btn_red" %>
+    </div>
+  </div>
+<% end %>

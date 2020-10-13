@@ -1,34 +1,30 @@
 # Camping Style
 
 ## サイト概要
-キャンパーのためのSNS、ECサイトです。
-ノウハウやおすすめのギアなどをSNSで共有できるようにします。
-ギアの管理や予定の管理機能も実装しキャンパーをサポートします。
-また、ECサイトとして提携メーカーのギアの販売をする。
+キャンパーのためのSNSサイトです。
+キャンプの写真やキャンプ飯の作り方などを共有しましょう。
+持ち物リストもキャンパーをサポートします
 
 ### サイトテーマ
-- キャンパー向けとしてはキャンプの総合サポート
-- メーカー向けとしてはマーケティング目的での利用
-をテーマとする
+- キャンパー向けのSNSサイト
 
 ### テーマを選んだ理由
-- 自分自身キャンプが好きだから
-- キャンプギアの管理ができるアプリがみあたらなかったから
-- SNS集客のECサイトはメーカーのマーケティングにとって効率的なのではと考えて
+- キャンプ情報に特化したSNSが少なかったこと
+- キャンパー同士交流ができる場を作りたかった
+- 持ち物リストを含んだキャンパー向けのSNSが見受けられなかった
 
 ### ターゲットユーザ
-キャンパーとキャンプギアメーカー
+キャンパー
 
 ### 主な利用シーン
-SNSでのキャンパー同士の情報共有やギアの購入、販売
-キャンプの予定やギアの管理
+SNSでのキャンパー同士の情報共有
+持ち物リストによるギアなどの管理
 火起こしやテント設営などのノウハウの共有
-近くのキャンプ場や天候の把握
 
 ## 設計書
 
 ### 機能一覧
-https://docs.google.com/spreadsheets/d/1eMhdsvmRd4ZL2UxQjKGYgmbj-fTQxF6zYT-a-YVjpEs/edit?usp=sharing
+https://docs.google.com/spreadsheets/d/1eMhdsvmRd4ZL2UxQjKGYgmbj-fTQxF6zYT-a-YVjpEs/edit#gid=0
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -38,5 +34,15 @@ https://docs.google.com/spreadsheets/d/1eMhdsvmRd4ZL2UxQjKGYgmbj-fTQxF6zYT-a-YVj
 - 仮想環境：Vagrant,VirtualBox
 
 ## 使用素材
-- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
-- 使用しない場合は、使用素材の項目をREADMEから削除してください。
+- 写真
+morguefile https://morguefile.com/
+PAKUTASO https://www.pakutaso.com/
+O-DAN https://o-dan.net/ja/
+- 動画
+GIFMAGAZINE https://gifmagazine.net/?locale=ja
+- アイコン
+ICOOON MONO https://icooon-mono.com/
+- イラスト
+illustAC https://www.ac-illust.com/
+- フォント
+FONTFREE https://fontfree.me/

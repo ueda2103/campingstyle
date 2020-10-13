@@ -1,0 +1,66 @@
+<div class="col-6">
+  <%= image_tag @recipe.recipe_images[0].to_s, size: "500x350" %>
+  <div class="recipe-body px-4 my-5">
+    <%= link_to user_path(@recipe.user_id) do %>
+      <%= image_tag @recipe.user.user_image.thumb.url, size: "70x70", class: "user-icon" %>
+    <% end %>
+    <div class="recipe-body__info">
+      <p><%= @recipe.user.family_name + @recipe.user.given_name %></p>
+
+      <div class="relationship_<%= @recipe.user.id %>">
+        <%= render "relationships/relationship", follower: @recipe.user %>
+      </div>
+
+      <div class="recipe-body__info_link">
+
+        <div class="favorite_<%= @recipe.id %>">
+          <%= render "favorites/favorite", recipe: @recipe %>
+        </div>
+
+        <p>
+          <i class="fas fa-comment fa-blue"></i>
+          <%= @recipe.comments.count %>件
+        </p>
+
+        <p>
+          <i class="fas fa-paw fa-brown"></i>
+          <%= @recipe.footprint %>件
+        </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="title-wrapper">
+    <h2><%= @recipe.title %></h2>
+    <div class="bookmark_<%= @recipe.id %>">
+      <%= render "bookmarks/bookmark", recipe: @recipe %>
+    </div>
+  </div>
+  <div class="body-wrapper">
+    <p><%= @recipe.body %></p>
+  </div>
+  <div class="food-wrapper">
+    <p>材料</p>
+    <% @foods.each do |f| %>
+      <p><%= f.name %></p>
+    <% end %>
+  </div>
+  <div class="flow-wrapper">
+    <p>手順</p>
+    <% @flows.each do |f| %>
+      <p><%= f.body %></p>
+    <% end %>
+  </div>
+</div>
+<div class="col-6">
+  <h2 class="mt-5">Comment</h2>
+  <%= form_with model: @comment, url: comments_path do |f| %>
+    <%= f.text_area :body %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :recipe_id, value: @recipe.id %>
+    <%= f.submit "送信" %>
+  <% end %>
+  <div class="comment__list">
+    <%= render "comments/commentlist", comments: @comments %>
+  </div>
+</div>
