@@ -18,9 +18,6 @@ ActiveRecord::Schema.define(version: 2020_10_04_020130) do
     t.integer "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_bookmarks_on_post_id"
-    t.index ["recipe_id"], name: "index_bookmarks_on_recipe_id"
-    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -30,9 +27,6 @@ ActiveRecord::Schema.define(version: 2020_10_04_020130) do
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_comments_on_post_id"
-    t.index ["recipe_id"], name: "index_comments_on_recipe_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -41,9 +35,6 @@ ActiveRecord::Schema.define(version: 2020_10_04_020130) do
     t.integer "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_favorites_on_post_id"
-    t.index ["recipe_id"], name: "index_favorites_on_recipe_id"
-    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "flows", force: :cascade do |t|
@@ -51,7 +42,6 @@ ActiveRecord::Schema.define(version: 2020_10_04_020130) do
     t.string "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recipe_id"], name: "index_flows_on_recipe_id"
   end
 
   create_table "foods", force: :cascade do |t|
@@ -59,7 +49,6 @@ ActiveRecord::Schema.define(version: 2020_10_04_020130) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recipe_id"], name: "index_foods_on_recipe_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -68,7 +57,6 @@ ActiveRecord::Schema.define(version: 2020_10_04_020130) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -80,7 +68,6 @@ ActiveRecord::Schema.define(version: 2020_10_04_020130) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title", "footprint"], name: "index_posts_on_title_and_footprint"
-    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -93,7 +80,6 @@ ActiveRecord::Schema.define(version: 2020_10_04_020130) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title", "footprint"], name: "index_recipes_on_title_and_footprint"
-    t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -112,9 +98,6 @@ ActiveRecord::Schema.define(version: 2020_10_04_020130) do
     t.integer "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_tag_entries_on_post_id"
-    t.index ["recipe_id"], name: "index_tag_entries_on_recipe_id"
-    t.index ["tag_id"], name: "index_tag_entries_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
