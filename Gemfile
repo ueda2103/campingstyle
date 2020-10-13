@@ -20,7 +20,7 @@ gem 'mini_magick'
 gem 'kaminari'
 gem 'jp_prefecture'
 gem 'font-awesome-sass'
-
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -40,6 +40,10 @@ group :test do
   gem 'chromedriver-helper'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+end
+
+group :production do
+  gem 'mysql2'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
