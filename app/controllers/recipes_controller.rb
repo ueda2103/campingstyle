@@ -1,9 +1,7 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @tags = Tag.all
-
     if params[:search].present?
       @recipes = Recipe.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(9)
 

@@ -1,9 +1,10 @@
 <%# 投稿一覧サイドバー %>
 <div class="col-2 my-4 px-3">
-  <%= render "/shared/index_sidebar", tags: @tags %>
+  <%# render "/shared/index_sidebar", tags: @tags %>
 </div>
 
-<%# 投稿一覧メイン %>
+<%# 投稿一覧 %>
 <div class="col-10 my-4 px-3">
   <%= render "index", title: @title, posts: @posts %>
+  <%= paginate @posts %>
 </div>

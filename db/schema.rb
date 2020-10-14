@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_13_084209) do
+ActiveRecord::Schema.define(version: 2020_10_04_015859) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -18,6 +18,9 @@ ActiveRecord::Schema.define(version: 2020_10_13_084209) do
     t.integer "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_bookmarks_on_post_id"
+    t.index ["recipe_id"], name: "index_bookmarks_on_recipe_id"
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -27,6 +30,9 @@ ActiveRecord::Schema.define(version: 2020_10_13_084209) do
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["recipe_id"], name: "index_comments_on_recipe_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -35,6 +41,9 @@ ActiveRecord::Schema.define(version: 2020_10_13_084209) do
     t.integer "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_favorites_on_post_id"
+    t.index ["recipe_id"], name: "index_favorites_on_recipe_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "flows", force: :cascade do |t|
@@ -42,6 +51,7 @@ ActiveRecord::Schema.define(version: 2020_10_13_084209) do
     t.string "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_flows_on_recipe_id"
   end
 
   create_table "foods", force: :cascade do |t|
@@ -49,6 +59,7 @@ ActiveRecord::Schema.define(version: 2020_10_13_084209) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_foods_on_recipe_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -57,6 +68,7 @@ ActiveRecord::Schema.define(version: 2020_10_13_084209) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -68,6 +80,7 @@ ActiveRecord::Schema.define(version: 2020_10_13_084209) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title", "footprint"], name: "index_posts_on_title_and_footprint"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -80,6 +93,7 @@ ActiveRecord::Schema.define(version: 2020_10_13_084209) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title", "footprint"], name: "index_recipes_on_title_and_footprint"
+    t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -87,24 +101,8 @@ ActiveRecord::Schema.define(version: 2020_10_13_084209) do
     t.integer "follower_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["followed_id", "follower_id"], name: "index_relationships_on_followed_id_and_follower_id", unique: true
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
-  end
-
-  create_table "tag_entries", force: :cascade do |t|
-    t.integer "tag_id", null: false
-    t.integer "post_id"
-    t.integer "recipe_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "tags", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
