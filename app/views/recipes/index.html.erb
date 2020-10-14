@@ -1,14 +1,10 @@
 <%# レシピタグ検索フォーム %>
 <div class="col-2 my-4 px-3">
-  <%= render "/shared/index_sidebar", tags: @tags %>
+  <%# render "/shared/index_sidebar", tags: @tags %>
 </div>
 
-<%# レシピ一覧メイン %>
+<%# レシピ一覧 %>
 <div class="col-10 my-4 px-3">
-
-  <%# レシピ検索フォーム %>
   <%= render "index", title: @title, recipes: @recipes %>
-
-  <%# ページネーション %>
   <%= paginate @recipes %>
 </div>

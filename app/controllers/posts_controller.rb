@@ -2,7 +2,6 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @tags = Tag.all
     if params[:search].present?
       @posts = Post.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(9)
       if @posts.present?
