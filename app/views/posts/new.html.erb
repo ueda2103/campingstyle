@@ -1,20 +1,20 @@
 <%= form_with model: @post, html: {class: "col-12 d-flex my-5"} do |f| %>
   <div class="post__left">
-    <div class="post-title__wrapper">
-      <%= f.label :title, "タイトル" %>
-      <%= f.text_field :title, autofocus: true %>
-    </div>
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, autofocus: true %>
+
     <button>
       <%= f.file_field :post_images, multiple: true, accept: 'image/jpeg,image/gif,image/png' %>
     </button>
+
+    <%= f.label :tag_list, "タグ" %>
+    <%= f.text_field :tag_list, velue: @post.tag_list.join(',') %>
   </div>
+
   <div class="post__right">
-    <div class="post-body__wrapper">
-      <%= f.label :body, "内容" %><br>
-      <%= f.text_area :body, autofocus: true %>
-    </div>
-    <div class="post-form__field">
-      <%= f.submit "投稿", class: "btn_blue" %>
-    </div>
+    <%= f.label :body, "内容" %>
+    <%= f.text_area :body, autofocus: true %>
+
+    <%= f.submit "投稿", class: "btn_blue" %>
   </div>
 <% end %>

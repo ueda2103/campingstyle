@@ -1,4 +1,5 @@
 class Recipe < ApplicationRecord
+  acts_as_taggable
   mount_uploaders :recipe_images, RecipeImagesUploader
 
   belongs_to  :user

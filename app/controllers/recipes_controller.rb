@@ -12,6 +12,10 @@ class RecipesController < ApplicationController
         redirect_to recipes_path, notice: "検索結果がありません"
       end
 
+    elsif params[:tag_name]
+      @recipes = Recipe.tagged_with("#{params[:tag_name]}").page(params[:page]).per(9)
+      @title = "#{params[:tag_name]}"
+
     else
       @recipes = Recipe.all.order(id: "DESC").page(params[:page]).per(9)
       @title = "ALL"
@@ -73,6 +77,6 @@ class RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.require(:recipe).permit({recipe_images: []}, :title, :body)
+    params.require(:recipe).permit({recipe_images: []}, :title, :body, :tag_list)
   end
 end

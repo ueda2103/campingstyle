@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  acts_as_taggable
+
   mount_uploaders :post_images, PostImagesUploader
 
   belongs_to  :user

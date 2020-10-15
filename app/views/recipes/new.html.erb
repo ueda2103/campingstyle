@@ -3,6 +3,8 @@
     <button>
       <%= f.file_field :recipe_images, multiple: true, accept: 'image/jpeg,image/gif,image/png' %>
     </button>
+    <%= f.label :tag_list, "タグ" %>
+    <%= f.text_field :tag_list, velue: @recipe.tag_list.join(',') %>
     <%= f.label :title, "タイトル" %>
     <%= f.text_field :title, autofocus: true %>
     <%= f.label :body, "内容" %>

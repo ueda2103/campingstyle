@@ -1,18 +1,19 @@
 <div class="recipe__left">
-  <%= form_with model: @recipe, url: recipe_path(@recipe.id), local: true, html: {class: "col-12 d-flex my-5"} do |r| %>
+  <%= form_with model: @recipe, url: recipe_path(@recipe.id), local: true, html: {class: "col-12 d-flex my-5"} do |f| %>
+    <%= image_tag @recipe.recipe_images[0].to_s, size: "500x350" %>
     <button>
-      <%= r.file_field :recipe_images, accept: 'image/jpeg,image/gif,image/png' %>
+      <%= f.file_field :recipe_images, accept: 'image/jpeg,image/gif,image/png' %>
     </button>
     <div class="recipe-title__wrapper">
-      <%= r.label :title, "タイトル" %>
-      <%= r.text_field :title, autofocus: true %>
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title, autofocus: true %>
     </div>
     <div class="recipe-body__wrapper">
-      <%= r.label :body, "内容" %><br>
-      <%= r.text_area :body, autofocus: true %>
+      <%= f.label :body, "内容" %><br>
+      <%= f.text_area :body, autofocus: true %>
     </div>
     <div class="recipe-form__field">
-      <%= r.submit "投稿", autofocus: true, class: "btn_blue" %>
+      <%= f.submit "投稿", autofocus: true, class: "btn_blue" %>
       <%= link_to "削除", recipe_path(@recipe.id), method: :delete, class: "btn_red" %>
     </div>
   <% end %>

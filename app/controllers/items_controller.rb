@@ -2,23 +2,27 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.user_id = current_user.id
+    @items = current_user.items
+    @item.save
+  end
 
-    if @item.save
-      redirect_back fallback_location: user_path(current_user.id)
+  def update
+    @item = Item.find(params[:id])
+    @items = current_user.items
+
+    if @item.status == "未所持"
+      @item.update(status: "所持済")
+    elsif @item.status == "所持済"
+      @item.update(status: "要購入")
     else
-      redirect_back fallback_location: user_path(current_user.id), notice: "保存に失敗しました"
+      @item.update(status: "未所持")
     end
   end
 
   def destroy
     @item = Item.find(params[:id])
-
-    if @item.user == current_user
-      @item.destroy
-      redirect_back fallback_location: user_path(current_user.id)
-    else
-      redirect_back fallback_location: user_path(current_user.id), notice: "他のユーザーの投稿は削除できません"
-    end
+    @items = current_user.items
+    @item.destroy
   end
 
   private

@@ -8,7 +8,7 @@
 <div class="card-box">
   <% posts.each do |post| %>
     <%= link_to post_path(post.id) do %>
-      <%= image_tag post.post_images.thumb.url, size: "250x200", class: "post-image" %>
+      <%= image_tag post.post_images[0].to_s, size: "250x200", class: "post-image" %>
     <% end %>
 
     <p class="card-title"><%= post.title %></p>
@@ -28,7 +28,7 @@
     </p>
 
     <%= link_to user_path(post.user_id) do %>
-      <%= image_tag post.user.user_image[0].to_s, size: "70x70", class: "user-icon" %>
+      <%= image_tag post.user.user_image.thumb.url, size: "70x70", class: "user-icon" %>
     <% end %>
 
     <p><%= post.user.family_name + post.user.given_name %></p>

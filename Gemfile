@@ -20,6 +20,7 @@ gem 'mini_magick'
 gem 'kaminari'
 gem 'jp_prefecture'
 gem 'font-awesome-sass'
+gem 'acts-as-taggable-on'
 gem 'dotenv-rails'
 
 group :development, :test do

@@ -30,6 +30,9 @@
       </div>
     </div>
   </div>
+
+  <%= render 'shared/tag_list', tag_list: @recipe.tag_list %>
+
   <div class="title-wrapper">
     <h2><%= @recipe.title %></h2>
     <div class="bookmark_<%= @recipe.id %>">

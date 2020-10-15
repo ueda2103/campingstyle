@@ -4,12 +4,18 @@ class PostsController < ApplicationController
   def index
     if params[:search].present?
       @posts = Post.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(9)
+
       if @posts.present?
         @title = "検索結果：#{params[:search]}"
       else
         @title = "ALL"
         redirect_to posts_path, notice: "検索結果がありません"
       end
+
+    elsif params[:tag_name]
+      @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).per(9)
+      @title = "#{params[:tag_name]}"
+      
     else
       @posts = Post.all.order(id: "DESC").page(params[:page]).per(9)
       @title = "ALL"
@@ -67,6 +73,6 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit({post_images: []}, :title, :body)
+    params.require(:post).permit({post_images: []}, :title, :body, :tag_list)
   end
 end
