@@ -1,4 +1,7 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :check_user, only: [:update, :destroy]
+
   def create
     @item = Item.new(item_params)
     @item.user_id = current_user.id
@@ -28,5 +31,11 @@ class ItemsController < ApplicationController
   private
   def item_params
     params.require(:item).permit(:name, :status)
+  end
+
+  def check_user
+    item = Item.find(params[:id])
+    user = User.find(item.user_id)
+    redirect_back fallback_location: user_path(current_uer.id) unless user == current_user
   end
 end
