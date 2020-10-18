@@ -1,0 +1,18 @@
+ja:
+  activerecord:
+    models:
+      user: 会員
+    attributes:
+      user:
+        family_name: 姓
+        given_name: 名
+        family_name_kana: セイ
+        given_name_kana: メイ
+        email: メールアドレス
+        postal_code: 郵便番号
+        prefecture_code: 都道府県
+        city: 市区町村
+        street: 番地
+        building: 建物
+        telephone_number: 電話番号
+        password: パスワード

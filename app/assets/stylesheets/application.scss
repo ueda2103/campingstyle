@@ -18,17 +18,32 @@
  @import "font-awesome";
 
 * {
-  font-size: 16px;
+  font-size: 12px;
 }
 
 p {
   margin: 0;
 }
 
+.red {
+  color: #ff0000;
+}
+
 .btn_yellow {
-  border: 1px solid #000000;
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #ffffff;
   border-radius: 5px;
-  background-color: #e2e961;
+  background-color: #ff9900;
+  text-decoration: none;
+  
+  &:hover {
+    color: #ffffff;
+    text-decoration: none;
+  }
 }
 
 .btn_blue {
@@ -37,14 +52,13 @@ p {
   padding: 5px;
   padding-left: 15px;
   padding-right: 15px;
-  color: #000000;
-  border: 1px solid #000000;
+  color: #ffffff;
   border-radius: 5px;
-  background-color: #5ddbe4;
+  background-color: #0000ff;
   text-decoration: none;
   
   &:hover {
-    color: #000000;
+    color: #ffffff;
     text-decoration: none;
   }
 }
@@ -55,14 +69,13 @@ p {
   padding: 5px;
   padding-left: 15px;
   padding-right: 15px;
-  color: #000000;
-  border: 1px solid #000000;
+  color: #ffffff;
   border-radius: 5px;
-  background-color: #e65757;
+  background-color: #ff0000;
   text-decoration: none;
   
   &:hover {
-    color: #000000;
+    color: #ffffff;
     text-decoration: none;
   }
 }
@@ -73,14 +86,13 @@ p {
   padding: 5px;
   padding-left: 15px;
   padding-right: 15px;
-  color: #000000;
-  border: 1px solid #000000;
+  color: #ffffff;
   border-radius: 5px;
-  background-color: #33db5d;
+  background-color: #00ff00;
   text-decoration: none;
   
   &:hover {
-    color: #000000;
+    color: #ffffff;
     text-decoration: none;
   }
 }

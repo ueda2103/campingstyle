@@ -3,13 +3,13 @@ class FoodsController < ApplicationController
 
   def create
     @food = Food.create(food_params)
-    redirect_back fallback_location: edit_recipe_path(@food.recipe_id)
+    @foods = Food.where(recipe_id: @food.recipe_id)
   end
-
+  
   def destroy
     @food = Food.find(params[:id])
+    @foods = Food.where(recipe_id: @food.recipe_id)
     @food.destroy
-    redirect_back fallback_location: edit_recipe_path(@food.recipe_id)
   end
 
   private

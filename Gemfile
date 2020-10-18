@@ -22,6 +22,7 @@ gem 'jp_prefecture'
 gem 'font-awesome-sass'
 gem 'acts-as-taggable-on'
 gem 'dotenv-rails'
+gem 'rails-i18n'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

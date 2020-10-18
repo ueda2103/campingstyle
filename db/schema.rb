@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 2020_10_15_010856) do
     t.json "recipe_images", null: false
     t.string "title", null: false
     t.text "body", null: false
-    t.integer "status", default: 0, null: false
+    t.boolean "status", default: false, null: false
     t.integer "footprint", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(version: 2020_10_15_010856) do
     t.integer "prefecture_code", null: false
     t.string "city", null: false
     t.string "street", null: false
-    t.string "building", null: false
+    t.string "building"
     t.string "telephone_number", null: false
     t.boolean "is_deleted", default: false, null: false
     t.string "email", default: "", null: false

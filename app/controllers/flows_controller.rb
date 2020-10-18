@@ -3,13 +3,13 @@ class FlowsController < ApplicationController
 
   def create
     @flow = Flow.create(flow_params)
-    redirect_back fallback_location: edit_recipe_path(@flow.recipe_id)
+    @flows = Flow.where(recipe_id: @flow.recipe_id)
   end
 
   def destroy
     @flow = Flow.find(params[:id])
+    @flows = Flow.where(recipe_id: @flow.recipe_id)
     @flow.destroy
-    redirect_back fallback_location: edit_recipe_path(@flow.recipe_id)
   end
 
   private

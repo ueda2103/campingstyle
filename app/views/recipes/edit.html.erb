@@ -19,24 +19,26 @@
   <% end %>
 </div>
 <div class="recipe__right">
-  <%= form_with model: @food, url: foods_path, local: true do |f| %>
+  <%= form_with model: @food, url: foods_path do |f| %>
     <%= f.label :name, "材料" %>
-    <%= f.text_field :name, autofocus: true %>
+    <%= f.text_field :name, autofocus: true, class: "food-text" %>
     <%= f.hidden_field :recipe_id, value: @recipe.id %>
     <%= f.submit "追加", class: "btn_blue" %>
   <% end %>
-  <% @foods.each do |f| %>
-    <p><%= f.name %></p>
-    <%= link_to "削除", food_path(f.id), method: :delete, class: "btn_red" %>
-  <% end %>
-  <%= form_with model: @flow, url: flows_path, local: true do |f| %>
+
+  <div class="food__list">
+    <%= render "foods/food", foods: @foods %>
+  </div>
+
+  <%= form_with model: @flow, url: flows_path do |f| %>
     <%= f.label :body, "作り方" %>
-    <%= f.text_field :body, autofocus: true %>
+    <%= f.text_field :body, autofocus: true, class: "flow-text" %>
     <%= f.hidden_field :recipe_id, value: @recipe.id %>
     <%= f.submit "追加", class: "btn_blue" %>
   <% end %>
-  <% @flows.each do |f| %>
-    <p><%= f.body %></p>
-    <%= link_to "削除", flow_path(f.id), method: :delete, class: "btn_red" %>
-  <% end %>
+
+  <div class="flow__list">
+    <%= render "flows/flow", flows: @flows %>
+  </div>
+
 </div>

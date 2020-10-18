@@ -1,5 +1,6 @@
 class Recipe < ApplicationRecord
   acts_as_taggable
+
   mount_uploaders :recipe_images, RecipeImagesUploader
 
   belongs_to  :user
@@ -11,6 +12,10 @@ class Recipe < ApplicationRecord
   has_many    :flows,           dependent: :destroy
   has_many    :favorite_users,  through: :favorites, source: :user
   has_many    :bookmark_users,  through: :bookmarks, source: :user
+
+  validates   :recipe_images, :footprint, :status, presence: true
+  validates   :title, presence: true, length: {maximum: 20}
+  validates   :body, presence:true, length: {maximum: 200}
 
   def recipe_favorited_by?(user)
     favorites.where(user_id: user.id).exists?
@@ -27,4 +32,6 @@ class Recipe < ApplicationRecord
   def recipe_bookmark_by(user)
     bookmarks.find_by(user_id: user.id)
   end
+
+  enum status: {"非公開":false, "公開":true}
 end

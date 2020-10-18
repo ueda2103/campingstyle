@@ -1,0 +1,4 @@
+<% foods.each do |f| %>
+  <p><%= f.name %></p>
+  <%= link_to "削除", food_path(f.id), method: :delete, class: "btn_red" %>
+<% end %>

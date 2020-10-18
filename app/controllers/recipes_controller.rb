@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
 
   def index
     if params[:search].present?
-      @recipes = Recipe.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(9)
+      @recipes = Recipe.where("title LIKE ?", "%#{params[:search]}%").where(status: "公開").order(id: "DESC").page(params[:page]).per(9)
 
       if @recipes.present?
         @title = "検索結果：#{params[:search]}"
@@ -13,11 +13,11 @@ class RecipesController < ApplicationController
       end
 
     elsif params[:tag_name]
-      @recipes = Recipe.tagged_with("#{params[:tag_name]}").page(params[:page]).per(9)
+      @recipes = Recipe.where(status: "公開").tagged_with("#{params[:tag_name]}").order(id: "DESC").page(params[:page]).per(9)
       @title = "#{params[:tag_name]}"
 
     else
-      @recipes = Recipe.all.order(id: "DESC").page(params[:page]).per(9)
+      @recipes = Recipe.where(status: "公開").order(id: "DESC").page(params[:page]).per(9)
       @title = "ALL"
     end
   end
@@ -56,12 +56,12 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
-    @recipe.status = "作成完了"
 
-    if @recipe.update(recipe_params)
+    if @recipe.flows.present? && @recipe.foods.present?
+      @recipe.update(recipe_params)
       redirect_to recipe_path(@recipe.id), notice: "保存されました"
     else
-      redirect_to new_recipe_path(@recipe.id), notice: "保存に失敗しました"
+      redirect_back fallback_location: edit_recipe_path(@recipe.id), notice: "保存に失敗しました"
     end
   end
 
@@ -77,6 +77,6 @@ class RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.require(:recipe).permit({recipe_images: []}, :title, :body, :tag_list)
+    params.require(:recipe).permit({recipe_images: []}, :title, :body, :status, :tag_list)
   end
 end

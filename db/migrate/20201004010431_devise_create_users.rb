@@ -13,7 +13,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.integer :prefecture_code,   null: false
       t.string  :city,              null: false
       t.string  :street,            null: false
-      t.string  :building,          null: false
+      t.string  :building
       t.string  :telephone_number,  null: false
       t.boolean :is_deleted,        null: false, default: false
 
