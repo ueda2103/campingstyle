@@ -2,6 +2,8 @@ ja:
   activerecord:
     models:
       user: 会員
+      post: 投稿
+      recipe: レシピ
     attributes:
       user:
         family_name: 姓
@@ -16,3 +18,11 @@ ja:
         building: 建物
         telephone_number: 電話番号
         password: パスワード
+      post: 
+        post_images: 画像
+        title: タイトル
+        body: 詳細
+      recipe:
+        recipe_images: 画像
+        title: タイトル
+        body: 詳細
