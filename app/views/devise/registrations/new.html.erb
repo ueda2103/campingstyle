@@ -4,9 +4,9 @@
 <%= form_with model: @user, url: user_registration_path, method: :post, local: true, html: {class: "mt-5 sign-up-form"} do |f| %>
 
   <div class="user-icon__wrapper">
-    <%= image_tag @user.user_image.thumb.url, size: "70x70", class: "user-icon" %>
+    <%= image_tag @user.user_image.thumb.url, size: "70x70", class: "user-icon img_prev" %>
     <button>
-      <%= f.file_field :user_image, accept: 'image/jpeg,image/gif,image/png' %>
+      <%= f.file_field :user_image, accept: 'image/jpeg,image/gif,image/png', class: "img" %>
     </button>
   </div>
 

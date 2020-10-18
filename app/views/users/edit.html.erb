@@ -2,9 +2,9 @@
 <%= form_with model: @user, local: true, html: {class: "user-edit-form"} do |f| %>
 
   <div class="user-icon__wrapper">
-    <%= image_tag @user.user_image.thumb.url, size: "100x100", class: "user-icon" %>
+    <%= image_tag @user.user_image.thumb.url, size: "100x100", class: "user-icon img_prev" %>
     <button>
-      <%= f.file_field :user_image, accept: 'image/jpeg,image/gif,image/png' %>
+      <%= f.file_field :user_image, accept: 'image/jpeg,image/gif,image/png', class: "img" %>
     </button>
   </div>
 

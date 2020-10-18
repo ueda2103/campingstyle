@@ -6,8 +6,9 @@
       <%= @post.errors.full_messages_for(:title).first %>
     <% end %>
 
+    <%= image_tag @post.post_images[0].to_s, class: "img_prev" %>
     <button>
-      <%= f.file_field :post_images, multiple: true, accept: 'image/jpeg,image/gif,image/png' %>
+      <%= f.file_field :post_images, multiple: true, accept: 'image/jpeg,image/gif,image/png', class: "img" %>
     </button>
     <% if @post.errors.include?(:post_images) %>
       <%= @post.errors.full_messages_for(:post_images).first %>

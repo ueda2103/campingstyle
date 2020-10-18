@@ -1,8 +1,8 @@
 <%= form_with model: @post, local: true, html: {class: "col-12 d-flex my-5"} do |f| %>
   <div class="post__left">
-    <%= image_tag @post.post_images[0].to_s, size: "500x350" %>
+    <%= image_tag @post.post_images[0].to_s, class: "img_prev" %>
     <button>
-      <%= f.file_field :post_images, accept: 'image/jpeg,image/gif,image/png' %>
+      <%= f.file_field :post_images, accept: 'image/jpeg,image/gif,image/png', class: "img" %>
     </button>
     <% if @post.errors.include?(:post_images) %>
       <%= @post.errors.full_messages_for(:post_images).first %>
