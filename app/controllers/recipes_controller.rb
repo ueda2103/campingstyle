@@ -44,7 +44,7 @@ class RecipesController < ApplicationController
     if @recipe.save
       redirect_to edit_recipe_path(@recipe.id), notice: "フォーマットが作成されました"
     else
-      redirect_to new_recipe_path, notice: "フォーマットの作成に失敗しました"
+      render "new"
     end
   end
 
@@ -58,10 +58,16 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
 
     if @recipe.flows.present? && @recipe.foods.present?
-      @recipe.update(recipe_params)
-      redirect_to recipe_path(@recipe.id), notice: "保存されました"
+      
+      if @recipe.update(recipe_params)
+        redirect_to recipe_path(@recipe.id), notice: "保存しました"
+      else
+        @foods = Food.where(recipe_id: @recipe.id)
+        @flows = Flow.where(recipe_id: @recipe.id)
+        render "edit"
+      end
     else
-      redirect_back fallback_location: edit_recipe_path(@recipe.id), notice: "保存に失敗しました"
+      redirect_back fallback_location: edit_recipe_path(@recipe.id), error: "材料・手順がありません"
     end
   end
 

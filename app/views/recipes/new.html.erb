@@ -3,12 +3,25 @@
     <button>
       <%= f.file_field :recipe_images, multiple: true, accept: 'image/jpeg,image/gif,image/png' %>
     </button>
+    <% if @recipe.errors.include?(:recipe_images) %>
+      <%= @recipe.errors.full_messages_for(:recipe_images).first %>
+    <% end %>
+
     <%= f.label :tag_list, "タグ" %>
     <%= f.text_field :tag_list, velue: @recipe.tag_list.join(',') %>
+
     <%= f.label :title, "タイトル" %>
     <%= f.text_field :title, autofocus: true %>
+    <% if @recipe.errors.include?(:title) %>
+      <%= @recipe.errors.full_messages_for(:title).first %>
+    <% end %>
+
     <%= f.label :body, "内容" %>
     <%= f.text_field :body, autofocus: true %>
+    <% if @recipe.errors.include?(:body) %>
+      <%= @recipe.errors.full_messages_for(:body).first %>
+    <% end %>
+
     <%= f.submit "次へ", class: "btn_blue" %>
   </div>
   <div class="recipe__right">

@@ -3,16 +3,19 @@ class UsersController < ApplicationController
 
   def index
     @users = User.where(is_deleted: "有効")
+
     if params[:search].present?
-      @users = @users.where("family_name LIKE ?", "%#{params[:search]}%")
+      @users = @users.where("family_name LIKE ?", "%#{params[:search]}%").page(params[:page]).per(10)
+
       if @users.present?
         @title = "検索結果：#{params[:search]}"
       else
         @title = "ALL"
-        redirect_to users_path, notice: "検索結果がありません"
+        redirect_to users_path, notice: "検索結果がありませんでした"
       end
     else
       @title = "ALL"
+      @users = @users.page(params[:page]).per(10)
     end
   end
 
@@ -20,7 +23,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.is_deleted == "退会済"
-      redirect_to users_path, notice: "退会済のユーザーです"
+      redirect_to users_path, notice: "対象のユーザーは退会済です"
     end
     
     if @user == current_user
@@ -42,15 +45,16 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(current_user.id)
+    @user = User.find(params[:id])
   end
 
   def update
     @user = User.find(current_user.id)
+
     if @user.update(user_params)
       redirect_to user_path(current_user.id), notice: "編集を保存しました"
     else
-      redirect_back fallback_location: edit_user_path(current_user.id), notice: "保存に失敗しました"
+      render "edit"
     end
   end
 

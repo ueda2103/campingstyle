@@ -1,5 +1,5 @@
 <h2 class="offset-1 col-5 mt-5">会員情報編集</h2>
-<%= form_with model: @user, html: {class: "user-edit-form"} do |f| %>
+<%= form_with model: @user, local: true, html: {class: "user-edit-form"} do |f| %>
 
   <div class="user-icon__wrapper">
     <%= image_tag @user.user_image.thumb.url, size: "100x100", class: "user-icon" %>

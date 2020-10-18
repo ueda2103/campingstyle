@@ -1,11 +1,17 @@
-<%= form_with model: @post, html: {class: "col-12 d-flex my-5"} do |f| %>
+<%= form_with model: @post, local: true, html: {class: "col-12 d-flex my-5"} do |f| %>
   <div class="post__left">
     <%= f.label :title, "タイトル" %>
     <%= f.text_field :title, autofocus: true %>
+    <% if @post.errors.include?(:title) %>
+      <%= @post.errors.full_messages_for(:title).first %>
+    <% end %>
 
     <button>
       <%= f.file_field :post_images, multiple: true, accept: 'image/jpeg,image/gif,image/png' %>
     </button>
+    <% if @post.errors.include?(:post_images) %>
+      <%= @post.errors.full_messages_for(:post_images).first %>
+    <% end %>
 
     <%= f.label :tag_list, "タグ" %>
     <%= f.text_field :tag_list, velue: @post.tag_list.join(',') %>
@@ -14,6 +20,9 @@
   <div class="post__right">
     <%= f.label :body, "内容" %>
     <%= f.text_area :body, autofocus: true %>
+    <% if @post.errors.include?(:body) %>
+      <%= @post.errors.full_messages_for(:body).first %>
+    <% end %>
 
     <%= f.submit "投稿", class: "btn_blue" %>
   </div>

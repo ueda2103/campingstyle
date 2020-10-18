@@ -4,14 +4,26 @@
     <button>
       <%= f.file_field :recipe_images, accept: 'image/jpeg,image/gif,image/png' %>
     </button>
+    <% if @recipe.errors.include?(:recipe_images) %>
+      <%= @recipe.errors.full_messages_for(:recipe_images).first %>
+    <% end %>
+
     <div class="recipe-title__wrapper">
       <%= f.label :title, "タイトル" %>
       <%= f.text_field :title, autofocus: true %>
     </div>
+    <% if @recipe.errors.include?(:title) %>
+      <%= @recipe.errors.full_messages_for(:title).first %>
+    <% end %>
+
     <div class="recipe-body__wrapper">
       <%= f.label :body, "内容" %><br>
       <%= f.text_area :body, autofocus: true %>
     </div>
+    <% if @recipe.errors.include?(:body) %>
+      <%= @recipe.errors.full_messages_for(:body).first %>
+    <% end %>
+
     <div class="recipe-form__field">
       <%= f.submit "投稿", autofocus: true, class: "btn_blue" %>
       <%= link_to "削除", recipe_path(@recipe.id), method: :delete, class: "btn_red" %>
