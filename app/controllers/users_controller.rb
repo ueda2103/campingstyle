@@ -10,8 +10,8 @@ class UsersController < ApplicationController
       if @users.present?
         @title = "検索結果：#{params[:search]}"
       else
-        @title = "ALL"
-        redirect_to users_path, notice: "検索結果がありませんでした"
+        @title = "検索結果がありません"
+        redirect_to users_path
       end
     else
       @title = "ALL"
@@ -23,7 +23,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.is_deleted == "退会済"
-      redirect_to users_path, notice: "対象のユーザーは退会済です"
+      flash[:error] = "対象のユーザーは退会済です"
+      redirect_to users_path
     end
     
     if @user == current_user
@@ -52,7 +53,8 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
 
     if @user.update(user_params)
-      redirect_to user_path(current_user.id), notice: "編集を保存しました"
+      flash[:success] = "編集を保存しました"
+      redirect_to user_path(current_user.id)
     else
       render "edit"
     end

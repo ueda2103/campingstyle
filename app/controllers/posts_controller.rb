@@ -8,8 +8,8 @@ class PostsController < ApplicationController
       if @posts.present?
         @title = "検索結果：#{params[:search]}"
       else
-        @title = "ALL"
-        redirect_to posts_path, notice: "検索結果がありません"
+        @title = "検索結果がありません"
+        redirect_to posts_path
       end
 
     elsif params[:tag_name]
@@ -40,7 +40,8 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
 
     if @post.save
-      redirect_to post_path(@post.id), notice: "投稿を保存しました"
+      flash[:success] = "投稿を保存しました"
+      redirect_to post_path(@post.id)
     else
       render "new"
     end
@@ -54,7 +55,8 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     
     if @post.update(post_params)
-      redirect_to post_path(@post.id), notice: "編集を保存を保存しました"
+      flash[:success] = "編集を保存しました"
+      redirect_to post_path(@post.id)
     else
       render "edit"
     end
@@ -65,9 +67,11 @@ class PostsController < ApplicationController
 
     if @post.user == current_user
       @post.destroy
-      redirect_to posts_path, notice: "投稿を削除しました"
+      flash[:success] = "投稿を削除しました"
+      redirect_to posts_path
     else
-      redirect_back fallback_location: post_path(@post.id), notice: "他のユーザーの投稿は削除できません"  
+      flash[:error] = "他のユーザーの投稿は削除できません"
+      redirect_back fallback_location: post_path(@post.id)
     end
   end
 

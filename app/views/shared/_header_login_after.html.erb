@@ -3,6 +3,7 @@
   <%= link_to root_path, class: "header-logo-wrapper" do %>
     <%= image_tag "logo.png", class: "header-logo" %>
   <% end %>
+
   <nav class="header-nav">
     <%= link_to "Mypage", user_path(current_user.id), class: "header-nav__link" %>
     <%= link_to "Users", users_path, class: "header-nav__link" %>
