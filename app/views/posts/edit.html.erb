@@ -1,6 +1,8 @@
 <%= form_with model: @post, local: true, html: {class: "col-12 d-flex my-5"} do |f| %>
   <div class="post__left">
-    <%= image_tag @post.post_images[0].to_s, class: "img_prev" %>
+    <% @post.post_images.each do |f_img| %>
+      <%= image_tag f_img.to_s, class: "img_prev" %>
+    <% end %>
     <button>
       <%= f.file_field :post_images, accept: 'image/jpeg,image/gif,image/png', class: "img" %>
     </button>

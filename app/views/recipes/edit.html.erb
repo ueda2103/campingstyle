@@ -1,6 +1,8 @@
 <div class="recipe__left">
   <%= form_with model: @recipe, url: recipe_path(@recipe.id), local: true, html: {class: "col-12 d-flex my-5"} do |f| %>
-    <%= image_tag @recipe.recipe_images[0].to_s, class: "img_prev" %>
+    <% @recipe.recipe_images.each do |f_img| %>
+      <%= image_tag f_img.to_s, class: "img_prev" %>
+    <% end %>
     <button>
       <%= f.file_field :recipe_images, accept: 'image/jpeg,image/gif,image/png', class: "img" %>
     </button>
@@ -30,6 +32,7 @@
     </div>
   <% end %>
 </div>
+
 <div class="recipe__right">
   <%= form_with model: @food, url: foods_path do |f| %>
     <%= f.label :name, "材料" %>

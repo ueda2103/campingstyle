@@ -6,11 +6,30 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# シードデータ
+# user
+family_names = %w{
+  佐藤:サトウ:sato
+  鈴木:スズキ:suzuki
+  高橋:タカハシ:takahasi
+  田中:タナカ:tanaka
+}
+
+given_names = %w{
+  太郎:タロウ:taro
+  二郎:ジロウ:jiro
+  三郎:サブロウ:saburo
+  花子:ハナコ:hanako
+  松子:マツコ:matuko
+}
+
+city_names = %w(青巻市 赤巻市 黄巻市)
+
 User.create!(
-  family_name: "高橋",
-  given_name: "太郎",
-  family_name_kana: "タカハシ",
-  given_name_kana: "タロウ",
+  family_name: "徳川",
+  given_name: "家康",
+  family_name_kana: "トクガワ",
+  given_name_kana: "イエヤス",
   postal_code: "1000002",
   prefecture_code: 13,
   city: "千代田区",
@@ -18,102 +37,266 @@ User.create!(
   building: "インフラトップ 4F",
   telephone_number: "09011112222",
   email: "test@gmail.com",
-  password: "password"
+  password: "password",
 )
 
-User.create!(
-  family_name: "織田",
-  given_name: "秀信",
-  family_name_kana: "オダ",
-  given_name_kana: "ヒデノブ",
-  postal_code: "1000002",
-  prefecture_code: 13,
-  city: "千代田区",
-  street: "1番地",
-  building: "インフラトップ 4F",
-  telephone_number: "09033332222",
-  email: "test2@gmail.com",
-  password: "password"
-)
+20.times do |n|
+  fn = family_names[n % 4].split(":")
+  gn = given_names[n % 5].split(":")
 
-Post.create!(
-  user_id: User.find(1).id,
-  post_images: "1",
-  title: "久々のソロキャンプ",
-  body: "今日は楽しむぞ〜！",
-  footprint: 3
-)
+  User.create!(
+    family_name: fn[0],
+    given_name: gn[0],
+    family_name_kana: fn[1],
+    given_name_kana: gn[1],
+    postal_code: sprintf("%07d", rand(10000000)),
+    prefecture_code: Random.rand(47),
+    city: city_names.sample,
+    street: "試験 1-2-3",
+    building: "インフラトップ",
+    telephone_number: sprintf("0900000%04d", n * 10 + n),
+    email: "#{fn[2]}.#{gn[2]}@example.jp",
+    password: "password",
+  )
+end
 
-Post.create!(
-  user_id: User.find(1).id,
-  post_images: "2",
-  title: "車中泊",
-  body: "雨だったー",
-  footprint: 4
-)
+# post
+post_titles_tags = %w{
+  ソロキャンプ
+  ファミリーキャンプ
+  車中泊
+  グランピング
+  野営
+  デイキャンプ
+  オートキャンプ
+  ツーリングキャンプ
+  TeePee style
+  Tree house style
+}
 
-Recipe.create!(
-  user_id: User.find(1).id,
-  recipe_images: 1,
-  title: "アヒージョ",
-  body: "定番です！",
-  footprint: 4
-)
+post_sub_titles = %w{
+  雨の
+  久々の
+  オシャレな
+  ギリギリの
+}
 
-Comment.create!(
-  user_id: User.find(2).id,
-  post_id: Post.find(1).id,
-  body: "こんにちは自分も行きたいです！"
-)
+40.times do |n|
+  i = Random.rand(20) + 1
+  c = Random.rand(3) + 1
+  tt = post_titles_tags[n % 10]
+  st = post_sub_titles[n % 4]
 
-Comment.create!(
-  user_id: User.find(2).id,
-  recipe_id: Recipe.find(1).id,
-  body: "美味しそうですね！"
-)
+  Post.create!(
+    user_id: User.find(i).id,
+    post_images: [open("db/fixtures/images/#{c}.jpg")],
+    title: "#{st}#{tt}",
+    body: "楽しむぞ",
+    footprint: Random.rand(100)
+  )
+end
 
-Food.create!(
-  recipe_id: Recipe.find(1).id,
-  name: "人参",
-  quantity: "1本"
-)
+# recipe
+recipe_titles_tags = %w{
+  ナポリタン
+  焼肉
+  バーベキュー
+  アヒージョ
+  ホットドック
+  焼き鳥
+  ビーフストロガノフ
+  ハンバーグ
+  生春巻き
+  ハムエッグ
+}
 
-Flow.create!(
-  recipe_id: Recipe.find(1).id,
-  body: "適当な大きさに切ります"
-)
+recipe_sub_titles = %w{
+  定番の
+  美味しい
+  オシャレな
+  しょっぱい
+}
 
-Favorite.create!(
-  user_id: User.find(2).id,
-  post_id: Post.find(1).id
-)
+40.times do |n|
+  i = Random.rand(20) + 1
+  c = Random.rand(3) + 1
+  tt = recipe_titles_tags[n % 10]
+  st = recipe_sub_titles[n % 4]
 
-Bookmark.create!(
-  user_id: User.find(2).id,
-  recipe_id: Recipe.find(1).id
-)
+  Recipe.create!(
+    user_id: User.find(i).id,
+    recipe_images: [open("db/fixtures/images/#{c}.jpg")],
+    title: "#{tt}#{st}",
+    body: "楽しむぞ〜！",
+    status: true,
+    footprint: Random.rand(100)
+  )
+end
 
-Relationship.create!(
-  followed_id: User.find(2).id,
-  follower_id: User.find(1).id
-)
+# コメント
+80.times do |n|
+  ui = Random.rand(20) + 1
+  pi = Random.rand(40) + 1
 
-Item.create!(
-  user_id: User.find(1).id,
-  name: "ファイヤスターター",
-  status: 0
-)
+  Comment.create!(
+    user_id: User.find(ui).id,
+    post_id: Post.find(pi).id,
+    body: "こんにちは自分も行きたいです！"
+  )
+end
 
-Tag.create!(
-  name: "ソロキャン"
-)
+80.times do |n|
+  ui = Random.rand(20) + 1
+  ri = Random.rand(40) + 1
 
-TagEntry.create!(
-  tag_id: Tag.find(1).id,
-  recipe_id: Recipe.find(1).id
-)
+  Comment.create!(
+    user_id: User.find(ui).id,
+    recipe_id: Recipe.find(ri).id,
+    body: "こんにちは美味しそうですね！"
+  )
+end
 
-TagEntry.create!(
-  tag_id: Tag.find(1).id,
-  post_id: User.find(1).id
-)
+# 食材
+foods = %w{
+  人参
+  玉ねぎ
+  豚肉
+  しめじ
+  ベーコン
+  卵
+  ニンニク
+  醤油
+  塩
+  胡椒
+}
+
+200.times do |n|
+  ri = Random.rand(40) + 1
+  fi = Random.rand(10)
+  f = foods[fi]
+
+  Food.create!(
+    recipe_id: Recipe.find(ri).id,
+    name: "#{f}"
+  )
+end
+
+# 手順
+flows = %w{
+  細かく刻む
+  ざく切りにする
+  手でちぎる
+  油をしく
+  塩をふる
+  胡椒をまぶす
+  火にかける
+  焦げ目がつくまで焼く
+  油であげる
+  煮る
+}
+
+200.times do |n|
+  ri = Random.rand(40) + 1
+  fi = Random.rand(10)
+  f = flows[fi]
+
+  Flow.create!(
+    recipe_id: Recipe.find(ri).id,
+    body: "#{f}"
+  )
+end
+
+# いいね
+40.times do |n|
+  ui = (n % 20) + 1
+  pi = (n % 40) + 1
+
+  Favorite.create!(
+    user_id: User.find(ui).id,
+    post_id: Post.find(pi).id
+  )
+end
+
+40.times do |n|
+  ui = (n % 20) + 1
+  ri = (n % 40) + 1
+
+  Favorite.create!(
+    user_id: User.find(ui).id,
+    recipe_id: Recipe.find(ri).id
+  )
+end
+
+# ブックマーク
+40.times do |n|
+  ui = (n % 20) + 1
+  pi = (n % 40) + 1
+
+  Bookmark.create!(
+    user_id: User.find(ui).id,
+    post_id: Post.find(pi).id
+  )
+end
+
+40.times do |n|
+  ui = (n % 20) + 1
+  ri = (n % 40) + 1
+
+  Bookmark.create!(
+    user_id: User.find(ui).id,
+    recipe_id: Recipe.find(ri).id
+  )
+end
+
+# フォロー
+20.times do |n|
+  ui = (n % 20) + 1
+  fi = 21 - ui
+
+  Relationship.create!(
+    followed_id: User.find(ui).id,
+    follower_id: User.find(fi).id
+  )
+end
+
+# アイテム
+items = %w{
+  ファイヤスターター
+  焚き火台
+  着火剤
+  テント
+  タープ
+  ランタン
+  豚肉
+  オイルサーディン
+  蟹味噌缶
+  レモン
+  ニンニク
+  胡椒
+  バター
+  オリーブオイル
+}
+
+250.times do |n|
+  ui = (n % 20) + 1
+  ii = (n % 14)
+
+  Item.create!(
+    user_id: User.find(ui).id,
+    name: "#{items[ii]}",
+    status: Random.rand(3)
+  )
+end
+
+# タグリスト
+post_titles_tags.each do |tag| 
+  tag_list = ActsAsTaggableOn::Tag.new
+  tag_list.name = tag
+  tag_list.save
+end
+
+recipe_titles_tags.each do |tag|
+  tag_list = ActsAsTaggableOn::Tag.new
+  tag_list.name = tag
+  tag_list.save
+end
