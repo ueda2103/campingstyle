@@ -3,9 +3,10 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.where(status: "公開")
+    @tags = Recipe.tag_counts
 
     if params[:search].present?
-      @recipes = @recipes.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(9)
+      @recipes = @recipes.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(8)
 
       if @recipes.present?
         @title = "検索結果：#{params[:search]}"
@@ -14,10 +15,10 @@ class RecipesController < ApplicationController
         redirect_to recipes_path
       end
     elsif params[:tag_name]
-      @recipes = @recipes.tagged_with("#{params[:tag_name]}").order(id: "DESC").page(params[:page]).per(9)
+      @recipes = @recipes.tagged_with("#{params[:tag_name]}").order(id: "DESC").page(params[:page]).per(8)
       @title = "#{params[:tag_name]}"
     else
-      @recipes = @recipes.order(id: "DESC").page(params[:page]).per(9)
+      @recipes = @recipes.order(id: "DESC").page(params[:page]).per(8)
       @title = "ALL"
     end
   end

@@ -1,14 +1,17 @@
 <%# タグ検索フォーム %>
 <table>
-
   <thead>
     <tr><td>タグ検索</td></tr>
   </thead>
-
   <tbody>
-    <% tags.each do |t| %>
-      <tr><td><%= link_to t.name, posts_path(tag_id: t.id) %></td></tr>
+    <% if /post/ =~ request.fullpath %>
+      <% tags.each do |tag| %>
+        <tr><td><%= link_to tag.name, posts_path(tag_id: tag.id) %></td></tr>
+      <% end %>
+    <% else %>
+      <% tags.each do |tag| %>
+        <tr><td><%= link_to tag.name, recipes_path(tag_id: tag.id) %></td></tr>
+      <% end %>
     <% end %>
   </tbody>
-
 </table>

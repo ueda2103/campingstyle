@@ -1,4 +1,9 @@
+// ユーザー一覧
 .users {
+
+  p {
+    font-size: 0.5rem;
+  }
 
   .user-body {
     justify-content: center;
@@ -7,6 +12,12 @@
 
     .user-body__text {
       width: 120px;
+
+      a {
+        width: 100px;
+        padding: 2px;
+        text-align: center;
+      }
     }
 
     .follow-count {
@@ -47,23 +58,20 @@
   }
 }
 
-.user-info {
-  text-align: center;
-
-  a {
-    width: 140px;
-  }
-}
-
-.user-edit-form {
+// ユーザー新規・編集
+.user-form {
   width: 100%;
 
   .user-icon__wrapper {
-    text-align: center;
-    margin-bottom: 30px;
+    text-align: center,;
+    margin-bottom: 10px;
 
     .user-icon {
       margin-right: 50px;
+    }
+
+    .img {
+      font-size: 0.5rem;
     }
   }
   
@@ -71,8 +79,8 @@
     margin: 0 auto;
     
     td {
-      padding-top: 20px;
       vertical-align: center;
+      padding-top: 10px;
       
       label {
         margin: auto;
@@ -80,15 +88,15 @@
       
       input {
         margin: auto;
-        height: 25px;
+        height: 20px;
       }
     }
   }
   
-  .user-edit-form__field {
+  .user-form__field {
     text-align: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     
     .btn_green {
       font-size: 1rem;
@@ -97,7 +105,10 @@
   }
 }
 
+// 退会ページ
 .withdrawal {
+  margin: 0 auto;
+  margin-top: 80px;
 
   h2 {
     text-align: center;
@@ -109,5 +120,79 @@
 
   .withdrawal-btn {
     text-align: center;
+  }
+}
+
+// ユーザー詳細ページサイドバー
+.user__info {
+  text-align: center;
+
+  a {
+    width: 80%;
+  }
+}
+
+// マイページメイン
+.current-user__body {
+
+  .item__form {
+    margin-left: 10%;
+    
+    label {
+      font-size: 1.5rem;
+      margin: auto 0;
+    }
+  }
+
+  .item__list {
+    
+    table {
+      margin: 0 auto;
+
+      tr {
+
+        td {
+          border-bottom: 2px solid #df7716;
+          padding-right: 20px;
+          
+          &:first-child {
+            width: 15vw;
+            padding-left: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// パスワード変更ページ
+.edit-password {
+  width: 100%;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+    
+  table {
+    margin: 0 auto;
+    margin-bottom: 20px;
+
+    td {
+      height: 40px;
+      
+      input {
+        width: 150px;
+        font-size: 0.5rem;
+      }
+    }
+  }
+
+  .actions {
+    text-align: center;
+
+    input {
+      margin-right: 20px;
+    }
   }
 }

@@ -1,22 +1,31 @@
-<%# マイページサイドバー %>
-<div class="current-user-info col-2">
-  <%= render "mypage_sidebar", user: @user %>
-</div>
+<main>
+  <div class="container">
+    <div class="row">
+      <%# マイページサイドバー %>
+      <div class="user__info col-2 mt-2">
+        <%= render "mypage_sidebar", user: @user %>
+      </div>
 
-<%# マイページ持ち物リスト %>
-<div class="current-user-body col-10">
-  <div class="items">
+      <%# マイページ持ち物リスト %>
+      <div class="current-user__body col-10 mt-2">
+        <div class="items">
+          <div class="item__form">
+            <h2>持ち物リスト</h2>
 
-    <%# 持ち物リスト入力フォーム %>
-    <%= form_with model: @item, url: items_path do |f| %>
-      <%= f.label :name, "持ち物" %>
-      <%= f.text_field :name %>
-      <%= f.submit "登録", class: "btn_blue" %>
-    <% end %>
+            <%# 持ち物リスト入力フォーム %>
+            <%= form_with model: @item, url: items_path, class: "form" do |f| %>
+              <%= f.label :name, "持ち物" %>
+              <%= f.text_field :name %>
+              <%= f.submit "登録", class: "btn_blue" %>
+            <% end %>
+          </div>
 
-    <%# 持ち物リスト表示画面 %>
-    <div class="item__list">
-      <%= render "items/itemlist", items: @items %>
+          <%# 持ち物リスト表示画面 %>
+          <div class="item__list mt-4">
+            <%= render "items/itemlist", items: @items %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</main>

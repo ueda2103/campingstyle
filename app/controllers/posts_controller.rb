@@ -2,8 +2,10 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
+    @tags = Post.tag_counts
+    
     if params[:search].present?
-      @posts = Post.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(9)
+      @posts = Post.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(8)
 
       if @posts.present?
         @title = "検索結果：#{params[:search]}"
@@ -11,13 +13,12 @@ class PostsController < ApplicationController
         @title = "検索結果がありません"
         redirect_to posts_path
       end
-
     elsif params[:tag_name]
-      @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).per(9)
+      @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
       @title = "#{params[:tag_name]}"
       
     else
-      @posts = Post.all.order(id: "DESC").page(params[:page]).per(9)
+      @posts = Post.all.order(id: "DESC").page(params[:page]).per(8)
       @title = "ALL"
     end
   end
