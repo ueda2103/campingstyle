@@ -4,15 +4,33 @@ class UsersController < ApplicationController
   def index
     @users = User.where(is_deleted: "有効")
 
-    if params[:search].present?
+    if params[:search]
       @users = @users.where("family_name LIKE ?", "%#{params[:search]}%").page(params[:page]).per(10)
 
-      if @users.present?
+      if params[:search].present?
         @title = "検索結果：#{params[:search]}"
       else
         @title = "検索結果がありません"
-        redirect_to users_path
       end
+
+    elsif params[:followed]
+      @users = current_user.followed_user.page(params[:page]).per(10)
+
+      if current_user.followed_user.present?
+        @title = "フォロー"
+      else
+        @title = "フォローユーザーがいません"
+      end
+
+    elsif params[:follower]
+      @users = current_user.follower_user.page(params[:page]).per(10)
+
+      if current_user.follower_user.present?
+        @title = "フォロワー"
+      else
+        @title = "フォロワーがいません"
+      end
+
     else
       @title = "ALL"
       @users = @users.page(params[:page]).per(10)

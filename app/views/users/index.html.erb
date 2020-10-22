@@ -1,8 +1,8 @@
 <main>
   <div class="container">
     <div class="row">
-      <div class="users offset-2 col-8 mt-3 px-3">
-        <h2 class="mb-4">Users　<%= @title %></h2>
+      <div class="users offset-2 col-8 my-1 px-3">
+        <h2>Users　<%= @title %></h2>
 
         <%= form_with url: users_path, method: :get, local: true, class: "form mb-3" do |f| %>
           <%= f.text_field :search %>
