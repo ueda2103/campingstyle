@@ -4,7 +4,7 @@
       <h2 class="offset-3 col-3 mt-3">新規会員登録</h2>
       <%= render "devise/shared/links" %>
 
-      <%= form_with model: @user, url: user_registration_path, method: :post, local: true, html: {class: "mt-2 user-form"} do |f| %>
+      <%= form_with model: @user, url: user_registration_path, method: :post, local: true, class: "mt-2 user-form" do |f| %>
 
         <div class="user-icon__wrapper">
           <%= image_tag @user.user_image.thumb.url, size: "70x70", class: "user-icon img_prev" %>

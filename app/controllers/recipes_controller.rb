@@ -6,12 +6,13 @@ class RecipesController < ApplicationController
     @tags = @recipes.tag_counts
 
     if params[:search]
-      @recipes = @recipes.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(12)
-
+      
       if params[:search].present?
         @title = "検索結果：#{params[:search]}"
+        @recipes = @recipes.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(12)
       else
         @title = "検索結果がありません"
+        @recipes = Recipe.where(status: "公開").order(id: "DESC").page(params[:page]).per(12)
       end
 
     elsif params[:bookmarks]

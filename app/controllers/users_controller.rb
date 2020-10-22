@@ -5,12 +5,13 @@ class UsersController < ApplicationController
     @users = User.where(is_deleted: "有効")
 
     if params[:search]
-      @users = @users.where("family_name LIKE ?", "%#{params[:search]}%").page(params[:page]).per(10)
-
+      
       if params[:search].present?
         @title = "検索結果：#{params[:search]}"
+        @users = @users.where("family_name LIKE ?", "%#{params[:search]}%").page(params[:page]).per(10)
       else
         @title = "検索結果がありません"
+        @users = @users.page(params[:page]).per(10)
       end
 
     elsif params[:followed]
