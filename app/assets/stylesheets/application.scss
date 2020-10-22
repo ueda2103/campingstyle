@@ -634,3 +634,63 @@ div.field_with_errors {
     background-color: #dd7e7e;
   }
 }
+
+#about, .top_posts, .top_recipes {
+
+  p {
+    font-size: 1.25rem;
+  }
+}
+
+#about > p, #about > h1 {
+  margin-left: 50px;
+}
+
+.top_posts, .top_recipes {
+  margin-top: 80px;
+}
+
+.top_recipes {
+  margin-bottom: 80px;
+}
+
+.card__list {
+  display: flex;
+  width: 100%;
+  margin-top: 30px;
+  justify-content: center;
+  text-align: center;
+  
+  .card {
+    width: 30%;
+    margin-right: 10px;
+    
+    .card__img {
+      width: 100%;
+      height: 230px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    h3 {
+      position: relative;
+      font-size: 1.5rem;
+      margin-top: 20px;
+      margin-left: 0;
+      margin-bottom: 15px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100px;
+        height: 2px;
+        transform: translateX(-50%) translateY(15px);
+        background-color: #00ffb3;
+      }
+    }
+  }
+}
