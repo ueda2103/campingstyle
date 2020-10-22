@@ -92,4 +92,10 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:user_image,:family_name, :given_name, :family_name_kana, :given_name_kana, :postal_code, :prefecture_code, :city, :street, :building, :telephone_number)
   end
+
+  def check_user
+    item = Item.find(params[:id])
+    user = User.find(item.user_id)
+    redirect_back fallback_location: user_path(current_uer.id) unless user == current_user
+  end
 end

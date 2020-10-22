@@ -11,8 +11,10 @@
     <div class="comment-body">
       <p><%= c.body %></p>
 
-      <% if c.user_id == current_user.id %>
-        <%= link_to "削除", comment_path(id: c.id), method: :delete, remote: true, class: "btn_red" %>
+      <% if user_signed_in? %>
+        <% if c.user_id == current_user.id %>
+          <%= link_to "削除", comment_path(id: c.id), method: :delete, remote: true, class: "btn_red" %>
+        <% end %>
       <% end %>
     </div>
   </div>

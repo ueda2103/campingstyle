@@ -8,21 +8,21 @@
             <%= render "/shared/flash" %>
             <%= f.text_field :title, autofocus: true %>
             <% if @post.errors.include?(:title) %>
-              <%= @post.errors.full_messages_for(:title).first %>
+              <span class="red"><%= @post.errors.full_messages_for(:title).first %></span>
             <% end %>
           </div>
 
           <div class="img my-4">
             <div class="img-box mb-2">
               <% @post.post_images.each do |f_img| %>
-                <%= image_tag f_img.to_s, size: "150x150", class: "img_prev" %>
+                <span class="red"><%= image_tag f_img.to_s, size: "150x150", class: "img_prev" %></span>
               <% end %>
             </div>
             <button>
               <%= f.file_field :post_images, class: "img" %>
             </button>
             <% if @post.errors.include?(:post_images) %>
-              <%= @post.errors.full_messages_for(:post_images).first %>
+              <span class="red"><%= @post.errors.full_messages_for(:post_images).first %></span>
             <% end %>
           </div>
 
@@ -33,7 +33,7 @@
             <%= f.label :body, "内容" %><br>
             <%= f.text_area :body, autofocus: true %>
             <% if @post.errors.include?(:body) %>
-              <%= @post.errors.full_messages_for(:body).first %>
+              <span class="red"><%= @post.errors.full_messages_for(:body).first %></span>
             <% end %>
           </div>
           

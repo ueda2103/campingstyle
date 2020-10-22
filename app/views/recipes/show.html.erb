@@ -63,11 +63,13 @@
       <div class="show_right col-6 mt-3">
         <h2>Comment</h2>
 
-        <%= form_with model: @comment, url: comments_path do |f| %>
-          <%= f.text_area :body %>
-          <%= f.hidden_field :user_id, value: current_user.id %>
-          <%= f.hidden_field :recipe_id, value: @recipe.id %>
-          <%= f.submit "送信" %>
+        <% if user_signed_in? %>
+          <%= form_with model: @comment, url: comments_path do |f| %>
+            <%= f.text_area :body %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.hidden_field :recipe_id, value: @recipe.id %>
+            <%= f.submit "送信" %>
+          <% end %>
         <% end %>
 
         <div class="comment__list">

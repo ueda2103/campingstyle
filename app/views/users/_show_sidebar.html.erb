@@ -8,3 +8,6 @@
 <div class="relationship_<%= user.id %>">
   <%= render "relationships/relationship", follower: user %>
 </div>
+
+<%= link_to "Posts", users_posts_path(user.id), class: "btn_blue mt-1" %>
+<%= link_to "Camping Meals", users_recipes_path(user.id), class: "btn_blue mt-1" %>

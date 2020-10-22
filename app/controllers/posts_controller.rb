@@ -37,8 +37,6 @@ class PostsController < ApplicationController
     @footprint = @post.footprint + 1
     @post.update(footprint: @footprint)
     @comments = Comment.where(post_id: params[:id])
-    @favorite = Favorite.find_by(user_id: current_user.id, post_id: params[:id])
-    @bookmark = Bookmark.find_by(user_id: current_user.id, post_id: params[:id])
   end
 
   def new
@@ -53,6 +51,7 @@ class PostsController < ApplicationController
       flash[:success] = "投稿を保存しました"
       redirect_to post_path(@post.id)
     else
+      flash[:error] = "保存に失敗しました"
       render "new"
     end
   end
@@ -68,6 +67,7 @@ class PostsController < ApplicationController
       flash[:success] = "編集を保存しました"
       redirect_to post_path(@post.id)
     else
+      flash[:error] = "保存に失敗しました"
       render "edit"
     end
   end

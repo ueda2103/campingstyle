@@ -10,7 +10,7 @@
             <%= render "/shared/flash" %>
             <%= f.text_field :title, autofocus: true %>
             <% if @post.errors.include?(:title) %>
-              <%= @post.errors.full_messages_for(:title).first %>
+              <span class="red"><%= @post.errors.full_messages_for(:title).first %></span>
             <% end %>
           </div>
 
@@ -22,7 +22,7 @@
               <%= f.file_field :post_images, multiple: true, class: "img" %>
             </button>
             <% if @post.errors.include?(:post_images) %>
-              <%= @post.errors.full_messages_for(:post_images).first %>
+              <span class="red"><%= @post.errors.full_messages_for(:post_images).first %></span>
             <% end %>
           </div>
         </div>
@@ -37,7 +37,7 @@
             <%= f.label :body, "内容" %>
             <%= f.text_area :body, autofocus: true %>
             <% if @post.errors.include?(:body) %>
-              <%= @post.errors.full_messages_for(:body).first %>
+              <span class="red"><%= @post.errors.full_messages_for(:body).first %></span>
             <% end %>
           </div>
 
