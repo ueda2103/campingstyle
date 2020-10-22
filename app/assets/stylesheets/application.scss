@@ -299,6 +299,7 @@ header {
 main {
   padding-top: 62px;
   padding-bottom: 50px;
+  min-height: calc(100vh - 62px);
 }
 
 .tag-sidebar {
@@ -468,8 +469,8 @@ main {
   }
 
   .user-body__center {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     text-align: center;
 
     a {
@@ -485,8 +486,9 @@ main {
 
     p {
       font-size: 1rem;
-      margin-left: 10px;
-      margin-right: 10px;
+      margin-left: 5px;
+      margin-right: 5px;
+      color: #000000;
     }
   }
 }
@@ -588,5 +590,42 @@ main {
 
   ol {
     padding-left: 60px;
+  }
+}
+
+footer {
+
+  p {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    border-top: 2px solid #00ff00;
+  }
+}
+
+.titlebar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.success {
+  color: #00ff00;
+  font-weight: bold;
+
+  &:before {
+    font-family: "Font Awesome 5 free";
+    content: "\f058";
+    margin-right: 5px;
+  }
+}
+
+.error {
+  color: #ff0000;
+  font-weight: bold;
+
+  &:before {
+    font-family: "Font Awesome 5 free";
+    content: "\f06a";
+    margin-right: 5px;
   }
 }

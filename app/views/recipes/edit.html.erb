@@ -5,6 +5,7 @@
           <div class="post-recipe__left">
             <div class="title">
               <%= f.label :title, "タイトル" %>
+              <%= render "/shared/flash" %>
               <%= f.text_field :title, autofocus: true %>
               <% if @recipe.errors.include?(:title) %>
                 <%= @recipe.errors.full_messages_for(:title).first %>
@@ -36,8 +37,8 @@
             </div>
 
             <div class="action">
-              <%= f.submit "投稿", autofocus: true, class: "btn_blue" %>
-              <%= link_to "削除", recipe_path(@recipe.id), method: :delete, class: "btn_red" %>
+              <%= f.submit "編集", autofocus: true, class: "btn_blue" %>
+              <%= link_to "削除", recipe_path(@recipe.id), method: :delete, data: {confirm: "本当に削除しますか"}, class: "btn_red" %>
             </div>
           </div>
         </div>

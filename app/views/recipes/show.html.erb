@@ -6,7 +6,7 @@
 
         <div class="show__title">
           <h2><%= @recipe.title %></h2>
-
+          <%= render "/shared/flash" %>
           <div class="bookmark_<%= @recipe.id %>">
             <%= render "bookmarks/bookmark", recipe: @recipe %>
           </div>

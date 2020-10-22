@@ -3,10 +3,10 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.where(status: "公開")
-    @tags = Recipe.tag_counts
+    @tags = @recipes.tag_counts
 
     if params[:search]
-      @recipes = @recipes.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(8)
+      @recipes = @recipes.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(12)
 
       if params[:search].present?
         @title = "検索結果：#{params[:search]}"
@@ -15,7 +15,7 @@ class RecipesController < ApplicationController
       end
 
     elsif params[:bookmarks]
-      @recipes = current_user.bookmark_recipe.order(id: "DESC").page(params[:page]).per(8)
+      @recipes = current_user.bookmark_recipe.order(id: "DESC").page(params[:page]).per(12)
 
       if current_user.bookmark_recipe.present?
         @title = "ブックマーク"
@@ -24,11 +24,11 @@ class RecipesController < ApplicationController
       end
 
     elsif params[:tag_name]
-      @recipes = @recipes.tagged_with("#{params[:tag_name]}").order(id: "DESC").page(params[:page]).per(8)
+      @recipes = @recipes.tagged_with("#{params[:tag_name]}").order(id: "DESC").page(params[:page]).per(12)
       @title = "検索結果：#{params[:tag_name]}"
       
     else
-      @recipes = @recipes.order(id: "DESC").page(params[:page]).per(8)
+      @recipes = @recipes.order(id: "DESC").page(params[:page]).per(12)
       @title = "ALL"
     end
   end
@@ -41,6 +41,10 @@ class RecipesController < ApplicationController
       @foods = Food.where(recipe_id: @recipe.id)
       @flows = Flow.where(recipe_id: @recipe.id)
       @comments = Comment.where(recipe_id: @recipe.id)
+
+      if @recipe.status == "非公開"
+        flash[:error] = "非公開のページです"
+      end
     elsif @recipe.status == "非公開"
       flash[:error] = "非公開のページです"
       redirect_to recipes_path
@@ -59,6 +63,7 @@ class RecipesController < ApplicationController
       flash[:success] = "フォーマットが作成されました"
       redirect_to edit_recipe_path(@recipe.id)
     else
+      flash[:error] = "保存に失敗しました"
       render "new"
     end
   end
@@ -76,16 +81,18 @@ class RecipesController < ApplicationController
       
       if @recipe.update(recipe_params)
         @recipe.update(status: "公開")
-        flash[:success] = "保存しました"
+        flash[:success] = "編集を保存しました"
         redirect_to recipe_path(@recipe.id)
       else
         @foods = Food.where(recipe_id: @recipe.id)
         @flows = Flow.where(recipe_id: @recipe.id)
+        flash[:error] = "保存に失敗しました"
         render "edit"
       end
     else
-      flash[:error] = "材料・手順がありません"
-      redirect_back fallback_location: edit_recipe_path(@recipe.id)
+      @recipe.update(status: "非公開")
+      flash[:error] = "材料・手順がないため非公開で保存しました"
+      redirect_to recipe_path(@recipe.id)
     end
   end
 
@@ -94,10 +101,10 @@ class RecipesController < ApplicationController
 
     if @recipe.destroy
       flash[:success] = "削除しました"
-      redirect_to recipe_path(@recipe.id)
+      redirect_to recipes_path
     else
       flash[:error] = "削除に失敗しました"
-      redirect_to new_recipe_path(@recipe.id)
+      redirect_to recipe_path(@recipe.id)
     end
   end
 

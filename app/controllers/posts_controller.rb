@@ -5,7 +5,7 @@ class PostsController < ApplicationController
     @tags = Post.tag_counts
     
     if params[:search]
-      @posts = Post.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(8)
+      @posts = Post.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(12)
 
       if params[:search].present?
         @title = "検索結果：#{params[:search]}"
@@ -14,11 +14,11 @@ class PostsController < ApplicationController
       end
 
     elsif params[:tag_name]
-      @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
+      @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).per(12)
       @title = "検索結果：#{params[:tag_name]}"
       
     elsif params[:bookmarks]
-      @posts = current_user.bookmark_post.order(id: "DESC").page(params[:page]).per(8)
+      @posts = current_user.bookmark_post.order(id: "DESC").page(params[:page]).per(12)
 
       if current_user.bookmark_post.present?
         @title = "ブックマーク"
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
       end
 
     else
-      @posts = Post.all.order(id: "DESC").page(params[:page]).per(8)
+      @posts = Post.all.order(id: "DESC").page(params[:page]).per(12)
       @title = "ALL"
     end
   end

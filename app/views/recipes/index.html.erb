@@ -7,13 +7,17 @@
       </div>
 
       <%# レシピ一覧 %>
-      <div class="post-recipe-index col-10 my-1 px-3">
-        <h2>Recipes　<%= @title %></h2>
+      <div class="post-recipe-index col-10 my-3 px-3">
+        <div class="titlebar">
+          <h2>Recipes　<%= @title %></h2>
 
-        <%= form_with url: recipes_path, method: :get, local: true, class: "form" do |f| %>
-          <%= f.text_field :search %>
-          <%= f.submit "検索", class: "btn_blue" %>
-        <% end %>
+          <%= render "/shared/flash" %>
+
+          <%= form_with url: recipes_path, method: :get, local: true, class: "form" do |f| %>
+            <%= f.text_field :search %>
+            <%= f.submit "検索", class: "btn_blue" %>
+          <% end %>
+        </div>
 
         <%= render "index", recipes: @recipes %>
         <%= paginate @recipes %>

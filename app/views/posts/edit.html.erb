@@ -5,6 +5,7 @@
         <div class="post-recipe__left">
           <div class="title">
             <%= f.label :title, "タイトル" %>
+            <%= render "/shared/flash" %>
             <%= f.text_field :title, autofocus: true %>
             <% if @post.errors.include?(:title) %>
               <%= @post.errors.full_messages_for(:title).first %>
