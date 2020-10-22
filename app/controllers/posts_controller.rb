@@ -4,19 +4,28 @@ class PostsController < ApplicationController
   def index
     @tags = Post.tag_counts
     
-    if params[:search].present?
+    if params[:search]
       @posts = Post.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(8)
 
-      if @posts.present?
+      if params[:search].present?
         @title = "検索結果：#{params[:search]}"
       else
         @title = "検索結果がありません"
-        redirect_to posts_path
       end
+
     elsif params[:tag_name]
       @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).per(8)
-      @title = "#{params[:tag_name]}"
+      @title = "検索結果：#{params[:tag_name]}"
       
+    elsif params[:bookmarks]
+      @posts = current_user.bookmark_post.order(id: "DESC").page(params[:page]).per(8)
+
+      if current_user.bookmark_post.present?
+        @title = "ブックマーク"
+      else
+        @title = "ブックマークがありません"
+      end
+
     else
       @posts = Post.all.order(id: "DESC").page(params[:page]).per(8)
       @title = "ALL"

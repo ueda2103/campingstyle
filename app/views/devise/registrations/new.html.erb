@@ -9,7 +9,7 @@
         <div class="user-icon__wrapper">
           <%= image_tag @user.user_image.thumb.url, size: "70x70", class: "user-icon img_prev" %>
           <button>
-            <%= f.file_field :user_image, accept: 'image/jpeg,image/gif,image/png', class: "img" %>
+            <%= f.file_field :user_image, class: "img" %>
           </button>
         </div>
 

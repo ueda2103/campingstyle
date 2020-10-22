@@ -1,30 +1,48 @@
-<%= form_with model: @post, local: true, html: {class: "col-12 d-flex my-5"} do |f| %>
-  <div class="post__left">
-    <%= f.label :title, "タイトル" %>
-    <%= f.text_field :title, autofocus: true %>
-    <% if @post.errors.include?(:title) %>
-      <%= @post.errors.full_messages_for(:title).first %>
-    <% end %>
+<main>
+  <div class="container">
+    <div class="row">
+      <h2 class="my-3">新規投稿</h2>
 
-    <%# image_tag @post.post_images[0].to_s, class: "img_prev" %>
-    <button>
-      <%= f.file_field :post_images, multiple: true, accept: 'image/jpeg,image/gif,image/png', class: "img" %>
-    </button>
-    <% if @post.errors.include?(:post_images) %>
-      <%= @post.errors.full_messages_for(:post_images).first %>
-    <% end %>
+      <%= form_with model: @post, local: true, class: "post-recipe__body d-flex col-12" do |f| %>
+        <div class="post-recipe__left">
+          <div class="title">
+            <%= f.label :title, "タイトル" %>
+            <%= f.text_field :title, autofocus: true %>
+            <% if @post.errors.include?(:title) %>
+              <%= @post.errors.full_messages_for(:title).first %>
+            <% end %>
+          </div>
 
-    <%= f.label :tag_list, "タグ" %>
-    <%= f.text_field :tag_list, velue: @post.tag_list.join(',') %>
+          <div class="img my-4">
+            <div class="img-box mb-2">
+              <%# image_tag @post.post_images[0].to_s, class: "img_prev" %>
+            </div>
+            <button>
+              <%= f.file_field :post_images, multiple: true, class: "img" %>
+            </button>
+            <% if @post.errors.include?(:post_images) %>
+              <%= @post.errors.full_messages_for(:post_images).first %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="post-recipe__right">
+          <div class="tag">
+            <%= f.label :tag_list, "タグ" %>
+            <%= f.text_field :tag_list, velue: @post.tag_list.join(',') %>
+          </div>
+
+          <div class="text my-4">
+            <%= f.label :body, "内容" %>
+            <%= f.text_area :body, autofocus: true %>
+            <% if @post.errors.include?(:body) %>
+              <%= @post.errors.full_messages_for(:body).first %>
+            <% end %>
+          </div>
+
+          <%= f.submit "投稿", class: "btn_blue" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div class="post__right">
-    <%= f.label :body, "内容" %>
-    <%= f.text_area :body, autofocus: true %>
-    <% if @post.errors.include?(:body) %>
-      <%= @post.errors.full_messages_for(:body).first %>
-    <% end %>
-
-    <%= f.submit "投稿", class: "btn_blue" %>
-  </div>
-<% end %>
+</main>

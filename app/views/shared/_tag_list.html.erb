@@ -1,5 +1,13 @@
-<% tag_list.each do |tag| %>
-  <%= link_to posts_path(tag_name: tag) do %>
-    <span><%= tag %></span>
+<% if /post/ =~ request.fullpath %>
+  <% tag_list.each do |tag| %>
+    <%= link_to posts_path(tag_name: tag), class: "btn_blue_mini" do %>
+      <span><%= tag %></span>
+    <% end %>
+  <% end %>
+<% else %>
+  <% tag_list.each do |tag| %>
+    <%= link_to recipes_path(tag_name: tag), class: "btn_blue_mini" do %>
+      <span><%= tag %></span>
+    <% end %>
   <% end %>
 <% end %>

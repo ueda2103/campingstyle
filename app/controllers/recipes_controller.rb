@@ -5,18 +5,28 @@ class RecipesController < ApplicationController
     @recipes = Recipe.where(status: "公開")
     @tags = Recipe.tag_counts
 
-    if params[:search].present?
+    if params[:search]
       @recipes = @recipes.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(8)
 
-      if @recipes.present?
+      if params[:search].present?
         @title = "検索結果：#{params[:search]}"
       else
         @title = "検索結果がありません"
-        redirect_to recipes_path
       end
+
+    elsif params[:bookmarks]
+      @recipes = current_user.bookmark_recipe.order(id: "DESC").page(params[:page]).per(8)
+
+      if current_user.bookmark_recipe.present?
+        @title = "ブックマーク"
+      else
+        @title = "ブックマークがありません"
+      end
+
     elsif params[:tag_name]
       @recipes = @recipes.tagged_with("#{params[:tag_name]}").order(id: "DESC").page(params[:page]).per(8)
-      @title = "#{params[:tag_name]}"
+      @title = "検索結果：#{params[:tag_name]}"
+      
     else
       @recipes = @recipes.order(id: "DESC").page(params[:page]).per(8)
       @title = "ALL"

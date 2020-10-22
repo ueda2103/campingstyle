@@ -6,11 +6,11 @@
   <tbody>
     <% if /post/ =~ request.fullpath %>
       <% tags.each do |tag| %>
-        <tr><td><%= link_to tag.name, posts_path(tag_id: tag.id) %></td></tr>
+        <tr><td><%= link_to tag.name, posts_path(tag_name: tag.name) %></td></tr>
       <% end %>
     <% else %>
       <% tags.each do |tag| %>
-        <tr><td><%= link_to tag.name, recipes_path(tag_id: tag.id) %></td></tr>
+        <tr><td><%= link_to tag.name, recipes_path(tag_name: tag.name) %></td></tr>
       <% end %>
     <% end %>
   </tbody>
