@@ -16,7 +16,7 @@
         <table>
           <tbody>
             <tr>
-              <td><%= f.label :family_name, "名前" %></td>
+              <td><%= f.label :family_name, "名前", class: "need" %></td>
               <td><%= f.text_field :family_name, autofocus: true, autocomplete: "family_name" %></td>
               <td><%= f.text_field :given_name, autofocus: true, autocomplete: "given_name" %></td>
             </tr>
@@ -30,7 +30,7 @@
             </tr>
 
             <tr>
-              <td><%= f.label :family_name_kana, "フリガナ" %></td>
+              <td><%= f.label :family_name_kana, "フリガナ", class: "need" %></td>
               <td><%= f.text_field :family_name_kana, autofocus: true, autocomplete: "family_name_kana" %></td>
               <td><%= f.text_field :given_name_kana, autofocus: true, autocomplete: "given_name_kana" %></td>
             </tr>
@@ -44,7 +44,7 @@
             </tr>
 
             <tr>
-              <td><%= f.label :email, "メールアドレス" %></td>
+              <td><%= f.label :email, "メールアドレス", class: "need" %></td>
               <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
             </tr>
             <tr>
@@ -54,7 +54,7 @@
             </tr>
 
             <tr>
-              <td><%= f.label :postal_code, "郵便番号(ハイフンなし)" %></td>
+              <td><%= f.label :postal_code, "郵便番号(ハイフンなし)", class: "need" %></td>
               <td><%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %></td>
             </tr>
             <tr>
@@ -64,7 +64,7 @@
             </tr>
 
             <tr>
-              <td><%= f.label :prefecture_code, "都道府県" %></td>
+              <td><%= f.label :prefecture_code, "都道府県", class: "need" %></td>
               <td><%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :name, :name, autofocus: true %></td>
             </tr>
             <tr>
@@ -74,7 +74,7 @@
             </tr>
 
             <tr>
-              <td><%= f.label :city, "市区町村" %></td>
+              <td><%= f.label :city, "市区町村", class: "need" %></td>
               <td><%= f.text_field :city, autofocus: true, autocomplete: "city" %></td>
             </tr>
             <tr>
@@ -84,7 +84,7 @@
             </tr>
 
             <tr>
-              <td><%= f.label :street, "番地" %></td>
+              <td><%= f.label :street, "番地", class: "need" %></td>
               <td><%= f.text_field :street, autofocus: true, autocomplete: "street" %></td>
             </tr>
             <tr>
@@ -99,7 +99,7 @@
             </tr>
 
             <tr>
-              <td><%= f.label :telephone_number, "電話番号(ハイフンなし)" %></td>
+              <td><%= f.label :telephone_number, "電話番号(ハイフンなし)", class: "need" %></td>
               <td><%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %></td>
             </tr>
             <tr>
@@ -110,7 +110,7 @@
 
             <tr>
               <td>
-                <%= f.label :password, "パスワード" %>
+                <%= f.label :password, "パスワード", class: "need" %>
                 <% if @minimum_password_length %>
                   (<%= @minimum_password_length %> 文字以上)
                 <% end %>
@@ -124,7 +124,7 @@
             </tr>
 
             <tr>
-              <td><%= f.label :password_confirmation, "パスワード (確認用)" %></td>
+              <td><%= f.label :password_confirmation, "パスワード (確認用)", class: "need" %></td>
               <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
             </tr>
             <tr>

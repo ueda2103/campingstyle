@@ -156,6 +156,26 @@ h2 {
   width: 100%;
 }
 
+.need::after {
+  content: "必須";
+  font-size: 0.5rem;
+  padding: 2px;
+  margin-left: 10px;
+  color: #ffffff;
+  border-radius: 2px;
+  background-color: #ff0000;
+}
+
+.need_long::after {
+  content: "必須";
+  font-size: 0.5rem;
+  padding: 2px;
+  margin-left: 120px;
+  color: #ffffff;
+  border-radius: 2px;
+  background-color: #ff0000;
+}
+
 header {
   position: fixed;
   width: 100vw;
@@ -303,15 +323,35 @@ main {
 }
 
 .tag-sidebar {
-
+  
   table {
+    width: 100%;
+    margin-top: 30px;
+    border-left: 2px solid #00ff00;
     
     thead {
+      background-color: #00ff00;
 
       tr {
 
         td {
-          font-size: 1.5rem;
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    tbody {
+
+      tr {
+
+        td {
+          padding: 5px;
+          border-bottom: 1px solid #00ff00;
+
+          a {
+            color: #ff9900;
+            font-weight: bold;
+          }
         }
       }
     }

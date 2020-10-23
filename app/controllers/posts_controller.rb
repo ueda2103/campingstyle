@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :check_user, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -90,5 +91,11 @@ class PostsController < ApplicationController
   private
   def post_params
     params.require(:post).permit({post_images: []}, :title, :body, :tag_list)
+  end
+
+  def check_user
+    post = Post.find(params[:id])
+    user = User.find(post.user_id)
+    redirect_back fallback_location: user_path(current_uer.id) unless user == current_user
   end
 end

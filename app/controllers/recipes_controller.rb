@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :check_user, only: [:edit, :update, :destroy]
 
   def index
     @recipes = Recipe.where(status: "公開")
@@ -112,5 +113,11 @@ class RecipesController < ApplicationController
   private
   def recipe_params
     params.require(:recipe).permit({recipe_images: []}, :title, :body, :status, :tag_list)
+  end
+
+  def check_user
+    recipe = Recipe.find(params[:id])
+    user = User.find(recipe.user_id)
+    redirect_back fallback_location: user_path(current_uer.id) unless user == current_user
   end
 end
