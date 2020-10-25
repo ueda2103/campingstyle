@@ -86,7 +86,7 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
     @user.update(is_deleted: true)
     reset_session
-    redirect_to root_path
+    redirect_to new_user_session_path
   end
 
   private

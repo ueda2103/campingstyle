@@ -14,9 +14,9 @@
 
             <%# 持ち物リスト入力フォーム %>
             <%= form_with model: @item, url: items_path, class: "form" do |f| %>
-              <%= f.label :name, "持ち物" %>
+              <%= f.label :name, "持ち物：" %>
               <%= f.text_field :name %>
-              <%= f.submit "登録", class: "btn_blue" %>
+              <%= f.submit "登録", class: "btn_blue_mini" %>
             <% end %>
           </div>
 

@@ -8,8 +8,9 @@
           <%= render "/shared/flash" %>
 
           <%= form_with url: users_path, method: :get, local: true, class: "form mb-3" do |f| %>
+            <%= f.label :search, "名前（姓）：" %>
             <%= f.text_field :search %>
-            <%= f.submit "検索", class: "btn_blue" %>
+            <%= f.submit "検索", class: "btn_blue_mini" %>
           <% end %>
         </div>
         

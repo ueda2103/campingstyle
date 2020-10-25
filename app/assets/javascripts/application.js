@@ -14,6 +14,8 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery
+//= require jquery-ui
+//= require tag-it
 //= require_tree .
 //= require popper
 //= require bootstrap-sprockets
@@ -42,7 +44,9 @@ $(function() {
     }
   }
   
-  $(".img").change(function(){
-    readURL(this);
+  $(document).on('turbolinks:load', () => {
+    $(".img").change(function(){
+      readURL(this);
+    });
   });
 });
