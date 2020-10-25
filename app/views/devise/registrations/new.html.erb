@@ -1,86 +1,144 @@
-<h2 class="offset-1 col-5 mt-5">新規会員登録</h2>
-<%= render "devise/shared/links" %>
+<main>
+  <div class="container">
+    <div class="row">
+      <h2 class="offset-3 col-3 mt-3">新規会員登録</h2>
+      <%= render "devise/shared/links" %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "mt-5 sign-up-form"}) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+      <%= form_with model: @user, url: user_registration_path, method: :post, local: true, class: "mt-2 user-form" do |f| %>
 
-  <div class="user-icon__wrapper">
-    <%= image_tag @user.user_image.thumb.url, size: "100x100", class: "user-icon" %>
-    <button>
-      <%= f.file_field :user_image, accept: 'image/jpeg,image/gif,image/png' %>
-    </button>
+        <div class="user-icon__wrapper">
+          <%= image_tag @user.user_image.thumb.url, size: "70x70", class: "user-icon img_prev" %>
+          <button>
+            <%= f.file_field :user_image, class: "img" %>
+          </button>
+        </div>
+
+        <table>
+          <tbody>
+            <tr>
+              <td><%= f.label :family_name, "名前", class: "need" %></td>
+              <td><%= f.text_field :family_name, autofocus: true, autocomplete: "family_name" %></td>
+              <td><%= f.text_field :given_name, autofocus: true, autocomplete: "given_name" %></td>
+            </tr>
+            <tr>
+              <% if @user.errors.include?(:family_name) || @user.errors.include?(:given_name) %>
+                <td class="red">
+                  <%= @user.errors.full_messages_for(:family_name).first %><br>
+                  <%= @user.errors.full_messages_for(:given_name).first %>
+                </td>
+              <% end %>
+            </tr>
+
+            <tr>
+              <td><%= f.label :family_name_kana, "フリガナ", class: "need" %></td>
+              <td><%= f.text_field :family_name_kana, autofocus: true, autocomplete: "family_name_kana" %></td>
+              <td><%= f.text_field :given_name_kana, autofocus: true, autocomplete: "given_name_kana" %></td>
+            </tr>
+            <tr>
+              <% if @user.errors.include?(:family_name_kana) || @user.errors.include?(:given_name_kana) %>
+                <td class="red">
+                  <%= @user.errors.full_messages_for(:family_name_kana).first %><br>
+                  <%= @user.errors.full_messages_for(:given_name_kana).first %>
+                </td>
+              <% end %>
+            </tr>
+
+            <tr>
+              <td><%= f.label :email, "メールアドレス", class: "need" %></td>
+              <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+            </tr>
+            <tr>
+              <% if @user.errors.include?(:email) %>
+                <td class="red"><%= @user.errors.full_messages_for(:email).first %></td>
+              <% end %>
+            </tr>
+
+            <tr>
+              <td><%= f.label :postal_code, "郵便番号(ハイフンなし)", class: "need" %></td>
+              <td><%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %></td>
+            </tr>
+            <tr>
+              <% if @user.errors.include?(:postal_code) %>
+                <td class="red"><%= @user.errors.full_messages_for(:postal_code).first %></td>
+              <% end %>
+            </tr>
+
+            <tr>
+              <td><%= f.label :prefecture_code, "都道府県", class: "need" %></td>
+              <td><%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :name, :name, autofocus: true %></td>
+            </tr>
+            <tr>
+              <% if @user.errors.include?(:prefecture_code) %>
+                <td class="red"><%= @user.errors.full_messages_for(:prefecture_code).first %></td>
+              <% end %>
+            </tr>
+
+            <tr>
+              <td><%= f.label :city, "市区町村", class: "need" %></td>
+              <td><%= f.text_field :city, autofocus: true, autocomplete: "city" %></td>
+            </tr>
+            <tr>
+              <% if @user.errors.include?(:city) %>
+                <td class="red"><%= @user.errors.full_messages_for(:city).first %></td>
+              <% end %>
+            </tr>
+
+            <tr>
+              <td><%= f.label :street, "番地", class: "need" %></td>
+              <td><%= f.text_field :street, autofocus: true, autocomplete: "street" %></td>
+            </tr>
+            <tr>
+              <% if @user.errors.include?(:street) %>
+                <td class="red"><%= @user.errors.full_messages_for(:street).first %></td>
+              <% end %>
+            </tr>
+
+            <tr>
+              <td><%= f.label :building, "建物" %></td>
+              <td><%= f.text_field :building, autofocus: true, autocomplete: "building" %></td>
+            </tr>
+
+            <tr>
+              <td><%= f.label :telephone_number, "電話番号(ハイフンなし)", class: "need" %></td>
+              <td><%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %></td>
+            </tr>
+            <tr>
+              <% if @user.errors.include?(:telephone_number) %>
+                <td class="red"><%= @user.errors.full_messages_for(:telephone_number).first %></td>
+              <% end %>
+            </tr>
+
+            <tr>
+              <td>
+                <%= f.label :password, "パスワード", class: "need" %>
+                <% if @minimum_password_length %>
+                  (<%= @minimum_password_length %> 文字以上)
+                <% end %>
+              </td>
+              <td><%= f.password_field :password, autocomplete: "new-password" %></td>
+            </tr>
+            <tr>
+              <% if @user.errors.include?(:password) %>
+                <td class="red"><%= @user.errors.full_messages_for(:password).first %></td>
+              <% end %>
+            </tr>
+
+            <tr>
+              <td><%= f.label :password_confirmation, "パスワード (確認用)", class: "need" %></td>
+              <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
+            </tr>
+            <tr>
+              <% if @user.errors.include?(:password_confirmation) %>
+                <td class="red"><%= @user.errors.full_messages_for(:password_confirmation).first %></td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="user-form__field">
+          <%= f.submit "新規登録", class: "btn_green" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <table>
-    <tbody>
-      <tr>
-        <td><%= f.label :family_name, "名前" %></td>
-        <td>(姓)</td>
-        <td><%= f.text_field :family_name, autofocus: true, autocomplete: "family_name" %></td>
-        <td><%= f.label :given_name, "(名)" %></td>
-        <td><%= f.text_field :given_name, autofocus: true, autocomplete: "given_name" %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :family_name_kana, "フリガナ" %></td>
-        <td>(セイ)</td>
-        <td><%= f.text_field :family_name_kana, autofocus: true, autocomplete: "family_name_kana" %></td>
-        <td><%= f.label :given_name_kana, "(メイ)" %></td>
-        <td><%= f.text_field :given_name_kana, autofocus: true, autocomplete: "given_name_kana" %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :email, "メールアドレス" %></td>
-        <td></td>
-        <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :postal_code, "郵便番号(ハイフンなし)" %></td>
-        <td></td>
-        <td><%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :prefecture_code, "都道府県" %></td>
-        <td></td>
-        <td><%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :name, :name, autofocus: true %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :city, "市区町村" %></td>
-        <td></td>
-        <td><%= f.text_field :city, autofocus: true, autocomplete: "city" %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :street, "番地" %></td>
-        <td></td>
-        <td><%= f.text_field :street, autofocus: true, autocomplete: "street" %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :building, "建物" %></td>
-        <td></td>
-        <td><%= f.text_field :building, autofocus: true, autocomplete: "building" %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :telephone_number, "電話番号(ハイフンなし)" %></td>
-        <td></td>
-        <td><%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %></td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.label :password, "パスワード" %>
-          <% if @minimum_password_length %>
-          (<%= @minimum_password_length %> 文字以上)
-          <% end %>
-        </td>
-        <td></td>
-        <td><%= f.password_field :password, autocomplete: "new-password" %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :password_confirmation, "パスワード (確認用)" %></td>
-        <td></td>
-        <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="sign-up-form__field">
-    <%= f.submit "新規登録", class: "btn_green" %>
-  </div>
-<% end %>
+</main>

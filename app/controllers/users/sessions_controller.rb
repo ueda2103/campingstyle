@@ -5,14 +5,25 @@ class Users::SessionsController < Devise::SessionsController
   before_action :reject_user, only: [:create]
 
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def new
+    today = Time.current.at_end_of_day
+    from = (today - 6.day).at_beginning_of_day
+    @posts = Post.where(created_at: from...today).order(footprint: "DESC").first(3)
+    @recipes = Recipe.order(footprint: "DESC").first(3)
+    super
+  end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    flash[:success] = "ログインしました"
+    super
+  end
+
+  def create_guest
+    user = User.guest
+    sign_in user
+    redirect_to root_path, success: "ゲストログインしました"
+  end
 
   # DELETE /resource/sign_out
   # def destroy

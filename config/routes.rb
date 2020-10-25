@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations:  "users/registrations",
-    sessions:       "users/sessions"
+    sessions:       "users/sessions",
+    passwords:      "users/passwords"
   }
 
   devise_scope :user do
     root  "homes#top"
+    post  "users/guest_sign_in"   => "users/sessions#create_guest", as: "user_guest_session"
   end
 
   get   "/users/:id/posts"        => "users#posts",       as: "users_posts"
@@ -21,5 +23,5 @@ Rails.application.routes.draw do
   resources :favorites,       only: [:create, :destroy]
   resources :bookmarks,       only: [:create, :destroy]
   resources :relationships,   only: [:create, :destroy]
-  resources :items,           only: [:create, :destroy]
+  resources :items,           only: [:create, :update, :destroy]
 end

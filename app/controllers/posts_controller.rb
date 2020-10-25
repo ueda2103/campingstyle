@@ -1,17 +1,36 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :check_user, only: [:edit, :update, :destroy]
 
   def index
-    if params[:search].present?
-      @posts = Post.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(9)
-      if @posts.present?
+    @posts = Post.all
+    @tags = Post.tag_counts
+    
+    if params[:search]
+      
+      if params[:search].present?
         @title = "検索結果：#{params[:search]}"
+        @posts = Post.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(12)
       else
-        @title = "ALL"
-        redirect_to posts_path, notice: "検索結果がありません"
+        @title = "検索結果がありません"
+        @posts = @posts.order(id: "DESC").page(params[:page]).per(12)
       end
+
+    elsif params[:tag_name]
+      @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).per(12)
+      @title = "検索結果：#{params[:tag_name]}"
+      
+    elsif params[:bookmarks]
+      @posts = current_user.bookmark_post.order(id: "DESC").page(params[:page]).per(12)
+
+      if current_user.bookmark_post.present?
+        @title = "ブックマーク"
+      else
+        @title = "ブックマークがありません"
+      end
+
     else
-      @posts = Post.all.order(id: "DESC").page(params[:page]).per(9)
+      @posts = Post.all.order(id: "DESC").page(params[:page]).per(12)
       @title = "ALL"
     end
   end
@@ -21,8 +40,6 @@ class PostsController < ApplicationController
     @footprint = @post.footprint + 1
     @post.update(footprint: @footprint)
     @comments = Comment.where(post_id: params[:id])
-    @favorite = Favorite.find_by(user_id: current_user.id, post_id: params[:id])
-    @bookmark = Bookmark.find_by(user_id: current_user.id, post_id: params[:id])
   end
 
   def new
@@ -34,9 +51,11 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
 
     if @post.save
-      redirect_to post_path(@post.id), notice: "投稿が保存されました"
+      flash[:success] = "投稿を保存しました"
+      redirect_to post_path(@post.id)
     else
-      redirect_back fallback_location: new_post_path, notice: "保存に失敗しました"
+      flash[:error] = "保存に失敗しました"
+      render "new"
     end
   end
 
@@ -48,9 +67,11 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     
     if @post.update(post_params)
-      redirect_to post_path(@post.id), notice: "編集が保存されました"
+      flash[:success] = "編集を保存しました"
+      redirect_to post_path(@post.id)
     else
-      redirect_back fallback_location: edit_post_path(@post.id), notice: "保存に失敗しました"
+      flash[:error] = "保存に失敗しました"
+      render "edit"
     end
   end
 
@@ -59,14 +80,22 @@ class PostsController < ApplicationController
 
     if @post.user == current_user
       @post.destroy
-      redirect_to posts_path, notice: "正常に削除されました"
+      flash[:success] = "投稿を削除しました"
+      redirect_to posts_path
     else
-      redirect_back fallback_location: post_path(@post.id), notice: "他のユーザーの投稿は削除できません"  
+      flash[:error] = "他のユーザーの投稿は削除できません"
+      redirect_back fallback_location: post_path(@post.id)
     end
   end
 
   private
   def post_params
-    params.require(:post).permit({post_images: []}, :title, :body)
+    params.require(:post).permit({post_images: []}, :title, :body, :tag_list)
+  end
+
+  def check_user
+    post = Post.find(params[:id])
+    user = User.find(post.user_id)
+    redirect_back fallback_location: user_path(current_uer.id) unless user == current_user
   end
 end

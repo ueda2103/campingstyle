@@ -1,0 +1,36 @@
+ja:
+  activerecord:
+    models:
+      user: 会員
+      post: 投稿
+      recipe: レシピ
+    attributes:
+      user:
+        family_name: 姓
+        given_name: 名
+        family_name_kana: セイ
+        given_name_kana: メイ
+        email: メールアドレス
+        postal_code: 郵便番号
+        prefecture_code: 都道府県
+        city: 市区町村
+        street: 番地
+        building: 建物
+        telephone_number: 電話番号
+        password: パスワード
+      post: 
+        post_images: 画像
+        title: タイトル
+        body: 詳細
+      recipe:
+        recipe_images: 画像
+        title: タイトル
+        body: 詳細
+
+  views:
+    pagination:
+      first: <i class="fas fa-angle-double-left"></i>
+      last: <i class="fas fa-angle-double-right"></i>
+      previous: <i class="fas fa-angle-left"></i>
+      next: <i class="fas fa-angle-right"></i>
+      truncate: "..."

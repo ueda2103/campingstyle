@@ -5,7 +5,7 @@ class CreateRecipes < ActiveRecord::Migration[5.2]
       t.json        :recipe_images, null: false
       t.string      :title,         null: false
       t.text        :body,          null: false
-      t.integer     :status,        null: false, default: 0
+      t.boolean     :status,        null: false, default: false
       t.integer     :footprint,     null: false, default: 0
 
       t.timestamps

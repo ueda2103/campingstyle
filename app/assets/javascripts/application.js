@@ -14,6 +14,8 @@
 //= require activestorage
 //= require turbolinks
 //= require jquery
+//= require jquery-ui
+//= require tag-it
 //= require_tree .
 //= require popper
 //= require bootstrap-sprockets
@@ -27,6 +29,24 @@ $(function() {
         "#user_city": "%4%5",
         "#user_street": "%6%7",
       },
+    });
+  });
+});
+
+$(function() {
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('.img_prev').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  
+  $(document).on('turbolinks:load', () => {
+    $(".img").change(function(){
+      readURL(this);
     });
   });
 });

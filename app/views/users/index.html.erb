@@ -1,41 +1,54 @@
-<div class="users offset-2 col-8 my-4 px-3">
-  <h2 class="mb-4">Users　<%= @title %></h2>
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="users offset-2 col-8 my-3 px-3">
+        <div class="titlebar">
+          <h2>Users　<%= @title %></h2>
 
-  <%= form_with url: users_path, method: :get, local: true do |f| %>
-    <%= f.text_field :search %>
-    <%= f.submit "検索", class: "btn_blue" %>
-  <% end %>
-  
-  <% @users.each do |u| %>
-    <div class="user-body d-flex py-2">
-      <%= link_to user_path(u.id) do %>
-        <%= image_tag u.user_image.thumb.url, size: "70x70", class: "user-icon mx-4" %>
-      <% end %>
+          <%= render "/shared/flash" %>
 
-      <div class="user-body__text mx-4">
-        <p class="mb-2"><%= u.family_name + u.given_name %></p>
-
-        <div class="relationship_<%= u.id %>">
-          <%= render "relationships/relationship", follower: u %>
+          <%= form_with url: users_path, method: :get, local: true, class: "form mb-3" do |f| %>
+            <%= f.label :search, "名前（姓）：" %>
+            <%= f.text_field :search %>
+            <%= f.submit "検索", class: "btn_blue_mini" %>
+          <% end %>
         </div>
-      </div>
+        
+        <% @users.each do |u| %>
+          <div class="user-body d-flex py-2">
+            <%= link_to user_path(u.id) do %>
+              <%= image_tag u.user_image.thumb.url, size: "40x40", class: "user-icon mx-4" %>
+            <% end %>
 
-      <div class="follow-count_<%= u.id %>">
-        <%= render "relationships/relationship_count", follow: u %>
-      </div>
+            <div class="user-body__text mx-4">
+              <p><%= u.family_name + u.given_name %></p>
 
-      <div class="post-count__wrapper mx-4">
-        <div class="post-count mb-2">
-          <span><i class="fas fa-campground fa-green fa-size__m"></i></span>
-          <p>Posts</p>
-          <p><%= u.posts.count %>件</p>
-        </div>
-        <div class="post-count">
-          <span><i class="fas fa-utensils fa-brown fa-size__m"></i></span>
-          <p>Camping Meals</p>
-          <p><%= u.recipes.count %>件</p>
-        </div>
+              <div class="relationship_<%= u.id %>">
+                <%= render "relationships/relationship", follower: u %>
+              </div>
+            </div>
+
+            <div class="follow-count_<%= u.id %>">
+              <%= render "relationships/relationship_count", follow: u %>
+            </div>
+
+            <div class="post-count__wrapper mx-4">
+              <div class="post-count mb-2">
+                <span><i class="fas fa-campground fa-green fa-size__m"></i></span>
+                <p>Posts</p>
+                <p><%= u.posts.count %>件</p>
+              </div>
+              <div class="post-count">
+                <span><i class="fas fa-utensils fa-brown fa-size__m"></i></span>
+                <p>Camping Meals</p>
+                <p><%= u.recipes.count %>件</p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <%= paginate @users %>
       </div>
     </div>
-  <% end %>
-</div>
+  </div>
+</main>

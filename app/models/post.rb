@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  acts_as_taggable
+
   mount_uploaders :post_images, PostImagesUploader
 
   belongs_to  :user
@@ -8,6 +10,10 @@ class Post < ApplicationRecord
   has_many    :bookmarks,       dependent: :destroy
   has_many    :favorite_users,  through: :favorites, source: :user
   has_many    :bookmark_users,  through: :bookmarks, source: :user
+
+  validates   :post_images, :footprint, presence: true
+  validates   :title, presence: true, length: {maximum: 20}
+  validates   :body, presence: true, length: {maximum: 200}
 
   def post_favorited_by?(user)
     favorites.where(user_id: user.id).exists?

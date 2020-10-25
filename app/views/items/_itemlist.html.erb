@@ -1,4 +1,11 @@
-<% items.each do |i| %>
-  <%= link_to i.name,  class: "btn_blue" %>
-  <%= link_to "削除", item_path(i.id), method: :delete, class: "btn_red" %>
-<% end %>
+<table>
+  <tbody>
+    <% items.each do |i| %>
+      <tr>
+        <td><%= i.name %></td>
+        <td><%= link_to i.status, item_path(i.id), method: :patch, remote: true, class: "btn_blue" %></td>
+        <td><%= link_to "削除", item_path(i.id), method: :delete, remote: true, class: "btn_red" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

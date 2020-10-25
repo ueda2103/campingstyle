@@ -1,0 +1,10 @@
+<table class="food-table">
+  <tbody>
+    <% foods.each do |f| %>
+      <tr>
+        <td><%= f.name %></td>
+        <td><%= link_to "削除", food_path(f.id), method: :delete, class: "btn_red" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

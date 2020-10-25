@@ -1,14 +1,49 @@
-<%= form_with model: @recipe, url: recipes_path(@recipe.id), local: true, html: {class: "col-12 d-flex my-5"} do |f| %>
-  <div class="recipe__left">
-    <button>
-      <%= f.file_field :recipe_images, multiple: true, accept: 'image/jpeg,image/gif,image/png' %>
-    </button>
-    <%= f.label :title, "タイトル" %>
-    <%= f.text_field :title, autofocus: true %>
-    <%= f.label :body, "内容" %>
-    <%= f.text_field :body, autofocus: true %>
-    <%= f.submit "次へ", class: "btn_blue" %>
+<main>
+  <div class="container">
+    <div class="row">
+      <h2 class="my-3">新規レシピ</h2>
+
+      <%= form_with model: @recipe, url: recipes_path(@recipe.id), local: true, class: "post-recipe__body d-flex col-12" do |f| %>
+        <div class="post-recipe__left">
+          <div class="title">
+            <%= f.label :title, "タイトル", class: "need" %>
+            <%= render "/shared/flash" %>
+            <%= f.text_field :title, autofocus: true %>
+            <% if @recipe.errors.include?(:title) %>
+              <span class="red"><%= @recipe.errors.full_messages_for(:title).first %></span>
+            <% end %>
+          </div>
+
+          <div class="img my-4">
+            <div class="img-box mb-2">
+              <%= image_tag @recipe.recipe_images[0].to_s, class: "main-img img_prev" %>
+            </div>
+            <button>
+              <%= f.file_field :recipe_images, multiple: true, class: "img need_long" %>
+            </button>
+            <% if @recipe.errors.include?(:recipe_images) %>
+              <span class="red"><%= @recipe.errors.full_messages_for(:recipe_images).first %></span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="post-recipe__right">
+          <div class="tag">
+            <%= f.label :tag_list, "タグ" %>
+            <%= f.text_field :tag_list, velue: @recipe.tag_list.join(','), id: "tags" %>
+          </div>
+
+          <div class="text my-4">
+            <%= f.label :body, "詳細", class: "need" %>
+            <%= f.text_area :body, autofocus: true %>
+            <% if @recipe.errors.include?(:body) %>
+              <span class="red"><%= @recipe.errors.full_messages_for(:body).first %></span>
+            <% end %>
+          </div>
+
+          <%= f.submit "次へ", class: "btn_blue" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div class="recipe__right">
-  </div>
-<% end %>
+</main>

@@ -1,0 +1,13 @@
+<div class="key-visual__background">
+  <div class="container">
+    <div class="row">
+      <%= video_tag "/videos/main-visual.mp4", autoplay: true, loop: true, muted: true, class: "key-visual" %>
+      <div class="key-visual__title">
+        <h1>Welcome to<br>Camping style</h1>
+      </div>
+      <% unless user_signed_in? %>
+        <%= render "devise/shared/login_form" %>
+      <% end %>
+    </div>
+  </div>
+</div>

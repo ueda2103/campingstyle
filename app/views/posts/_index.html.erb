@@ -1,44 +1,47 @@
-<h2><%= title %></h2>
-
-<%= form_with url: posts_path, method: :get, local: true do |f| %>
-  <%= f.text_field :search %>
-  <%= f.submit "検索", class: "btn_blue" %>
-<% end %>
-
 <div class="card-box">
   <% posts.each do |post| %>
-    <%= link_to post_path(post.id) do %>
-      <%= image_tag post.post_images.thumb.url, size: "250x200", class: "post-image" %>
-    <% end %>
+    <div class="card">
+      <%= link_to post_path(post.id) do %>
+        <%= image_tag post.post_images[0].to_s, size: "200x150", class: "image" %>
+      <% end %>
 
-    <p class="card-title"><%= post.title %></p>
+      <p class="card-title"><%= post.title %></p>
 
-    <div class="favorite_<%= post.id %>">
-      <%= render "favorites/favorite", post: post %>
-    </div>
+      <div class="card-icon">
+        <div class="favorite_<%= post.id %> favorites">
+          <%= render "favorites/favorite", post: post %>
+        </div>
 
-    <p class="d-inline-block">
-      <i class="fas fa-comment fa-blue"></i>
-      <%= post.comments.count %>件
-    </p>
+        <p class="comments">
+          <i class="fas fa-comment fa-blue"></i>
+          <%= post.comments.count %>件
+        </p>
 
-    <p class="d-inline-block">
-      <i class="fas fa-paw fa-brown"></i>
-      <%= post.footprint %>件
-    </p>
+        <p class="footprints">
+          <i class="fas fa-paw fa-brown"></i>
+          <%= post.footprint %>件
+        </p>
+      </div>
 
-    <%= link_to user_path(post.user_id) do %>
-      <%= image_tag post.user.user_image[0].to_s, size: "70x70", class: "user-icon" %>
-    <% end %>
+      <div class="user-body">
+        <div class="user-body__left">
+          <%= link_to user_path(post.user_id) do %>
+            <%= image_tag post.user.user_image.thumb.url, size: "40x40", class: "user-icon" %>
+          <% end %>
 
-    <p><%= post.user.family_name + post.user.given_name %></p>
+          <p><%= post.user.family_name + post.user.given_name %></p>
+        </div>
 
-    <div class="relationship_<%= post.user.id %>">
-      <%= render "relationships/relationship", follower: post.user %>
-    </div>
+        <div class="user-body__right">
+          <div class="relationship_<%= post.user.id %> relationships">
+            <%= render "relationships/relationship", follower: post.user %>
+          </div>
 
-    <div class="bookmark_<%= post.id %>">
-      <%= render "bookmarks/bookmark", post: post %>
+          <div class="bookmark_<%= post.id %> bookmarks">
+            <%= render "bookmarks/bookmark", post: post %>
+          </div>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>

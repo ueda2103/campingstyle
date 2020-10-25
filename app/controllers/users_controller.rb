@@ -3,16 +3,38 @@ class UsersController < ApplicationController
 
   def index
     @users = User.where(is_deleted: "有効")
-    if params[:search].present?
-      @users = @users.where("family_name LIKE ?", "%#{params[:search]}%")
-      if @users.present?
+
+    if params[:search]
+      
+      if params[:search].present?
         @title = "検索結果：#{params[:search]}"
+        @users = @users.where("family_name LIKE ?", "%#{params[:search]}%").page(params[:page]).per(10)
       else
-        @title = "ALL"
-        redirect_to users_path, notice: "検索結果がありません"
+        @title = "検索結果がありません"
+        @users = @users.page(params[:page]).per(10)
       end
+
+    elsif params[:followed]
+      @users = current_user.followed_user.page(params[:page]).per(10)
+
+      if current_user.followed_user.present?
+        @title = "フォロー"
+      else
+        @title = "フォローユーザーがいません"
+      end
+
+    elsif params[:follower]
+      @users = current_user.follower_user.page(params[:page]).per(10)
+
+      if current_user.follower_user.present?
+        @title = "フォロワー"
+      else
+        @title = "フォロワーがいません"
+      end
+
     else
       @title = "ALL"
+      @users = @users.page(params[:page]).per(10)
     end
   end
 
@@ -20,7 +42,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.is_deleted == "退会済"
-      redirect_to users_path, notice: "退会済のユーザーです"
+      flash[:error] = "対象のユーザーは退会済です"
+      redirect_to users_path
     end
     
     if @user == current_user
@@ -42,15 +65,17 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(current_user.id)
+    @user = User.find(params[:id])
   end
 
   def update
     @user = User.find(current_user.id)
+
     if @user.update(user_params)
-      redirect_to user_path(current_user.id), notice: "編集を保存しました"
+      flash[:success] = "編集を保存しました"
+      redirect_to user_path(current_user.id)
     else
-      redirect_back fallback_location: edit_user_path(current_user.id), notice: "保存に失敗しました"
+      render "edit"
     end
   end
 
@@ -61,11 +86,17 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
     @user.update(is_deleted: true)
     reset_session
-    redirect_to root_path
+    redirect_to new_user_session_path
   end
 
   private
   def user_params
     params.require(:user).permit(:user_image,:family_name, :given_name, :family_name_kana, :given_name_kana, :postal_code, :prefecture_code, :city, :street, :building, :telephone_number)
+  end
+
+  def check_user
+    item = Item.find(params[:id])
+    user = User.find(item.user_id)
+    redirect_back fallback_location: user_path(current_uer.id) unless user == current_user
   end
 end

@@ -11,6 +11,8 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require jquery.tagit
+ *= require tagit.ui-zendesk
  *= require_self
  */
  @import "bootstrap";
@@ -18,17 +20,33 @@
  @import "font-awesome";
 
 * {
-  font-size: 16px;
+  font-size: 12px;
 }
 
 p {
   margin: 0;
 }
 
+.red {
+  color: #ff0000;
+}
+
 .btn_yellow {
-  border: 1px solid #000000;
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #ffffff;
+  border: none;
   border-radius: 5px;
-  background-color: #e2e961;
+  background-color: #ff9900;
+  text-decoration: none;
+  
+  &:hover {
+    color: #ffffff;
+    text-decoration: none;
+  }
 }
 
 .btn_blue {
@@ -37,14 +55,31 @@ p {
   padding: 5px;
   padding-left: 15px;
   padding-right: 15px;
-  color: #000000;
-  border: 1px solid #000000;
+  color: #ffffff;
+  border: none;
   border-radius: 5px;
-  background-color: #5ddbe4;
+  background-color: #0000ff;
   text-decoration: none;
   
   &:hover {
-    color: #000000;
+    color: #ffffff;
+    text-decoration: none;
+  }
+}
+
+.btn_blue_mini {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  background-color: #0000ff;
+  text-decoration: none;
+  
+  &:hover {
+    color: #ffffff;
     text-decoration: none;
   }
 }
@@ -55,14 +90,14 @@ p {
   padding: 5px;
   padding-left: 15px;
   padding-right: 15px;
-  color: #000000;
-  border: 1px solid #000000;
+  color: #ffffff;
+  border: none;
   border-radius: 5px;
-  background-color: #e65757;
+  background-color: #ff0000;
   text-decoration: none;
   
   &:hover {
-    color: #000000;
+    color: #ffffff;
     text-decoration: none;
   }
 }
@@ -73,14 +108,14 @@ p {
   padding: 5px;
   padding-left: 15px;
   padding-right: 15px;
-  color: #000000;
-  border: 1px solid #000000;
+  color: #ffffff;
+  border: none;
   border-radius: 5px;
-  background-color: #33db5d;
+  background-color: #00ff00;
   text-decoration: none;
   
   &:hover {
-    color: #000000;
+    color: #ffffff;
     text-decoration: none;
   }
 }
@@ -103,6 +138,48 @@ p {
 
 .user-icon {
   border-radius: 50%;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+
+  label {
+    margin: auto;
+  }
+
+  input {
+    margin-left: 10px;
+    height: 15px;
+  }
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+.main-img {
+  width: 100%;
+}
+
+.need::after {
+  content: "必須";
+  font-size: 0.5rem;
+  padding: 2px;
+  margin-left: 10px;
+  color: #ffffff;
+  border-radius: 2px;
+  background-color: #ff0000;
+}
+
+.need_long::after {
+  content: "必須";
+  font-size: 0.5rem;
+  padding: 2px;
+  margin-left: 120px;
+  color: #ffffff;
+  border-radius: 2px;
+  background-color: #ff0000;
 }
 
 header {
@@ -133,151 +210,572 @@ header {
   }
 }
 
-main {
-  padding-top: 60px;
-
-  .background {
+// キービジュアル
+.key-visual__background {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  z-index: 0;
+  padding-top: 62px;
+  
+  .row {
     position: relative;
-    background-color: #000000;
-    
+
     .key-visual {
-      object-fit: cover;
-      width: 60%;
-      height: 80vh;
-    }
-    
-    .key-visual__cover {
-      display: flex;
       position: absolute;
       top: 0;
-      width: 1140px;
+      left: 0;
+      height: calc(100vh - 62px);
+      z-index: 1;
+    }
+    
+    .key-visual__title {
+      display: flex;
+      width: 100%;
+      height: calc(100vh - 62px);
+      align-items: center;
+      z-index: 2;
       
-      .key-visual__title {
+      h1 {
         display: flex;
-        width: 60%;
-        height: 80vh;
+        font-size: 4rem;
+        width: 100%;
+        height: 150px;
+        padding-left: 10%;
         align-items: center;
+        background-color: #ffffff;
+      }
+    }
+    
+    .login-form__outer {
+      position: absolute;
+      right: 10%;
+      display: flex;
+      width: 30%;
+      height: calc(100vh - 62px);
+      justify-content: center;
+      align-items: center;
+      z-index: 3;
+      
+      .login-form {
+        width: 300px;
+        height: 350px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        border: 5px solid #ff9900;
         
-        h1 {
+        .login-form__title {
+          font-size: 2rem;
+          margin-bottom: 20px;
+        }
+        
+        .login-form__field {
+          width: 80%;
+          margin: 0 auto;
+          
+          label {
+            font-size: 1rem;
+            margin: 0;
+          }
+          
+          input {
+            font-size: 0.75rem;
+            width: 100%;
+            margin-bottom: 10px;
+          }
+          
+          .btn_yellow {
+            margin-top: 10px;
+          }
+        }
+        
+        .login-form__check-box {
           display: flex;
-          font-size: 3rem;
-          width: 100%;
-          height: 150px;
           justify-content: center;
           align-items: center;
+          margin-bottom: 20px;
+          
+          label {
+            font-size: 0.75rem;
+            margin: 0;
+            margin-left: 20px;
+          }
+        }
+        
+        .login-form__link {
           text-align: center;
-          background-color: #ffffff;
+          
+          .login-form__guest-btn {
+            margin-left: 10px;
+          }
+          
+          .password-forget__link {
+            display: inline-block;
+            font-size: 0.75rem;
+            margin-top: 10px;
+          }
         }
       }
-      
-      .login-form__outer {
+    }
+  }
+}
+
+// メインコンテンツ
+main {
+  padding-top: 62px;
+  padding-bottom: 50px;
+  min-height: calc(100vh - 62px);
+}
+
+.tag-sidebar {
+  
+  table {
+    width: 100%;
+    margin-top: 30px;
+    border-left: 2px solid #00ff00;
+    
+    thead {
+      background-color: #00ff00;
+
+      tr {
+
+        td {
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    tbody {
+
+      tr {
+
+        td {
+          padding: 5px;
+          border-bottom: 1px solid #00ff00;
+
+          a {
+            color: #ff9900;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+.post-recipe-index {
+
+  .form {
+    margin-bottom: 10px;
+  }
+
+  .card-box {
+    display: flex;
+    flex-wrap: wrap;
+    
+    .card {
+      margin: 4px;
+      padding: 5px;
+      text-align: center;
+      border: 3px solid #4edb1f;
+      border-radius: 20px;
+      background-color: #ffffff;
+  
+      .image {
+        border-radius: 20px;
+      }
+
+      .card-title {
+        margin-top: 5px;
+        margin-bottom: 0;
+      }
+
+      .card-icon {
         display: flex;
-        width: 40%;
+        justify-content: center;
+
+        .favorites {
+
+          p {
+            color: #000000;
+          }
+        }  
+        
+        .comments {
+          margin-left: 10px;
+          margin-right: 10px;
+          margin-bottom: 10px;
+        }
+      }
+
+      .user-body {
+        display: flex;
         justify-content: center;
         align-items: center;
-        
-        .login-form {
-          width: 300px;
-          height: 370px;
-          padding: 20px;
-          background-color: #ffffff;
-          border-radius: 10px;
-          
-          .login-form__title {
-            font-size: 1.25rem;
-            margin-bottom: 20px;
-          }
-          
-          .login-form__field {
-            width: 80%;
-            margin: 0 auto;
-            
-            label {
-              font-size: 1rem;
-              margin: 0;
-            }
-            
-            input {
-              font-size: 0.75rem;
-              width: 100%;
-              margin-bottom: 10px;
-            }
-            
-            .btn_yellow {
-              margin-top: 10px;
-            }
-          }
-          
-          .login-form__check-box {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 30px;
-            
-            label {
-              font-size: 0.75rem;
-              margin: 0;
-              margin-left: 20px;
-            }
-          }
-          
-          .login-form__link {
-            text-align: center;
 
-            .login-form__guest-btn {
-              margin-left: 10px;
-            }
-            
-            .password-forget__link {
-              display: inline-block;
-              font-size: 0.75rem;
-              margin-top: 10px;
-            }
+        .user-body__right {
+          margin-left: 10px;
+
+          .relationships {
+            margin-bottom: 5px;
+          }
+
+          a {
+            width: 100%;
+            padding-top: 2px;
+            padding-bottom: 2px;
           }
         }
       }
     }
   }
+}
 
-  .sign-up-form {
+// 新規・編集投稿およびレシピ
+.post-recipe__body {
+  flex-wrap: wrap;
+  
+  label {
+    display: block;
+    font-size: 1.25rem;
+  }
+
+  .title input, .tag input {
+    width: 50%;
+    height: 20px;
+  }
+
+  .post-recipe__left {
+    width: 50%;
+  }
+
+  .img-box {
+    width: 90%;
+    height: 50vh;
+  }
+
+  .post-recipe__right {
+    width: 50%;
+  }
+
+  textarea {
+    width: 90%;
+    height: 250px;
+  }
+
+  .action {
+    text-align: center;
+
+    input, a {
+      width: 100px;
+      margin-right: 20px;
+    }
+  }
+}
+
+.food-table, .flow-table {
+  width: 70%;
+  margin: 0 auto;
+
+  tr {
+    border-bottom: 2px solid #000000;
+
+    td {
+
+      &:first-child {
+        width: 80%;
+      }
+    }
+  }
+}
+
+.show__title {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  h2 {
+    border-bottom: 2px solid #00ff00;
+  }
+}
+
+.show__user-body {
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+  border-bottom: 5px solid #00ff00;
+
+  .user-body__left {
+    margin-left: 20px;
+  }
+
+  .user-body__center {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+
+    a {
+      width: 100px;
+      padding: 2px;
+      margin-top: 5px;
+    }
+  }
+
+  .user-body__right {
+    display: flex;
+    align-items: center;
+
+    p {
+      font-size: 1rem;
+      margin-left: 5px;
+      margin-right: 5px;
+      color: #000000;
+    }
+  }
+}
+
+.show_right {
+
+  h2 {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #00ff00;
+  }
+
+  form {
+    display: flex;
+    align-items: center;
+    
+    textarea {
+      width: 80%;
+      height: 50px;
+      margin-right: 20px;
+    }
+    
+    input {
+      height: 50px;
+      color: #ffffff;
+      background-color: #0000ff;
+      border-radius: 5px;
+    }
+  }
+}
+
+.comment__list {
+  margin-top: 30px;
+  
+  .comment-item {
+    display: flex;
+    margin-bottom: 10px;
+    
+    .comment-body {
+      display: flex;
+      align-items: center;
+      width: 80%;
+      margin-bottom: 10px;
+      
+      p {
+        display: inline-block;
+        width: 80%;
+        height: 50px;
+        padding: 5px;
+        margin-left: 10px;
+        margin-right: 20px;
+        border: 1px solid #000000;
+      }
+
+      a {
+        height: 50px;
+        padding: 0;
+        padding-left: 5px;
+        padding-right: 5px;
+        line-height: 50px;
+      }
+    }
+  }
+}
+
+.show__text {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 20px;
+  border-top: 5px solid #ff9900;
+  border-bottom: 5px solid #ff9900;
+  
+  p {
     width: 100%;
+    height: 100px;
+    border: 1px solid #000000;
+  }
+}
 
-    .user-icon__wrapper {
-      text-align: center;
-      margin-bottom: 30px;
+.show__food {
+  margin-top: 20px;
 
-      .user-icon {
-        margin-right: 50px;
-      }
-    }
+  h2 {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #00ff00;
+  }
+
+  p {
+    padding-left: 50px;
+  }
+}
+
+.show__flow {
+  margin-top: 20px;
+
+  h2 {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #00ff00;
+  }
+
+  ol {
+    padding-left: 60px;
+  }
+}
+
+footer {
+
+  p {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    border-top: 2px solid #00ff00;
+  }
+}
+
+.titlebar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.success {
+  color: #00ff00;
+  font-weight: bold;
+
+  &:before {
+    font-family: "Font Awesome 5 free";
+    content: "\f058";
+    margin-right: 5px;
+  }
+}
+
+.error {
+  color: #ff0000;
+  font-weight: bold;
+
+  &:before {
+    font-family: "Font Awesome 5 free";
+    content: "\f06a";
+    margin-right: 5px;
+  }
+}
+
+div.field_with_errors {
+
+  input, textarea {
+    background-color: #dd7e7e;
+  }
+}
+
+#about, .top_posts, .top_recipes {
+
+  p {
+    font-size: 1.25rem;
+  }
+}
+
+#about > p, #about > h1 {
+  margin-left: 50px;
+}
+
+.top_posts, .top_recipes {
+  margin-top: 80px;
+
+  h1 {
+    margin-left: 50px;
+  }
+
+  p {
+    margin-left: 50px;
+  }
+}
+
+.top_recipes {
+  margin-bottom: 80px;
+}
+
+.card__list {
+  display: flex;
+  width: 100%;
+  margin-top: 30px;
+  justify-content: center;
+  text-align: center;
+  
+  .card {
+    width: 30%;
+    margin-right: 10px;
     
-    table {
-      margin: 0 auto;
-      
-      td {
-        padding-top: 20px;
-        vertical-align: center;
-        
-        label {
-          margin: auto;
-        }
-        
-        input {
-          margin: auto;
-          height: 25px;
-        }
-      }
+    .card__img {
+      width: 100%;
+      height: 230px;
     }
-    
-    .sign-up-form__field {
-      text-align: center;
-      margin-top: 50px;
-      margin-bottom: 50px;
-      
-      .btn_green {
-        font-size: 1rem;
-        width: 200px;
+
+    p {
+      margin: 0;
+    }
+
+    h3 {
+      position: relative;
+      font-size: 1.5rem;
+      margin-top: 20px;
+      margin-left: 0;
+      margin-bottom: 15px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100px;
+        height: 2px;
+        transform: translateX(-50%) translateY(15px);
+        background-color: #00ffb3;
       }
     }
   }
+}
+
+.pagination {
+  justify-content: center;
+  margin-top: 40px;
+  
+  .page-item {
+    border-radius: 50%;
+    
+    a {
+      color: #097a09 !important;
+    }
+  }
+
+  .active {
+    border-radius: 50%;
+    
+    a {
+      padding: 2px;
+      padding-left: 4px;
+      padding-right: 4px;
+      background: #ffffff !important;
+      border-color: #ffffff !important;
+      border-radius: 50%;
+      border: 5px solid #ff9900 !important;
+    }
+  }
+}
+
+.notice {
+  display: none !important;
 }

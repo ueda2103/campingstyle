@@ -1,22 +1,46 @@
-<%= form_with model: @post, html: {class: "col-12 d-flex my-5"} do |f| %>
-  <div class="post__left">
-    <div class="post-title__wrapper">
-      <%= f.label :title, "タイトル" %>
-      <%= f.text_field :title, autofocus: true %>
+<main>
+  <div class="container">
+    <div class="row">
+      <%= form_with model: @post, local: true, class: "post-recipe__body col-12 d-flex mt-3" do |f| %>
+        <div class="post-recipe__left">
+          <div class="title">
+            <%= f.label :title, "タイトル" %>
+            <%= render "/shared/flash" %>
+            <%= f.text_field :title, autofocus: true %>
+            <% if @post.errors.include?(:title) %>
+              <span class="red"><%= @post.errors.full_messages_for(:title).first %></span>
+            <% end %>
+          </div>
+
+          <div class="img my-4">
+            <div class="img-box mb-2">
+              <%= image_tag @post.post_images[0].to_s, class: "main-img img_prev" %>
+            </div>
+            <button>
+              <%= f.file_field :post_images, class: "img" %>
+            </button>
+            <% if @post.errors.include?(:post_images) %>
+              <span class="red"><%= @post.errors.full_messages_for(:post_images).first %></span>
+            <% end %>
+          </div>
+
+        </div>
+
+        <div class="post-recipe__right">
+          <div class="text my-4">
+            <%= f.label :body, "内容" %><br>
+            <%= f.text_area :body, autofocus: true %>
+            <% if @post.errors.include?(:body) %>
+              <span class="red"><%= @post.errors.full_messages_for(:body).first %></span>
+            <% end %>
+          </div>
+          
+          <div class="action">
+            <%= f.submit "編集", class: "btn_blue" %>
+            <%= link_to "削除", post_path(@post.id), method: :delete, data: {confirm: "本当に削除しますか"}, class: "btn_red" %>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <%= image_tag @post.post_images.thumb.url, size: "500x350" %>
-    <button>
-      <%= f.file_field :post_images, accept: 'image/jpeg,image/gif,image/png' %>
-    </button>
   </div>
-  <div class="post__right">
-    <div class="post-body__wrapper">
-      <%= f.label :body, "内容" %><br>
-      <%= f.text_area :body, autofocus: true %>
-    </div>
-    <div class="post-form__field">
-      <%= f.submit "編集", class: "btn_blue" %>
-      <%= link_to "削除", post_path(@post.id), method: :delete, data: {confirm: "本当に削除しますか"}, class: "btn_red" %>
-    </div>
-  </div>
-<% end %>
+</main>

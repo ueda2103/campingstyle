@@ -1,13 +1,74 @@
-<div class="background">
-  <div class="container">
-    <div class="row">
-      <%= video_tag "/videos/main-visual.mp4", autoplay: true, loop: true, muted: true, class: "key-visual" %>
-      <div class="key-visual__cover">
-        <div class="key-visual__title">
-          <h1>Welcome to<br>Camping style</h1>
+<%= render "shared/key-visual" %>
+
+<main>
+ <div class="container">
+  <div class="row">
+    <div id="about">
+      <h1>About</h1>
+      <p>Camping StyleはキャンパーのためのSNSです</p>
+      <div class="card__list">
+        <div class="card">
+          <%= link_to posts_path do %>
+            <%= image_tag "top_post_img.jpg", class: "card__img" %>
+          <% end %>
+          <h3>Posts</h3>
+          <p>
+            キャンプの写真をみんなと<br>
+            シェアしましょう
+          </p>
+        </div>
+        <div class="card">
+          <%= link_to recipes_path do %>
+            <%= image_tag "top_recipe_img.jpg", class: "card__img" %>
+          <% end %>
+          <h3>Camping Meals</h3>
+          <p>
+            キャンプ飯のレシピをみんなと<br>
+            シェアしましょう
+          </p>
+        </div>
+        <div class="card">
+          <%= image_tag "top_itemlist_img.jpg", class: "card__img" %>
+          <h3>Item Lists</h3>
+          <p>
+            持ち物リストを活用して<br>
+            キャンプを楽しみましょう
+          </p>
         </div>
       </div>
     </div>
+
+    <div class="top_posts">
+      <h1>Topics</h1>
+      <p>一週間の人気の投稿です</p>
+      <div class="card__list">
+        <% @posts.each do |post| %>
+          <div class="card">
+            <%= link_to post_path(post.id) do %>
+              <%= image_tag post.post_images[0].to_s, class: "card__img" %>
+            <% end %>
+            <h3><%= post.title %></h3>
+            <p><%= post.body %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="top_recipes">
+      <h1>Recipes</h1>
+      <p>人気のレシピです</p>
+      <div class="card__list">
+        <% @recipes.each do |recipe| %>
+          <div class="card">
+            <%= link_to recipe_path(recipe.id) do %>
+              <%= image_tag recipe.recipe_images[0].to_s, class: "card__img" %>
+            <% end %>
+            <h3><%= recipe.title %></h3>
+            <p><%= recipe.body %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
-  
+ </div>
+</main>

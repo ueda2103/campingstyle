@@ -1,19 +1,26 @@
 class FlowsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_user, only: [:destroy]
 
   def create
     @flow = Flow.create(flow_params)
-    redirect_back fallback_location: edit_recipe_path(@flow.recipe_id)
+    @flows = Flow.where(recipe_id: @flow.recipe_id)
   end
 
   def destroy
     @flow = Flow.find(params[:id])
+    @flows = Flow.where(recipe_id: @flow.recipe_id)
     @flow.destroy
-    redirect_back fallback_location: edit_recipe_path(@flow.recipe_id)
   end
 
   private
   def flow_params
     params.permit(:recipe_id, :body)
+  end
+
+  def check_user
+    flow = Flow.find(params[:id])
+    user = User.find(flow.user_id)
+    redirect_back fallback_location: user_path(current_uer.id) unless user == current_user
   end
 end
