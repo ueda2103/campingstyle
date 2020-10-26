@@ -54,6 +54,7 @@ class PostsController < ApplicationController
       flash[:success] = "投稿を保存しました"
       redirect_to post_path(@post.id)
     else
+      p @post.errors
       flash[:error] = "保存に失敗しました"
       render "new"
     end

@@ -17,7 +17,7 @@
               <%= image_tag @post.post_images[0].to_s, class: "main-img img_prev" %>
             </div>
             <button>
-              <%= f.file_field :post_images, class: "img" %>
+              <%= f.file_field :post_images, multiple: true, class: "img" %>
             </button>
             <% if @post.errors.include?(:post_images) %>
               <span class="red"><%= @post.errors.full_messages_for(:post_images).first %></span>
