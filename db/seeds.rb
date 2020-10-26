@@ -74,7 +74,7 @@ post_sub_titles = %w{
 
   Post.create!(
     user_id: User.find(i).id,
-    post_images: [open("public/images/posts/#{c}.jpg")],
+    post_images: [open("/images/posts/#{c}.jpg")],
     title: "#{st}#{tt}",
     body: "楽しむぞ",
     footprint: Random.rand(100)
@@ -110,7 +110,7 @@ recipe_sub_titles = %w{
 
   Recipe.create!(
     user_id: User.find(i).id,
-    recipe_images: [open("public/images/recipes/#{c}.jpg")],
+    recipe_images: [open("/images/recipes/#{c}.jpg")],
     title: "#{st}#{tt}",
     body: "楽しむぞ〜！",
     status: true,
