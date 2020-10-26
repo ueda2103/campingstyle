@@ -25,21 +25,6 @@ given_names = %w{
 
 city_names = %w(青巻市 赤巻市 黄巻市)
 
-User.create!(
-  family_name: "徳川",
-  given_name: "家康",
-  family_name_kana: "トクガワ",
-  given_name_kana: "イエヤス",
-  postal_code: "1000002",
-  prefecture_code: 13,
-  city: "千代田区",
-  street: "1番地",
-  building: "インフラトップ 4F",
-  telephone_number: "09011112222",
-  email: "test@gmail.com",
-  password: "password",
-)
-
 20.times do |n|
   fn = family_names[n % 4].split(":")
   gn = given_names[n % 5].split(":")
@@ -126,7 +111,7 @@ recipe_sub_titles = %w{
   Recipe.create!(
     user_id: User.find(i).id,
     recipe_images: [open("db/fixtures/images/#{c}.jpg")],
-    title: "#{tt}#{st}",
+    title: "#{st}#{tt}",
     body: "楽しむぞ〜！",
     status: true,
     footprint: Random.rand(100)

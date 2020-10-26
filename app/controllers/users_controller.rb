@@ -91,7 +91,8 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:user_image,:family_name, :given_name, :family_name_kana, :given_name_kana, :postal_code, :prefecture_code, :city, :street, :building, :telephone_number)
+    params.require(:user).permit(:user_image, :family_name, :given_name, :family_name_kana,
+     :given_name_kana, :email, :postal_code, :prefecture_code, :city, :street, :building, :telephone_number)
   end
 
   def check_user
