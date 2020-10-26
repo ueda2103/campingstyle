@@ -42,3 +42,8 @@ set :deploy_to, "/home/ec2-user/campingstyle"
 set :rbenv_ruby, '2.5.7'
 set :linked_files, %w{config/master.key .env}
 append :linked_dirs, "log", "public", "tmp"
+
+# set :default_env, {
+#   aws_access_key_id: ENV["S3_ACCESS_KEY_ID"],
+#   aws_secret_access_key_id: ENV["S3_SECRET_ACCESS_KEY_ID"],
+# }
