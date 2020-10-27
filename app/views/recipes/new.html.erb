@@ -16,7 +16,7 @@
 
           <div class="img my-4">
             <div class="img-box mb-2">
-              <%= image_tag @recipe.recipe_images[0].to_s, class: "main-img img_prev" %>
+              <%= image_tag @recipe.recipe_images[0].to_s, size: "550x350", class: "main-img img_prev" %>
             </div>
             <button>
               <%= f.file_field :recipe_images, multiple: true, class: "img need_long" %>
