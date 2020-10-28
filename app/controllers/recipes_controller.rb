@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.where(status: "公開")
-    @tags = @recipes.tag_counts
+    @tags = @recipes.tag_counts_on(:tags)
 
     if params[:search]
       
