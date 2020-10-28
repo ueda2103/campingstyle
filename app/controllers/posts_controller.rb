@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
-    @tags = Post.tag_counts
+    @tags = @posts.tag_counts_on(:tags)
     
     if params[:search]
       
