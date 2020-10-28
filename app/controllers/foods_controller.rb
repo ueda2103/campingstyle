@@ -20,7 +20,8 @@ class FoodsController < ApplicationController
 
   def check_user
     food = Food.find(params[:id])
-    user = User.find(food.user_id)
+    recipe = Recipe.find(food.recipe_id)
+    user = User.find(recipe.user_id)
     redirect_back fallback_location: user_path(current_uer.id) unless user == current_user
   end
 end
