@@ -3,7 +3,7 @@
     <% flows.each do |f| %>
       <tr>
         <td><%= f.body %></td>
-        <td><%= link_to "削除", flow_path(f.id), method: :delete, class: "btn_red" %></td>
+        <td><%= link_to "削除", flow_path(f.id), method: :delete, remote: true, class: "btn_red" %></td>
       </tr>
     <% end %>
   </tbody>

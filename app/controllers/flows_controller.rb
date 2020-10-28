@@ -20,7 +20,8 @@ class FlowsController < ApplicationController
 
   def check_user
     flow = Flow.find(params[:id])
-    user = User.find(flow.user_id)
+    recipe = Recipe.find(flow.recipe_id)
+    user = User.find(recipe.user_id)
     redirect_back fallback_location: user_path(current_uer.id) unless user == current_user
   end
 end
