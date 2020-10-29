@@ -12,11 +12,11 @@
 
     <%# ブックマーク既済の場合destroyアクションへのリンクを付与 %>
     <% if bookmark_base.bookmark_by?(current_user) %>
-      <%= link_to "ブックマークを外す", bookmark_path(bookmark_base.bookmark_by(current_user), bookmark_base_id: bookmark_base.id, bookmark_base_type: bookmark_base_type(bookmark_base)), method: :delete, remote: true, class: "btn_red" %>
+      <%= link_to "ブックマークを外す", bookmark_path(bookmark_base.bookmark_by(current_user), bookmark_base_id: bookmark_base.id, base_type: base_type(bookmark_base)), method: :delete, remote: true, class: "btn_red" %>
 
     <%# ブックマーク未済の場合createアクションへのリンクを付与 %>
     <% else %>
-      <%= link_to "ブックマーク", bookmarks_path(bookmark_base_id: bookmark_base.id, bookmark_base_type: bookmark_base_type(bookmark_base)), method: :post, remote: true, class: "btn_blue" %>
+      <%= link_to "ブックマーク", bookmarks_path(bookmark_base_id: bookmark_base.id, base_type: base_type(bookmark_base)), method: :post, remote: true, class: "btn_blue" %>
     <% end %>
   <% end %>
 <% end %>

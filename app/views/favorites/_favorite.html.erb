@@ -3,7 +3,7 @@
 
   <%# いいね既済の場合destroyアクションへのリンクを付与 %>
   <% if favorite_base.favorited_by?(current_user) %>
-    <%= link_to favorite_path(favorite_base.favorited_by(current_user), favorite_base_id: favorite_base.id, favorite_base_type: favorite_base_type(favorite_base)), method: :delete, remote: true do %>
+    <%= link_to favorite_path(favorite_base.favorited_by(current_user), favorite_base_id: favorite_base.id, base_type: base_type(favorite_base)), method: :delete, remote: true do %>
       <p class="d-inline-block">
         <i class="fas fa-heart fa-pink"></i>
         <%= favorite_base.favorite_users.count %>件
@@ -12,7 +12,7 @@
 
   <%# いいね未済の場合createアクションへのリンクを付与 %>
   <% else %>
-    <%= link_to favorites_path(favorite_base_id: favorite_base.id, favorite_base_type: favorite_base_type(favorite_base)), method: :post, remote: true do %>
+    <%= link_to favorites_path(favorite_base_id: favorite_base.id, base_type: base_type(favorite_base)), method: :post, remote: true do %>
       <p class="d-inline-block">
         <i class="far fa-heart fa-pink"></i>
         <%= favorite_base.favorite_users.count %>件

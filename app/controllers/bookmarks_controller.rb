@@ -4,7 +4,7 @@ class BookmarksController < ApplicationController
 
   def create
     # Postをブックマークする場合の処理
-    if params[:bookmark_base_type] == "post"
+    if params[:base_type] == "post"
       @bookmark_base = Post.find(params[:bookmark_base_id])
       @bookmark = Bookmark.new(user_id: current_user.id, post_id: @bookmark_base.id)
     
@@ -19,7 +19,7 @@ class BookmarksController < ApplicationController
 
   def destroy
     # Postのブックマークを削除する場合の処理
-    if params[:bookmark_base_type] == "post"
+    if params[:base_type] == "post"
       @bookmark_base = Post.find(params[:bookmark_base_id])
       @bookmark = @bookmark_base.bookmark_by(current_user)
 

@@ -4,7 +4,7 @@ class FavoritesController < ApplicationController
 
   def create
     # Postにいいねする場合の処理
-    if params[:favorite_base_type] == "post"
+    if params[:base_type] == "post"
       @favorite_base = Post.find(params[:favorite_base_id])
       @favorite = Favorite.new(user_id: current_user.id, post_id: @favorite_base.id)
     
@@ -19,7 +19,7 @@ class FavoritesController < ApplicationController
 
   def destroy
     # Postのいいねを削除する場合の処理
-    if params[:favorite_base_type] == "post"
+    if params[:base_type] == "post"
       @favorite_base = Post.find(params[:favorite_base_id])
       @favorite = @favorite_base.favorited_by(current_user)
 
