@@ -1,1 +1,1 @@
-$('.bookmark_<%= @post_recipe.id %>').html("<%= j(render "bookmarks/bookmark", post: @post_recipe, recipe: @post_recipe) %>")
+$('.bookmark_<%= @bookmark_base.id %>').html("<%= j(render "bookmarks/bookmark", bookmark_base: @bookmark_base) %>")

@@ -17,19 +17,19 @@ class Recipe < ApplicationRecord
   validates   :title, presence: true, length: {maximum: 20}
   validates   :body, presence:true, length: {maximum: 200}
 
-  def recipe_favorited_by?(user)
+  def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
 
-  def recipe_favorited_by(user)
+  def favorited_by(user)
     favorites.find_by(user_id: user.id)
   end
 
-  def recipe_bookmark_by?(user)
+  def bookmark_by?(user)
     bookmarks.where(user_id: user.id).exists?
   end
 
-  def recipe_bookmark_by(user)
+  def bookmark_by(user)
     bookmarks.find_by(user_id: user.id)
   end
 
