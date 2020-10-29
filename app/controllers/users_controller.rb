@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :withdrawal, :unsubscribe]
+  before_action :check_guest, only: [:update, :unsubscribe]
 
   def index
     @users = User.where(is_deleted: "有効")
