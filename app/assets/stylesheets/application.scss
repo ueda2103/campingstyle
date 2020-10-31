@@ -68,7 +68,6 @@ p {
   padding-right: 15px;
   color: #ffffff;
   border: none;
-  border-radius: 5px;
   background-color: #ff9900;
   text-decoration: none;
   
@@ -86,7 +85,6 @@ p {
   padding-right: 15px;
   color: #ffffff;
   border: none;
-  border-radius: 5px;
   background-color: #0000ff;
   text-decoration: none;
   
@@ -103,7 +101,6 @@ p {
   padding-right: 15px;
   color: #ffffff;
   border: none;
-  border-radius: 5px;
   background-color: #0000ff;
   text-decoration: none;
   
@@ -121,7 +118,6 @@ p {
   padding-right: 15px;
   color: #ffffff;
   border: none;
-  border-radius: 5px;
   background-color: #ff0000;
   text-decoration: none;
   
@@ -139,7 +135,6 @@ p {
   padding-right: 15px;
   color: #ffffff;
   border: none;
-  border-radius: 5px;
   background-color: #00ff00;
   text-decoration: none;
   
@@ -727,7 +722,7 @@ main {
 
 // トップページ
 .top-page .row {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 #about, .top-posts, .top-recipes {
@@ -795,9 +790,14 @@ main {
 
   .card {
     box-shadow: 15px 15px 0 #989898;
+    transition: 0.3s all ease-in-out;
 
     .card-img-top {
       height: 250px;
+    }
+
+    &:hover {
+      transform: translateY(-30px);
     }
   }
 }

@@ -34,7 +34,9 @@
         </div>
 
         <div class="card">
-          <%= image_tag "top_itemlist_img.jpg", class: "card-img-top w-100" %>
+          <%= link_to user_path(current_user.id) do %>
+            <%= image_tag "top_itemlist_img.jpg", class: "card-img-top w-100" %>
+          <% end %>
           <div class="card-body">
             <h4 class="card-title text-center mt-4 mb-3">Item Lists</h4>
             <p class="card-text text-center">持ち物リストを活用してキャンプを楽しみましょう</p>

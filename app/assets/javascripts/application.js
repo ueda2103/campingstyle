@@ -59,7 +59,9 @@ $(function() {
 })
 
 $(function(){
-  $(".key-visual__title h1 span").addClass("fadein");
+  $(document).on('turbolinks:load', () => {
+    $(".key-visual__title h1 span").addClass("fadein");
+  });
 
   $(window).scroll(function () { 
     $(".key-visual__title h1 span").each(function(){
@@ -77,10 +79,9 @@ $(function(){
       var targetElement = $(this).offset().top;
       var scroll = $(window).scrollTop();
       var windowHeight = $(window).height();
-      console.log("hoge");
-        if (scroll > targetElement - windowHeight + 200){
-          $("#about h2 span").addClass("fadein_sec");
-        }
+      if (scroll > targetElement - windowHeight + 200){
+        $("#about h2 span").addClass("fadein_sec");
+      }
     });
   });
 
@@ -89,10 +90,9 @@ $(function(){
       var targetElement = $(this).offset().top;
       var scroll = $(window).scrollTop();
       var windowHeight = $(window).height();
-      console.log("hoge");
-        if (scroll > targetElement - windowHeight + 200){
-          $(".top-posts h2 span").addClass("fadein_sec");
-        }
+      if (scroll > targetElement - windowHeight + 200){
+        $(".top-posts h2 span").addClass("fadein_sec");
+      }
     });
   });
 
@@ -101,10 +101,9 @@ $(function(){
       var targetElement = $(this).offset().top;
       var scroll = $(window).scrollTop();
       var windowHeight = $(window).height();
-      console.log("hoge");
-        if (scroll > targetElement - windowHeight + 200){
-          $(".top-recipes h2 span").addClass("fadein_sec");
-        }
+      if (scroll > targetElement - windowHeight + 200){
+        $(".top-recipes h2 span").addClass("fadein_sec");
+      }
     });
   });
 });
