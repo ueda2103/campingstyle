@@ -18,7 +18,7 @@
             <%= image_tag "top_post_img.jpg", class: "card-img-top w-100" %>
           <% end %>
           <div class="card-body">
-            <h4 class="card-title text-center mt-4 mb-3">Posts</h4>
+            <h4 class="card-title text-center mt-4 mb-5">Posts</h4>
             <p class="card-text text-center">キャンプの写真をみんなとシェアしましょう</p>
           </div>
         </div>
@@ -28,7 +28,7 @@
             <%= image_tag "top_recipe_img.jpg", class: "card-img-top w-100" %>
           <% end %>
           <div class="card-body">
-            <h4 class="card-title text-center mt-4 mb-3">Camping Meals</h4>
+            <h4 class="card-title text-center mt-4 mb-5">Camping Meals</h4>
             <p class="card-text text-center">キャンプ飯のレシピをみんなとシェアしましょう</p>
           </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="card card__item-lists">
           <%= image_tag "top_itemlist_img.jpg", class: "card-img-top w-100" %>
           <div class="card-body">
-            <h4 class="card-title text-center mt-4 mb-3">Item Lists</h4>
+            <h4 class="card-title text-center mt-4 mb-5">Item Lists</h4>
             <p class="card-text text-center">持ち物リストを活用してキャンプを楽しみましょう<br><small class="red">※ご利用にはログインが必要です</small></p>
           </div>
         </div>
@@ -64,7 +64,7 @@
               <%= image_tag post.post_images[0].to_s, class: "card-img-top w-100" %>
             <% end %>
             <div class="card-body">
-              <h4 class="card-title text-center mt-4 mb-3"><%= post.title %></h4>
+              <h4 class="card-title text-center mt-4 mb-5"><%= post.title %></h4>
               <p class="card-text text-center"><%= post.body %></p>
             </div>
           </div>
@@ -94,7 +94,7 @@
               <%= image_tag recipe.recipe_images[0].to_s, class: "card-img-top w-100" %>
             <% end %>
             <div class="card-body">
-              <h4 class="card-title text-center mt-4 mb-3"><%= recipe.title %></h4>
+              <h4 class="card-title text-center mt-4 mb-5"><%= recipe.title %></h4>
               <p class="card-text text-center"><%= recipe.body %></p>
             </div>
           </div>
