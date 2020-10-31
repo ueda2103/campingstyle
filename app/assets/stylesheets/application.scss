@@ -19,13 +19,42 @@
  @import "font-awesome-sprockets";
  @import "font-awesome";
 
+// ベース
 * {
   font-size: 12px;
 }
 
+h1 {
+  font-size: 6rem;
+}
+
+h2 {
+  font-size: 4rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+h4 {
+  font-size: 2.5rem;
+}
+
+h5 {
+  font-size: 2rem;
+}
+
+h6 {
+  font-size: 1.5rem;
+}
+
 p {
+  font-size: 1.5rem;
   margin: 0;
 }
+
+
+
 
 .red {
   color: #ff0000;
@@ -154,10 +183,6 @@ p {
   }
 }
 
-h2 {
-  font-size: 1.5rem;
-}
-
 .main-img {
   width: 100%;
 }
@@ -182,12 +207,7 @@ h2 {
   background-color: #ff0000;
 }
 
-// メインコンテンツ
-main {
-  padding-top: 80px;
-  padding-bottom: 50px;
-  min-height: 100vh;
-}
+// メイン
 
 .tag-sidebar {
   
@@ -498,16 +518,6 @@ main {
   }
 }
 
-footer {
-
-  p {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    text-align: center;
-    border-top: 2px solid #00ff00;
-  }
-}
-
 .titlebar {
   display: flex;
   justify-content: space-between;
@@ -539,74 +549,6 @@ div.field_with_errors {
 
   input, textarea {
     background-color: #dd7e7e;
-  }
-}
-
-#about, .top_posts, .top_recipes {
-
-  p {
-    font-size: 1.25rem;
-  }
-}
-
-#about > p, #about > h1 {
-  margin-left: 50px;
-}
-
-.top_posts, .top_recipes {
-  margin-top: 80px;
-
-  h1 {
-    margin-left: 50px;
-  }
-
-  p {
-    margin-left: 50px;
-  }
-}
-
-.top_recipes {
-  margin-bottom: 80px;
-}
-
-.card__list {
-  display: flex;
-  width: 100%;
-  margin-top: 30px;
-  justify-content: center;
-  text-align: center;
-  
-  .card {
-    width: 30%;
-    margin-right: 10px;
-    
-    .card__img {
-      width: 100%;
-      height: 230px;
-    }
-
-    p {
-      margin: 0;
-    }
-
-    h3 {
-      position: relative;
-      font-size: 1.5rem;
-      margin-top: 20px;
-      margin-left: 0;
-      margin-bottom: 15px;
-
-      &:after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100px;
-        height: 2px;
-        transform: translateX(-50%) translateY(15px);
-        background-color: #00ffb3;
-      }
-    }
   }
 }
 
@@ -642,11 +584,11 @@ div.field_with_errors {
 }
 
 
+
+
 // ヘッダー
 header {
   position: fixed;
-  width: 100%;
-  background-color: #ffffff;
   border-bottom: 2px solid #00ff00;
   z-index: 1000;
 
@@ -655,7 +597,7 @@ header {
   }
 
   .nav-link {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -663,7 +605,6 @@ header {
 // トップページ背景
 .background {
   position: fixed;
-  z-index: 0;
 
   .background__image_item {
     opacity: 0.7;
@@ -688,15 +629,64 @@ header {
 .key-visual {
   position: relative;
   height: calc(100vh - 80px);
-  
-  h1 {
-    font-size: 6rem;
-    height: 250px;
-    padding-right: 30%;
-  }
 
-  h2 {
-    font-size: 2rem;
+  h1 {
+    height: 200px;
+    padding-right: 30%;
+
+    span {
+      font-size: 7rem;
+      opacity: 0;
+
+      &:nth-child(1) {
+        transform: matrix(1, 5, -5, 1, -50, 50);
+        transition: 0.4s all ease-in-out;
+      }
+      &:nth-child(2) {
+        transform: matrix(1, 5, 5, 1, 100, -100);
+        transition: 0.5s all ease-in-out;
+      }
+      &:nth-child(3) {
+        transform: matrix(1, 5, 5, 1, -150, 150);
+        transition: 0.6s all ease-in-out;
+      }
+      &:nth-child(4) {
+        transform: matrix(1, 5, 5, 1, 200, -200);
+        transition: 0.7s all ease-in-out;
+      }
+      &:nth-child(5) {
+        transform: matrix(1, 5, 5, 1, -250, 250);
+        transition: 0.8s all ease-in-out;
+      }
+      &:nth-child(6) {
+        transform: matrix(1, 5, 5, 1, 300, -300);
+        transition: 0.9s all ease-in-out;
+      }
+      &:nth-child(7) {
+        transform: matrix(1, 5, 5, 1, -350, 350);
+        transition: 1.0s all ease-in-out;
+      }
+      &:nth-child(8) {
+        transform: matrix(1, 5, 5, 1, 400, -400);
+        transition: 1.1s all ease-in-out;
+      }
+      &:nth-child(9) {
+        transform: matrix(1, 5, 5, 1, -450, 450);
+        transition: 1.2s all ease-in-out;
+      }
+      &:nth-child(10) {
+        transform: matrix(1, 5, 5, 1, 500, -500);
+        transition: 1.3s all ease-in-out;
+      }
+      &:nth-child(11) {
+        transform: matrix(1, 5, 5, 1, -550, 550);
+        transition: 1.4s all ease-in-out;
+      }
+      &:nth-child(12) {
+        transform: matrix(1, 5, 5, 1, 600, -600);
+        transition: 1.5s all ease-in-out;
+      }
+    }
   }
 
   label, input, a {
@@ -727,7 +717,125 @@ header {
 }
 
 
-// About
-// #id, .top_posts, .top_recipes {
-  
-// }
+// メイン
+main {
+  position: relative;
+  padding-top: 80px;
+  min-height: 100vh;
+}
+
+
+// トップページ
+.top-page .row {
+  height: 100vh;
+}
+
+#about, .top-posts, .top-recipes {
+  max-width: 1140px;
+  margin: auto;
+
+  h2 {
+    padding-left: 300px;
+
+    span {
+      display: inline-block;
+      font-size: 4rem;
+
+      &:nth-child(1) {
+        transform: rotateY(90deg);
+        transition: 0.4s all ease-in-out;
+      }
+
+      &:nth-child(2) {
+        transform: rotateY(90deg);
+        transition: 0.6s all ease-in-out;
+      }
+
+      &:nth-child(3) {
+        transform: rotateY(90deg);
+        transition: 0.8s all ease-in-out;
+      }
+
+      &:nth-child(4) {
+        transform: rotateY(90deg);
+        transition: 1.0s all ease-in-out;
+      }
+
+      &:nth-child(5) {
+        transform: rotateY(90deg);
+        transition: 1.2s all ease-in-out;
+      }
+
+      &:nth-child(6) {
+        transform: rotateY(90deg);
+        transition: 1.4s all ease-in-out;
+      }
+
+      &:nth-child(7) {
+        transform: rotateY(90deg);
+        transition: 1.6s all ease-in-out;
+      }
+    }
+  }
+
+  h4 {
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100px;
+      height: 2px;
+      transform: translateX(-50%) translateY(20px);
+      background-color: #00ffb3;
+    }
+  }
+
+  .card {
+    box-shadow: 15px 15px 0 #989898;
+
+    .card-img-top {
+      height: 250px;
+    }
+  }
+}
+
+.parallax-bg {
+  width: 100vw;
+  height: 50vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.img-bg-01 {
+  background-image: url("parallax-1.jpg");
+}
+
+.img-bg-02 {
+  background-image: url("parallax-2.jpg");
+}
+
+
+// フッター
+footer {
+  position: relative;
+  border-top: 2px solid #00ff00;
+}
+
+
+// 共通クラス
+// キービジュアルフェードイン
+.fadein {
+  opacity: 1 !important;
+  transform: matrix(1, 0, 0, 1, 0, 0) !important;
+}
+
+// セクションフェードイン
+.fadein_sec {
+  opacity: 1 !important;
+  transform: matrix(1, 0, 0, 1, -300, 0) !important;
+}

@@ -13,7 +13,7 @@
 
   <body>
 
-    <header>
+    <header class="w-100 bg-white">
       <div class="container">
         <div class="row">
           <% if user_signed_in? %>
@@ -27,7 +27,7 @@
 
     <%= yield %>
     
-    <footer>
+    <footer class="bg-white">
       <%= render "/shared/footer" %>
     </footer>
   </body>
