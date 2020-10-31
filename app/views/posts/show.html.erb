@@ -8,7 +8,7 @@
           <h2><%= @post.title %></h2>
           <%= render "/shared/flash" %>
           <div class="bookmark_<%= @post.id %>">
-            <%= render "bookmarks/bookmark", post: @post %>
+            <%= render "bookmarks/bookmark", bookmark_base: @post %>
           </div>
         </div>
 
@@ -30,7 +30,7 @@
           <div class="user-body__right">
             <p>いいね</p>
             <div class="favorite_<%= @post.id %>">
-              <%= render "favorites/favorite", post: @post %>
+              <%= render "favorites/favorite", favorite_base: @post %>
             </div>
             <p>コメント　<i class="fas fa-comment fa-blue"></i><%= @post.comments.count %>件</p>
             <p>足あと　<i class="fas fa-paw fa-brown"></i><%= @post.footprint %>件</p>

@@ -3,28 +3,37 @@ class BookmarksController < ApplicationController
   before_action :check_user, only: [:destroy]
 
   def create
-    if params[:post_id].present?
-      @post_recipe = Post.find(params[:post_id])
-      @bookmark = Bookmark.new(user_id: current_user.id, post_id: @post_recipe.id)
+    # Postをブックマークする場合の処理
+    if params[:base_type] == "post"
+      @bookmark_base = Post.find(params[:bookmark_base_id])
+      @bookmark = Bookmark.new(user_id: current_user.id, post_id: @bookmark_base.id)
+    
+    # Recipeをブックマークする場合の処理
     else
-      @post_recipe = Recipe.find(params[:recipe_id])
-      @bookmark = Bookmark.new(user_id: current_user.id, recipe_id: @post_recipe.id)
+      @bookmark_base = Recipe.find(params[:bookmark_base_id])
+      @bookmark = Bookmark.new(user_id: current_user.id, recipe_id: @bookmark_base.id)
     end
+
     @bookmark.save
   end
 
   def destroy
-    if params[:post_id].present?
-      @post_recipe = Post.find(params[:post_id])
-      @bookmark = Bookmark.find_by(user_id: current_user.id, post_id: @post_recipe.id)
+    # Postのブックマークを削除する場合の処理
+    if params[:base_type] == "post"
+      @bookmark_base = Post.find(params[:bookmark_base_id])
+      @bookmark = @bookmark_base.bookmark_by(current_user)
+
+    # Recipeのブックマークを削除する場合の処理
     else
-      @post_recipe = Recipe.find(params[:recipe_id])
-      @bookmark = Bookmark.find_by(user_id: current_user.id, recipe_id: @post_recipe.id)
+      @bookmark_base = Recipe.find(params[:bookmark_base_id])
+      @bookmark = @bookmark_base.bookmark_by(current_user)
     end
+
     @bookmark.destroy
   end
 
   private
+  # ブックマーク削除実行ユーザーが対象のブックマーク作成ユーザーと同一であることの確認
   def check_user
     bookmark = Bookmark.find(params[:id])
     user = User.find(bookmark.user_id)

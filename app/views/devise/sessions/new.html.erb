@@ -1,70 +1,102 @@
 <%= render "shared/key-visual" %>
 
 <main>
- <div class="container">
-  <div class="row">
+ <div class="container-fluid top-page p-0">
+  <div class="row bg-white">
     <div id="about">
-      <h1>About</h1>
-      <p>Camping StyleはキャンパーのためのSNSです</p>
-      <div class="card__list">
+      <h2>
+        <span>A</span>
+        <span>b</span>
+        <span>o</span>
+        <span>u</span>
+        <span>t</span>
+      </h2>
+      <p class="mb-5">Camping StyleはキャンパーのためのSNSです</p>
+      <div class="card-deck">
         <div class="card">
           <%= link_to posts_path do %>
-            <%= image_tag "top_post_img.jpg", class: "card__img" %>
+            <%= image_tag "top_post_img.jpg", class: "card-img-top w-100" %>
           <% end %>
-          <h3>Posts</h3>
-          <p>
-            キャンプの写真をみんなと<br>
-            シェアしましょう
-          </p>
+          <div class="card-body">
+            <h4 class="card-title text-center mt-4 mb-3">Posts</h4>
+            <p class="card-text text-center">キャンプの写真をみんなとシェアしましょう</p>
+          </div>
         </div>
+
         <div class="card">
           <%= link_to recipes_path do %>
-            <%= image_tag "top_recipe_img.jpg", class: "card__img" %>
+            <%= image_tag "top_recipe_img.jpg", class: "card-img-top w-100" %>
           <% end %>
-          <h3>Camping Meals</h3>
-          <p>
-            キャンプ飯のレシピをみんなと<br>
-            シェアしましょう
-          </p>
+          <div class="card-body">
+            <h4 class="card-title text-center mt-4 mb-3">Camping Meals</h4>
+            <p class="card-text text-center">キャンプ飯のレシピをみんなとシェアしましょう</p>
+          </div>
         </div>
-        <div class="card">
-          <%= image_tag "top_itemlist_img.jpg", class: "card__img" %>
-          <h3>Item Lists</h3>
-          <p>
-            持ち物リストを活用して<br>
-            キャンプを楽しみましょう
-          </p>
+
+        <div class="card card__item-lists">
+          <%= image_tag "top_itemlist_img.jpg", class: "card-img-top w-100" %>
+          <div class="card-body">
+            <h4 class="card-title text-center mt-4 mb-3">Item Lists</h4>
+            <p class="card-text text-center">持ち物リストを活用してキャンプを楽しみましょう<br><small class="red">※ご利用にはログインが必要です</small></p>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="top_posts">
-      <h1>Topics</h1>
-      <p>一週間の人気の投稿です</p>
-      <div class="card__list">
+  <div class="parallax-bg img-bg-01"></div>
+
+  <div class="row bg-white">
+    <div class="top-posts">
+      <h2>
+        <span>T</span>
+        <span>o</span>
+        <span>p</span>
+        <span>i</span>
+        <span>c</span>
+        <span>s</span>
+      </h2>
+      <p class="mb-5">一週間の人気の投稿です</p>
+      <div class="card-deck">
         <% @posts.each do |post| %>
           <div class="card">
             <%= link_to post_path(post.id) do %>
-              <%= image_tag post.post_images[0].to_s, class: "card__img" %>
+              <%= image_tag post.post_images[0].to_s, class: "card-img-top w-100" %>
             <% end %>
-            <h3><%= post.title %></h3>
-            <p><%= post.body %></p>
+            <div class="card-body">
+              <h4 class="card-title text-center mt-4 mb-3"><%= post.title %></h4>
+              <p class="card-text text-center"><%= post.body %></p>
+            </div>
           </div>
         <% end %>
       </div>
     </div>
+  </div>
 
-    <div class="top_recipes">
-      <h1>Recipes</h1>
-      <p>人気のレシピです</p>
-      <div class="card__list">
+  <div class="parallax-bg img-bg-02"></div>
+
+  <div class="row bg-white">
+    <div class="top-recipes">
+      <h2>
+        <span>R</span>
+        <span>e</span>
+        <span>c</span>
+        <span>i</span>
+        <span>p</span>
+        <span>e</span>
+        <span>s</span>
+      </h2>
+      <p class="mb-5">人気のレシピです</p>
+      <div class="card-deck">
         <% @recipes.each do |recipe| %>
           <div class="card">
             <%= link_to recipe_path(recipe.id) do %>
-              <%= image_tag recipe.recipe_images[0].to_s, class: "card__img" %>
+              <%= image_tag recipe.recipe_images[0].to_s, class: "card-img-top w-100" %>
             <% end %>
-            <h3><%= recipe.title %></h3>
-            <p><%= recipe.body %></p>
+            <div class="card-body">
+              <h4 class="card-title text-center mt-4 mb-3"><%= recipe.title %></h4>
+              <p class="card-text text-center"><%= recipe.body %></p>
+            </div>
           </div>
         <% end %>
       </div>

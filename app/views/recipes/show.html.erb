@@ -8,7 +8,7 @@
           <h2><%= @recipe.title %></h2>
           <%= render "/shared/flash" %>
           <div class="bookmark_<%= @recipe.id %>">
-            <%= render "bookmarks/bookmark", recipe: @recipe %>
+            <%= render "bookmarks/bookmark", bookmark_base: @recipe %>
           </div>
         </div>
 
@@ -30,7 +30,7 @@
           <div class="user-body__right">
             <p>いいね</p>
             <div class="favorite_<%= @recipe.id %>">
-              <%= render "favorites/favorite", recipe: @recipe %>
+              <%= render "favorites/favorite", favorite_base: @recipe %>
             </div>
             <p>コメント　<i class="fas fa-comment fa-blue"></i><%= @recipe.comments.count %>件</p>
             <p>足あと　<i class="fas fa-paw fa-brown"></i><%= @recipe.footprint %>件</p>

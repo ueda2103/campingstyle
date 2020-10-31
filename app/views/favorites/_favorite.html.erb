@@ -1,55 +1,29 @@
+<%# ログイン時いいね機能をON %>
 <% if user_signed_in? %>
-  <% if /post/ =~ request.fullpath %>
 
-    <% if post.post_favorited_by?(current_user) %>
-      <%= link_to favorite_path(post.post_favorited_by(current_user), post_id: post.id), method: :delete, remote: true do %>
-        <p class="d-inline-block">
-          <i class="fas fa-heart fa-pink"></i>
-          <%= post.favorite_users.count %>件
-        </p>
-      <% end %>
-
-    <% else %>
-      <%= link_to favorites_path(post_id: post.id), method: :post, remote: true do %>
-        <p class="d-inline-block">
-          <i class="far fa-heart fa-pink"></i>
-          <%= post.favorite_users.count %>件
-        </p>
-      <% end %>
+  <%# いいね既済の場合destroyアクションへのリンクを付与 %>
+  <% if favorite_base.favorited_by?(current_user) %>
+    <%= link_to favorite_path(favorite_base.favorited_by(current_user), favorite_base_id: favorite_base.id, base_type: base_type(favorite_base)), method: :delete, remote: true do %>
+      <p class="d-inline-block">
+        <i class="fas fa-heart fa-pink"></i>
+        <%= favorite_base.favorite_users.count %>件
+      </p>
     <% end %>
 
+  <%# いいね未済の場合createアクションへのリンクを付与 %>
   <% else %>
-
-    <% if recipe.recipe_favorited_by?(current_user) %>
-      <%= link_to favorite_path(recipe.recipe_favorited_by(current_user), recipe_id: recipe.id), method: :delete, remote: true do %>
-        <p class="d-inline-block">
-          <i class="fas fa-heart fa-pink"></i>
-          <%= recipe.favorite_users.count %>件
-        </p>
-      <% end %>
-
-    <% else %>
-      <%= link_to favorites_path(recipe_id: recipe.id), method: :post, remote: true do %>
-        <p class="d-inline-block">
-          <i class="far fa-heart fa-pink"></i>
-          <%= recipe.favorite_users.count %>件
-        </p>
-      <% end %>
+    <%= link_to favorites_path(favorite_base_id: favorite_base.id, base_type: base_type(favorite_base)), method: :post, remote: true do %>
+      <p class="d-inline-block">
+        <i class="far fa-heart fa-pink"></i>
+        <%= favorite_base.favorite_users.count %>件
+      </p>
     <% end %>
   <% end %>
-  
+
+<%# 未ログイン時いいね機能をOFFにし、いいねの数のみ表示 %>
 <% else %>
-
-  <% if /post/ =~ request.fullpath %>
     <p class="d-inline-block">
       <i class="fas fa-heart fa-pink"></i>
-      <%= post.favorite_users.count %>件
+      <%= favorite_base.favorite_users.count %>件
     </p>
-
-  <% else %>
-    <p class="d-inline-block">
-      <i class="fas fa-heart fa-pink"></i>
-      <%= recipe.favorite_users.count %>件
-    </p>
-  <% end %>
 <% end %>

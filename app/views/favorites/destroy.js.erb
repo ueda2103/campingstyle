@@ -1,1 +1,1 @@
-$('.favorite_<%= @post_recipe.id %>').html("<%= j(render "favorites/favorite", post: @post_recipe, recipe: @post_recipe) %>")
+$('.favorite_<%= @favorite_base.id %>').html("<%= j(render "favorites/favorite", favorite_base: @favorite_base) %>")

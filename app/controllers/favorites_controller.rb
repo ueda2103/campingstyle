@@ -3,28 +3,37 @@ class FavoritesController < ApplicationController
   before_action :check_user, only: [:destroy]
 
   def create
-    if params[:post_id].present?
-      @post_recipe = Post.find(params[:post_id])
-      @favorite = Favorite.new(user_id: current_user.id, post_id: @post_recipe.id)
+    # Postにいいねする場合の処理
+    if params[:base_type] == "post"
+      @favorite_base = Post.find(params[:favorite_base_id])
+      @favorite = Favorite.new(user_id: current_user.id, post_id: @favorite_base.id)
+    
+    # Recipeにいいねする場合の処理
     else
-      @post_recipe = Recipe.find(params[:recipe_id])
-      @favorite = Favorite.new(user_id: current_user.id, recipe_id: @post_recipe.id)
+      @favorite_base = Recipe.find(params[:favorite_base_id])
+      @favorite = Favorite.new(user_id: current_user.id, recipe_id: @favorite_base.id)
     end
+
     @favorite.save
   end
 
   def destroy
-    if params[:post_id].present?
-      @post_recipe = Post.find(params[:post_id])
-      @favorite = Favorite.find_by(user_id: current_user.id, post_id: @post_recipe.id)
+    # Postのいいねを削除する場合の処理
+    if params[:base_type] == "post"
+      @favorite_base = Post.find(params[:favorite_base_id])
+      @favorite = @favorite_base.favorited_by(current_user)
+
+    # Recipeのいいねを削除する場合の処理
     else
-      @post_recipe = Recipe.find(params[:recipe_id])
-      @favorite = Favorite.find_by(user_id: current_user.id, recipe_id: @post_recipe.id)
+      @favorite_base = Recipe.find(params[:favorite_base_id])
+      @favorite = @favorite_base.favorited_by(current_user)
     end
+
     @favorite.destroy
   end
 
   private
+  # いいね削除実行ユーザーが対象のいいね作成ユーザーと同一であることの確認
   def check_user
     favorite = Favorite.find(params[:id])
     user = User.find(favorite.user_id)

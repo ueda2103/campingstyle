@@ -1,10 +1,25 @@
-<div class="key-visual__background">
-  <div class="container">
-    <div class="row">
-      <%= video_tag "/assets/main-visual-4c79b6d13387b6f06bd604e09f65b65d5670a2f4a3f40a4f3b9b8ebd830662ce.mp4", autoplay: true, loop: true, muted: true, class: "key-visual" %>
-      <div class="key-visual__title">
-        <h1>Welcome to<br>Camping style</h1>
+<%= render "/shared/background" %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="key-visual w-100 mb-5">
+      <div class="key-visual__title d-flex align-items-center h-100">
+        <h1 class="d-flex align-items-center justify-content-center w-100 bg-white">
+          <span>C</span>
+          <span>a</span>
+          <span>m</span>
+          <span>p</span>
+          <span>i</span>
+          <span>n</span>
+          <span>g</span>&nbsp;
+          <span>s</span>
+          <span>t</span>
+          <span>y</span>
+          <span>l</span>
+          <span>e</span>
+        </h1>
       </div>
+
       <% unless user_signed_in? %>
         <%= render "devise/shared/login_form" %>
       <% end %>

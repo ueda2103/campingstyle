@@ -57,3 +57,53 @@ $(function() {
     $('#tags').tagit();
   });
 })
+
+$(function(){
+  $(document).on('turbolinks:load', () => {
+    $(".key-visual__title h1 span").addClass("fadein");
+  });
+
+  $(window).scroll(function () { 
+    $(".key-visual__title h1 span").each(function(){
+      const scroll = $(window).scrollTop();
+      if(scroll !== 0) {
+        $(".key-visual__title h1 span").removeClass("fadein");
+      } else {
+        $(".key-visual__title h1 span").addClass("fadein");
+      }
+    });
+  });
+
+  $(window).scroll(function (){
+    $("#about h2 span").each(function(){
+      var targetElement = $(this).offset().top;
+      var scroll = $(window).scrollTop();
+      var windowHeight = $(window).height();
+      if (scroll > targetElement - windowHeight + 200){
+        $("#about h2 span").addClass("fadein_sec");
+      }
+    });
+  });
+
+  $(window).scroll(function (){
+    $(".top-posts h2 span").each(function(){
+      var targetElement = $(this).offset().top;
+      var scroll = $(window).scrollTop();
+      var windowHeight = $(window).height();
+      if (scroll > targetElement - windowHeight + 200){
+        $(".top-posts h2 span").addClass("fadein_sec");
+      }
+    });
+  });
+
+  $(window).scroll(function (){
+    $(".top-recipes h2 span").each(function(){
+      var targetElement = $(this).offset().top;
+      var scroll = $(window).scrollTop();
+      var windowHeight = $(window).height();
+      if (scroll > targetElement - windowHeight + 200){
+        $(".top-recipes h2 span").addClass("fadein_sec");
+      }
+    });
+  });
+});

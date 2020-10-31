@@ -9,7 +9,7 @@
 
       <div class="card-icon">
         <div class="favorite_<%= recipe.id %> favorites">
-          <%= render "favorites/favorite", recipe: recipe %>
+          <%= render "favorites/favorite", favorite_base: recipe %>
         </div>
 
         <p class="comments">
@@ -38,7 +38,7 @@
           </div>
 
           <div class="bookmark_<%= recipe.id %> bookmarks">
-            <%= render "bookmarks/bookmark", recipe: recipe %>
+            <%= render "bookmarks/bookmark", bookmark_base: recipe %>
           </div>
         </div>
       </div>
