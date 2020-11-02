@@ -7,7 +7,7 @@ module Vision
     def get_image_data(image_file)
       # APIのURL作成
       api_url = "https://vision.googleapis.com/v1/images:annotate?key=#{ENV['GOOGLE_API_KEY']}"
-      Rails.logger.debug ENV['GOOGLE_API_KEY']
+      Rails.logger.debug api_url
 
       # 画像をbase64にエンコード
       Rails.logger.debug "ここ1？"
