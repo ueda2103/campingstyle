@@ -34,6 +34,8 @@ module Vision
       response = https.request(request, params)
 
       # APIレスポンス出力
+      logger.debug JSON.parse(response.body)['responses'][0]['safeSearchAnnotation']
+      logger.debug "#{Rails.root}/public#{image_file}"
       result = JSON.parse(response.body)['responses'][0]['safeSearchAnnotation']
       if result.value?("LIKELY") || result.value?("VERY_LIKELY")
         return false

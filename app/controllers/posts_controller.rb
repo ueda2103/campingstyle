@@ -49,7 +49,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    logger.debug @post.post_images[0]
+    logger.debug @post.post_images[0].url
     result = Vision.get_image_data(@post.post_images[0].url)
 
     if result == true
