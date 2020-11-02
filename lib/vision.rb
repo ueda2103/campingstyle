@@ -40,7 +40,7 @@ module Vision
       Rails.logger.debug "ここ4？"
       Rails.logger.debug "#{Rails.root}/public#{image_file}"
       Rails.logger.debug "ここ5？"
-      Rails.logger.debug JSON.parse(response.body)['responses'][0]['safeSearchAnnotation']
+      Rails.logger.debug JSON.parse(response.body)
       result = JSON.parse(response.body)['responses'][0]['safeSearchAnnotation']
       if result.value?("LIKELY") || result.value?("VERY_LIKELY")
         return false
