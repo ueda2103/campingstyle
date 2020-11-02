@@ -3,9 +3,19 @@
 
   <%# カレントユーザーが作成した記事の場合は編集リンクを表示 %>
   <% if bookmark_base.user == current_user %>
-    <div class="post-edit">
-      <%= link_to "編集", edit_post_path(bookmark_base.id), class: "btn_green" %>
-    </div>
+
+    <%# Postの場合のリンク %>
+    <% if /post/ =~ request.fullpath %>
+      <div class="post-edit">
+        <%= link_to "編集", edit_post_path(bookmark_base.id), class: "btn_green" %>
+      </div>
+    
+    <%# Recipeの場合のリンク %>
+    <% else %>
+      <div class="post-edit">
+        <%= link_to "編集", edit_recipe_path(bookmark_base.id), class: "btn_green" %>
+      </div>
+    <% end %>
 
   <%# 他のユーザーが作成した記事の場合はブックマークリンクを表示 %>
   <% else %>

@@ -49,12 +49,20 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    result = Vision.get_image_data(@post.post_images[0].url)
 
-    if @post.save
-      flash[:success] = "投稿を保存しました"
-      redirect_to post_path(@post.id)
+    if result == true
+
+      if @post.save
+        flash[:success] = "投稿を保存しました"
+        redirect_to post_path(@post.id)
+      else
+        flash[:error] = "保存に失敗しました"
+        render "new"
+      end
+
     else
-      flash[:error] = "保存に失敗しました"
+      flash[:error] = "画像が不適切です"
       render "new"
     end
   end
@@ -65,12 +73,24 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    
-    if @post.update(post_params)
-      flash[:success] = "編集を保存しました"
-      redirect_to post_path(@post.id)
+    @post.post_images = post_params[:post_images]
+
+    if post_params[:post_images].present?
+      result = Vision.get_image_data(@post.post_images[0].url)
     else
-      flash[:error] = "保存に失敗しました"
+      result = true
+    end
+    
+    if result == true
+      if @post.update(post_params)
+        flash[:success] = "編集を保存しました"
+        redirect_to post_path(@post.id)
+      else
+        flash[:error] = "保存に失敗しました"
+        render "edit"
+      end
+    else
+      flash[:error] = "画像が不適切です"
       render "edit"
     end
   end
@@ -96,6 +116,6 @@ class PostsController < ApplicationController
   def check_user
     post = Post.find(params[:id])
     user = User.find(post.user_id)
-    redirect_back fallback_location: user_path(current_uer.id) unless user == current_user
+    redirect_back fallback_location: user_path(current_user.id) unless user == current_user
   end
 end

@@ -13,9 +13,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    @user = User.new(sign_up_params)
+
+    if @user.user_image.present?
+      result = Vision.get_image_data(@user.user_image.url)
+    else
+      result = true
+    end
+
+    if result == true
+      super
+    else
+      flash[:error] = "画像が不適切です"
+      render "new"
+    end
+  end
 
   # GET /resource/edit
   # def edit

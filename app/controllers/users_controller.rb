@@ -71,11 +71,23 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(current_user.id)
-
-    if @user.update(user_params)
-      flash[:success] = "編集を保存しました"
-      redirect_to user_path(current_user.id)
+    @user.user_image = user_params[:user_image]
+    if user_params[:user_image].present?
+      result = Vision.get_image_data(@user.user_image.url)
     else
+      result = true
+    end
+
+    if result == true
+      if @user.update(user_params)
+        flash[:success] = "編集を保存しました"
+        redirect_to user_path(current_user.id)
+      else
+        flash[:error] = "保存に失敗しました"
+        render "edit"
+      end
+    else
+      flash[:error] = "画像が不適切です"
       render "edit"
     end
   end
