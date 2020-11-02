@@ -74,7 +74,7 @@ post_sub_titles = %w{
 
   Post.create!(
     user_id: User.find(i).id,
-    post_images: [open("public/assets/ post1-28e5f74b63fb99ef4317e36eefe7606d9392af7a4bf1f21d2e1e664c5d25e6d4.jpg")],
+    post_images: [open("app/assets/images/post1.jpg")],
     title: "#{st}#{tt}",
     body: "楽しむぞ",
     footprint: Random.rand(100)
@@ -110,8 +110,7 @@ recipe_sub_titles = %w{
 
   Recipe.create!(
     user_id: User.find(i).id,
-    recipe_images: [open("public/assets/recipe1-905d86ecad5793a4192798fbfa13d1ca31d91f20c30eafd1e370d10f6609bdee.jpg
-    ")],
+    recipe_images: [open("app/assets/images/recipe1.jpg")],
     title: "#{st}#{tt}",
     body: "楽しむぞ〜！",
     status: true,

@@ -60,12 +60,20 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
+    result = Vision.get_image_data(@recipe.recipe_images[0].url)
 
-    if @recipe.save
-      flash[:success] = "フォーマットが作成されました"
-      redirect_to edit_recipe_path(@recipe.id)
+    if result == true
+
+      if @recipe.save
+        flash[:success] = "フォーマットが作成されました"
+        redirect_to edit_recipe_path(@recipe.id)
+      else
+        flash[:error] = "保存に失敗しました"
+        render "new"
+      end
+
     else
-      flash[:error] = "保存に失敗しました"
+      flash[:error] = "画像が不適切です"
       render "new"
     end
   end
@@ -78,23 +86,41 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
+    @recipe.recipe_images = recipe_params[:recipe_images]
+    @foods = Food.where(recipe_id: @recipe.id)
+    @flows = Flow.where(recipe_id: @recipe.id)
 
-    if @recipe.flows.present? && @recipe.foods.present?
+    if recipe_params[:recipe_images].present?
+      result = Vision.get_image_data(@recipe.recipe_images[0].url)
+    else
+      result = true
+    end
+
+    if result == true
       
-      if @recipe.update(recipe_params)
-        @recipe.update(status: "公開")
-        flash[:success] = "編集を保存しました"
-        redirect_to recipe_path(@recipe.id)
+      if @recipe.flows.present? && @recipe.foods.present?
+        
+        if @recipe.update(recipe_params)
+          @recipe.update(status: "公開")
+          flash[:success] = "編集を保存しました"
+          redirect_to recipe_path(@recipe.id)
+        else
+          flash[:error] = "保存に失敗しました"
+          render "edit"
+        end
+        
       else
-        @foods = Food.where(recipe_id: @recipe.id)
-        @flows = Flow.where(recipe_id: @recipe.id)
-        flash[:error] = "保存に失敗しました"
-        render "edit"
+        if @recipe.update(status: "非公開")
+          flash[:error] = "材料・手順がないため非公開で保存しました"
+          redirect_to recipe_path(@recipe.id)
+        else
+          flash[:error] = "保存に失敗しました"
+          render "edit"
+        end
       end
     else
-      @recipe.update(status: "非公開")
-      flash[:error] = "材料・手順がないため非公開で保存しました"
-      redirect_to recipe_path(@recipe.id)
+      flash[:error] = "画像が不適切です"
+      render "edit"
     end
   end
 
@@ -118,6 +144,6 @@ class RecipesController < ApplicationController
   def check_user
     recipe = Recipe.find(params[:id])
     user = User.find(recipe.user_id)
-    redirect_back fallback_location: user_path(current_uer.id) unless user == current_user
+    redirect_back fallback_location: user_path(current_user.id) unless user == current_user
   end
 end
