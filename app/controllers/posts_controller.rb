@@ -49,20 +49,20 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    result = false
     result = Vision.get_image_data(@post.post_images[0].url)
 
-    if result == true
-
-      if @post.save
-        flash[:success] = "投稿を保存しました"
-        redirect_to post_path(@post.id)
-      else
-        flash[:error] = "保存に失敗しました"
-        render "new"
-      end
-
-    else
+    if result.blank?
       flash[:error] = "画像が不適切です"
+      render "new"
+      return
+    end
+
+    if @post.save
+      flash[:success] = "投稿を保存しました"
+      redirect_to post_path(@post.id)
+    else
+      flash[:error] = "保存に失敗しました"
       render "new"
     end
   end
@@ -74,6 +74,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     @post.post_images = post_params[:post_images]
+    result = false
 
     if post_params[:post_images].present?
       result = Vision.get_image_data(@post.post_images[0].url)
@@ -81,16 +82,17 @@ class PostsController < ApplicationController
       result = true
     end
     
-    if result == true
-      if @post.update(post_params)
-        flash[:success] = "編集を保存しました"
-        redirect_to post_path(@post.id)
-      else
-        flash[:error] = "保存に失敗しました"
-        render "edit"
-      end
-    else
+    if result.blank?
       flash[:error] = "画像が不適切です"
+      render "edit"
+      return
+    end
+
+    if @post.update(post_params)
+      flash[:success] = "編集を保存しました"
+      redirect_to post_path(@post.id)
+    else
+      flash[:error] = "保存に失敗しました"
       render "edit"
     end
   end
