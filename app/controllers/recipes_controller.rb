@@ -38,7 +38,8 @@ class RecipesController < ApplicationController
   def show
     @recipe = Recipe.find(params[:id])
     if @recipe.status == "公開" || @recipe.user_id == current_user.id
-      @footprint = @recipe.footprint + 1
+      @footprint = @recipe.footprint
+      @footprint = @footprint + 1 unless @recipe.user_id == current_user.id
       @recipe.update(footprint: @footprint)
       @foods = Food.where(recipe_id: @recipe.id)
       @flows = Flow.where(recipe_id: @recipe.id)
