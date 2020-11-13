@@ -9,14 +9,13 @@ class UsersController < ApplicationController
       
       if params[:search].present?
         @title = "検索結果：#{params[:search]}"
-        @users = @users.where("family_name LIKE ?", "%#{params[:search]}%").page(params[:page]).per(10)
+        @users = @users.where("family_name LIKE ?", "%#{params[:search]}%")
       else
         @title = "検索結果がありません"
-        @users = @users.page(params[:page]).per(10)
       end
 
     elsif params[:followed]
-      @users = current_user.followed_user.page(params[:page]).per(10)
+      @users = current_user.followed_user
 
       if current_user.followed_user.present?
         @title = "フォロー"
@@ -25,7 +24,7 @@ class UsersController < ApplicationController
       end
 
     elsif params[:follower]
-      @users = current_user.follower_user.page(params[:page]).per(10)
+      @users = current_user.follower_user
 
       if current_user.follower_user.present?
         @title = "フォロワー"
@@ -35,8 +34,9 @@ class UsersController < ApplicationController
 
     else
       @title = "ALL"
-      @users = @users.page(params[:page]).per(10)
     end
+
+    @users = @users.order(id: "DESC").page(params[:page]).per(10)
   end
 
   def show

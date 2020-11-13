@@ -10,18 +10,17 @@ class PostsController < ApplicationController
       
       if params[:search].present?
         @title = "検索結果：#{params[:search]}"
-        @posts = Post.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(12)
+        @posts = Post.where("title LIKE ?", "%#{params[:search]}%")
       else
         @title = "検索結果がありません"
-        @posts = @posts.order(id: "DESC").page(params[:page]).per(12)
       end
 
     elsif params[:tag_name]
-      @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).per(12)
+      @posts = Post.tagged_with("#{params[:tag_name]}")
       @title = "検索結果：#{params[:tag_name]}"
       
     elsif params[:bookmarks]
-      @posts = current_user.bookmark_post.order(id: "DESC").page(params[:page]).per(12)
+      @posts = current_user.bookmark_post
 
       if current_user.bookmark_post.present?
         @title = "ブックマーク"
@@ -30,9 +29,10 @@ class PostsController < ApplicationController
       end
 
     else
-      @posts = Post.all.order(id: "DESC").page(params[:page]).per(12)
       @title = "ALL"
     end
+
+    @posts = @posts.order(id: "DESC").page(params[:page]).per(12)
   end
 
   def show

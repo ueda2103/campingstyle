@@ -4,8 +4,12 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.create(comment_params)
+
+    # Postにコメントする場合の処理
     if @comment.post_id.present?
       @comments = Comment.where(post_id: @comment.post_id)
+    
+    # Recipeにコメントする場合の処理
     else
       @comments = Comment.where(recipe_id: @comment.recipe_id)
     end
@@ -13,9 +17,13 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
+
+    # Postのコメントを削除する場合の処理
     if @comment.post_id.present?
       @comments = Comment.where(post_id: @comment.post_id)
       @comment.destroy
+
+    # Recipeのコメントを削除する場合の処理
     else
       @comments = Comment.where(recipe_id: @comment.recipe_id)
       @comment.destroy

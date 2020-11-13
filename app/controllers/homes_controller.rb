@@ -6,6 +6,7 @@ class HomesController < ApplicationController
     @posts = Post.where(created_at: from...today).order(footprint: "DESC").first(3)
     @recipes = Recipe.order(footprint: "DESC").first(3)
 
+    # ユーザーがログインしていない場合の処理
     unless user_signed_in?
       redirect_to new_user_session_path
     end

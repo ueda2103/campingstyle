@@ -13,11 +13,10 @@ class RecipesController < ApplicationController
         @recipes = @recipes.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(12)
       else
         @title = "検索結果がありません"
-        @recipes = Recipe.where(status: "公開").order(id: "DESC").page(params[:page]).per(12)
       end
 
     elsif params[:bookmarks]
-      @recipes = current_user.bookmark_recipe.order(id: "DESC").page(params[:page]).per(12)
+      @recipes = current_user.bookmark_recipe
 
       if current_user.bookmark_recipe.present?
         @title = "ブックマーク"
@@ -26,13 +25,14 @@ class RecipesController < ApplicationController
       end
 
     elsif params[:tag_name]
-      @recipes = @recipes.tagged_with("#{params[:tag_name]}").order(id: "DESC").page(params[:page]).per(12)
+      @recipes = @recipes.tagged_with("#{params[:tag_name]}")
       @title = "検索結果：#{params[:tag_name]}"
       
     else
-      @recipes = @recipes.order(id: "DESC").page(params[:page]).per(12)
       @title = "ALL"
     end
+
+    @recipes = @recipes.order(id: "DESC").page(params[:page]).per(12)
   end
 
   def show
