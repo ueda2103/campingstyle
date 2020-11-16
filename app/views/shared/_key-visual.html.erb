@@ -1,8 +1,11 @@
+<%# キービジュアル %>
+<%# 背景 %>
 <%= render "/shared/background" %>
 
 <div class="container-fluid">
   <div class="row">
     <div class="key-visual w-100 mb-5">
+      <%# タイトル %>
       <div class="key-visual__title d-flex align-items-center h-100">
         <h1 class="d-flex align-items-center justify-content-center w-100 bg-white">
           <span>C</span>
@@ -20,6 +23,7 @@
         </h1>
       </div>
 
+      <%# ログインフォーム %>
       <% unless user_signed_in? %>
         <%= render "devise/shared/login_form" %>
       <% end %>

@@ -1,24 +1,33 @@
+<%# 投稿詳細ページ %>
 <main>
   <div class="container">
     <div class="row">
+
+      <%# ページ左側 %>
       <div class="col-6 mt-3">
         <%= image_tag @post.post_images[0].to_s, size: "550x350", class: "main-img" %>
 
+        <%# タイトルバー %>
         <div class="show__title">
           <h2><%= @post.title %></h2>
+
           <%= render "/shared/flash" %>
           <div class="bookmark_<%= @post.id %>">
             <%= render "bookmarks/bookmark", bookmark_base: @post %>
           </div>
         </div>
 
+        <%# 投稿ユーザー詳細 %>
         <div class="show__user-body">
+
+          <%# ユーザー詳細左側 %>
           <div class="user-body__left">
             <%= link_to user_path(@post.user_id) do %>
               <%= image_tag @post.user.user_image.thumb.url, size: "50x50", class: "user-icon" %>
             <% end %>
           </div>
 
+          <%# ユーザー詳細中央 %>
           <div class="user-body__center">
             <%= @post.user.family_name + @post.user.given_name %>
 
@@ -27,26 +36,33 @@
             </div>
           </div>
 
+          <%# ユーザー詳細右側 %>
           <div class="user-body__right">
             <p>いいね</p>
             <div class="favorite_<%= @post.id %>">
               <%= render "favorites/favorite", favorite_base: @post %>
             </div>
+
             <p>コメント　<i class="fas fa-comment fa-blue"></i><%= @post.comments.count %>件</p>
+
             <p>足あと　<i class="fas fa-paw fa-brown"></i><%= @post.footprint %>件</p>
           </div>
         </div>
 
+        <%# タグリンク %>
         <%= render 'shared/tag_list', tag_list: @post.tag_list %>
         
+        <%# 投稿本文 %>
         <div class="show__text">
           <p><%= @post.body %></p>
         </div>
       </div>
 
+      <%# ページ右側 %>
       <div class="show_right col-6 mt-3">
-        <h2>Comment</h2>
 
+        <%# コメント %>
+        <h2>Comment</h2>
         <% if user_signed_in? %>
           <%= form_with model: @comment, url: comments_path do |f| %>
             <%= f.text_area :body %>

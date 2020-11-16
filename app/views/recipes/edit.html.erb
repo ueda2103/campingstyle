@@ -1,49 +1,64 @@
+<%# レシピ編集ページ %>
 <main>
   <div class="container">
     <div class="row">
-        <%= form_with model: @recipe, url: recipe_path(@recipe.id), local: true, class: "post-recipe__body col-12 d-flex mt-3" do |f| %>
-          <div class="post-recipe__left">
-            <div class="title">
-              <%= f.label :title, "タイトル", class: "need" %>
-              <%= render "/shared/flash" %>
-              <%= f.text_field :title, autofocus: true %>
-              <% if @recipe.errors.include?(:title) %>
-                <span class="red"><%= @recipe.errors.full_messages_for(:title).first %></span>
-              <% end %>
-            </div>
 
-            <div class="img my-4">
-              <div class="img-box mb-2">
-                <%= image_tag @recipe.recipe_images[0].to_s, size: "550x350", class: "main-img img_prev" %>
-              </div>
-              <button>
-                <%= f.file_field :recipe_images, multiple: true, class: "img need_long" %>
-              </button>
-              <% if @recipe.errors.include?(:recipe_images) %>
-                <span class="red"><%= @recipe.errors.full_messages_for(:recipe_images).first %></span>
-              <% end %>
-            </div>
+      <%# ページ上段 %>
+      <%= form_with model: @recipe, url: recipe_path(@recipe.id), local: true, class: "post-recipe__body col-12 d-flex mt-3" do |f| %>
+
+        <%# ページ左上 %>
+        <div class="post-recipe__left">
+
+          <%# タイトル入力フォーム %>
+          <div class="title">
+            <%= f.label :title, "タイトル", class: "need" %>
+            <%= render "/shared/flash" %>
+            <%= f.text_field :title, autofocus: true %>
+            <% if @recipe.errors.include?(:title) %>
+              <span class="red"><%= @recipe.errors.full_messages_for(:title).first %></span>
+            <% end %>
           </div>
 
-          <div class="post-recipe__right">
-            <div class="text my-4">
-              <%= f.label :body, "詳細", class: "need" %>
-              <%= f.text_area :body, autofocus: true %>
-              <% if @recipe.errors.include?(:body) %>
-                <span class="red"><%= @recipe.errors.full_messages_for(:body).first %></span>
-              <% end %>
+          <%# 画像投稿フォーム %>
+          <div class="img my-4">
+            <div class="img-box mb-2">
+              <%= image_tag @recipe.recipe_images[0].to_s, size: "550x350", class: "main-img img_prev" %>
             </div>
+            <button>
+              <%= f.file_field :recipe_images, multiple: true, class: "img need_long" %>
+            </button>
+            <% if @recipe.errors.include?(:recipe_images) %>
+              <span class="red"><%= @recipe.errors.full_messages_for(:recipe_images).first %></span>
+            <% end %>
+          </div>
+        </div>
 
-            <div class="action">
-              <%= f.submit "編集", autofocus: true, class: "btn_blue" %>
-              <%= link_to "削除", recipe_path(@recipe.id), method: :delete, data: {confirm: "本当に削除しますか"}, class: "btn_red" %>
-            </div>
+        <%# ページ右上 %>
+        <div class="post-recipe__right">
+
+          <%# 詳細入力フォーム %>
+          <div class="text my-4">
+            <%= f.label :body, "詳細", class: "need" %>
+            <%= f.text_area :body, autofocus: true %>
+            <% if @recipe.errors.include?(:body) %>
+              <span class="red"><%= @recipe.errors.full_messages_for(:body).first %></span>
+            <% end %>
+          </div>
+
+          <div class="action">
+            <%= f.submit "編集", autofocus: true, class: "btn_blue" %>
+            <%= link_to "削除", recipe_path(@recipe.id), method: :delete, data: {confirm: "本当に削除しますか"}, class: "btn_red" %>
           </div>
         </div>
       <% end %>
 
+      <%# ページ下段 %>
       <div class="post-recipe__body col-12 d-flex mt-5">
+
+        <%# ページ左下 %>
         <div class="post-recipe__left">
+
+          <%# 材料入力フォーム %>
           <%= form_with model: @food, url: foods_path do |f| %>
             <%= f.label :name, "材料", class: "need" %>
             <%= f.text_field :name, autofocus: true, class: "food-text" %>
@@ -56,7 +71,10 @@
           </div>
         </div>
 
+        <%# ページ右下 %>
         <div class="post-recipe__right">
+
+          <%# 作り方入力フォーム %>
           <%= form_with model: @flow, url: flows_path do |f| %>
             <%= f.label :body, "作り方", class: "need" %>
             <%= f.text_field :body, autofocus: true, class: "flow-text" %>

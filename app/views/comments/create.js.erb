@@ -1,2 +1,5 @@
+<%# コメント登録 %>
 $('.comment__list').html("<%= j(render "comments/commentlist", comments: @comments) %>")
+
+<%# コメント入力欄初期化 %>
 $('textarea').val('')

@@ -1,2 +1,5 @@
+<%# 材料登録 %>
 $('.food__list').html("<%= j(render "foods/food", foods: @foods) %>")
+
+<%# 材料登録フォーム初期化 %>
 $('.food-text').val('')

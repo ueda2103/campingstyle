@@ -1,8 +1,14 @@
+<%# 投稿編集ページ %>
 <main>
   <div class="container">
     <div class="row">
+
+      <%# 投稿入力フォーム %>
       <%= form_with model: @post, local: true, class: "post-recipe__body col-12 d-flex mt-3" do |f| %>
+        <%# ページ左側 %>
         <div class="post-recipe__left">
+
+          <%# タイトル入力フォーム %>
           <div class="title">
             <%= f.label :title, "タイトル" %>
             <%= render "/shared/flash" %>
@@ -12,6 +18,7 @@
             <% end %>
           </div>
 
+          <%# 画像投稿フォーム %>
           <div class="img my-4">
             <div class="img-box mb-2">
               <%= image_tag @post.post_images[0].to_s, size: "550x350", class: "main-img img_prev" %>
@@ -23,12 +30,14 @@
               <span class="red"><%= @post.errors.full_messages_for(:post_images).first %></span>
             <% end %>
           </div>
-
         </div>
 
+        <%# ページ右側 %>
         <div class="post-recipe__right">
+
+          <%# 詳細入力フォーム %>
           <div class="text my-4">
-            <%= f.label :body, "内容" %><br>
+            <%= f.label :body, "詳細" %><br>
             <%= f.text_area :body, autofocus: true %>
             <% if @post.errors.include?(:body) %>
               <span class="red"><%= @post.errors.full_messages_for(:body).first %></span>
