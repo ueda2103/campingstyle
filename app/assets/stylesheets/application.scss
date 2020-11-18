@@ -44,12 +44,12 @@ h5 {
   font-size: 2rem;
 }
 
-h6 {
+h6, td, p, a, input, textarea, label {
   font-size: 1.5rem;
 }
 
-p {
-  font-size: 1.5rem;
+p, a {
+  font-size: 1.25rem;
   margin: 0;
 }
 
@@ -62,7 +62,6 @@ p {
 
 .btn_yellow {
   display: inline-block;
-  font-size: 0.75rem;
   padding: 5px;
   padding-left: 15px;
   padding-right: 15px;
@@ -112,7 +111,6 @@ p {
 
 .btn_red {
   display: inline-block;
-  font-size: 0.75rem;
   padding: 5px;
   padding-left: 15px;
   padding-right: 15px;
@@ -129,7 +127,6 @@ p {
 
 .btn_green {
   display: inline-block;
-  font-size: 0.75rem;
   padding: 5px;
   padding-left: 15px;
   padding-right: 15px;
@@ -184,7 +181,7 @@ p {
 
 .need::after {
   content: "必須";
-  font-size: 0.5rem;
+  font-size: 1rem;
   padding: 2px;
   margin-left: 10px;
   color: #ffffff;
@@ -683,10 +680,6 @@ header {
       }
     }
   }
-
-  label, input, a {
-    font-size: 1.25rem;
-  }
   
   .login-form__wrapper {
     position: absolute;
@@ -717,6 +710,15 @@ main {
   position: relative;
   padding-top: 80px;
   min-height: 100vh;
+}
+
+
+// メイン背景
+.main__background {
+  background-image: image-url("main-background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 
@@ -802,6 +804,8 @@ main {
   }
 }
 
+
+// パララックス
 .parallax-bg {
   width: 100vw;
   height: 50vh;
