@@ -38,7 +38,9 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @footprint = @post.footprint
-    @footprint = @footprint + 1 unless @post.user_id == current_user.id
+    if user_signed_in?
+      @footprint = @footprint + 1 unless @post.user_id == current_user.id
+    end
     @post.update(footprint: @footprint)
     @comments = Comment.where(post_id: params[:id])
   end

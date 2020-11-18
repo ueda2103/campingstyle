@@ -10,6 +10,13 @@ class Users::SessionsController < Devise::SessionsController
     from = (today - 6.day).at_beginning_of_day
     @posts = Post.where(created_at: from...today).order(footprint: "DESC").first(3)
     @recipes = Recipe.order(footprint: "DESC").first(3)
+    
+    # 一週間の投稿が3件未満の場合
+    if @posts.count < 3
+      @posts = Post.all
+    end
+    
+    @posts = @posts.order(footprint: "DESC").first(3)
     super
   end
 
