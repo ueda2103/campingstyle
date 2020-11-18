@@ -13,11 +13,10 @@ class RecipesController < ApplicationController
         @recipes = @recipes.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(12)
       else
         @title = "検索結果がありません"
-        @recipes = Recipe.where(status: "公開").order(id: "DESC").page(params[:page]).per(12)
       end
 
     elsif params[:bookmarks]
-      @recipes = current_user.bookmark_recipe.order(id: "DESC").page(params[:page]).per(12)
+      @recipes = current_user.bookmark_recipe
 
       if current_user.bookmark_recipe.present?
         @title = "ブックマーク"
@@ -26,19 +25,21 @@ class RecipesController < ApplicationController
       end
 
     elsif params[:tag_name]
-      @recipes = @recipes.tagged_with("#{params[:tag_name]}").order(id: "DESC").page(params[:page]).per(12)
+      @recipes = @recipes.tagged_with("#{params[:tag_name]}")
       @title = "検索結果：#{params[:tag_name]}"
       
     else
-      @recipes = @recipes.order(id: "DESC").page(params[:page]).per(12)
       @title = "ALL"
     end
+
+    @recipes = @recipes.order(id: "DESC").page(params[:page]).per(12)
   end
 
   def show
     @recipe = Recipe.find(params[:id])
     if @recipe.status == "公開" || @recipe.user_id == current_user.id
-      @footprint = @recipe.footprint + 1
+      @footprint = @recipe.footprint
+      @footprint = @footprint + 1 unless @recipe.user_id == current_user.id
       @recipe.update(footprint: @footprint)
       @foods = Food.where(recipe_id: @recipe.id)
       @flows = Flow.where(recipe_id: @recipe.id)
@@ -60,20 +61,20 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
+    result = false
     result = Vision.get_image_data(@recipe.recipe_images[0].url)
 
-    if result == true
-
-      if @recipe.save
-        flash[:success] = "フォーマットが作成されました"
-        redirect_to edit_recipe_path(@recipe.id)
-      else
-        flash[:error] = "保存に失敗しました"
-        render "new"
-      end
-
-    else
+    if result.blank?
       flash[:error] = "画像が不適切です"
+      render "new"
+      return
+    end
+
+    if @recipe.save
+      flash[:success] = "フォーマットが作成されました"
+      redirect_to edit_recipe_path(@recipe.id)
+    else
+      flash[:error] = "保存に失敗しました"
       render "new"
     end
   end
@@ -89,6 +90,7 @@ class RecipesController < ApplicationController
     @recipe.recipe_images = recipe_params[:recipe_images]
     @foods = Food.where(recipe_id: @recipe.id)
     @flows = Flow.where(recipe_id: @recipe.id)
+    result = false
 
     if recipe_params[:recipe_images].present?
       result = Vision.get_image_data(@recipe.recipe_images[0].url)
@@ -96,31 +98,31 @@ class RecipesController < ApplicationController
       result = true
     end
 
-    if result == true
-      
-      if @recipe.flows.present? && @recipe.foods.present?
-        
-        if @recipe.update(recipe_params)
-          @recipe.update(status: "公開")
-          flash[:success] = "編集を保存しました"
-          redirect_to recipe_path(@recipe.id)
-        else
-          flash[:error] = "保存に失敗しました"
-          render "edit"
-        end
-        
-      else
-        if @recipe.update(status: "非公開")
-          flash[:error] = "材料・手順がないため非公開で保存しました"
-          redirect_to recipe_path(@recipe.id)
-        else
-          flash[:error] = "保存に失敗しました"
-          render "edit"
-        end
-      end
-    else
+    if result.blank?
       flash[:error] = "画像が不適切です"
       render "edit"
+      return
+    end
+
+    if @recipe.flows.present? && @recipe.foods.present?
+      
+      if @recipe.update(recipe_params)
+        @recipe.update(status: "公開")
+        flash[:success] = "編集を保存しました"
+        redirect_to recipe_path(@recipe.id)
+      else
+        flash[:error] = "保存に失敗しました"
+        render "edit"
+      end
+      
+    else
+      if @recipe.update(status: "非公開")
+        flash[:error] = "材料・手順がないため非公開で保存しました"
+        redirect_to recipe_path(@recipe.id)
+      else
+        flash[:error] = "保存に失敗しました"
+        render "edit"
+      end
     end
   end
 

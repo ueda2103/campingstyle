@@ -12,14 +12,7 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     @items = current_user.items
-
-    if @item.status == "未所持"
-      @item.update(status: "所持済")
-    elsif @item.status == "所持済"
-      @item.update(status: "要購入")
-    else
-      @item.update(status: "未所持")
-    end
+    @item.change_status
   end
 
   def destroy

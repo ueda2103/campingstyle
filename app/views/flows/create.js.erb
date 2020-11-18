@@ -1,2 +1,5 @@
+<%# 作り方登録 %>
 $('.flow__list').html("<%= j(render "flows/flow", flows: @flows) %>")
+
+<%# 作り方入力フォーム初期化 %>
 $('.flow-text').val('')

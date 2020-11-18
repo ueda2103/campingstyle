@@ -1,3 +1,4 @@
+<%# 投稿一覧ページ %>
 <main>
   <div class="container">
     <div class="row">
@@ -8,6 +9,8 @@
 
       <%# 投稿一覧 %>
       <div class="post-recipe-index col-10 my-3 px-3">
+
+        <%# タイトルバー %>
         <div class="titlebar">
           <h2>Posts　<%= @title %></h2>
 
@@ -19,6 +22,7 @@
           <% end %>
         </div>
 
+        <%# 投稿一覧 %>
         <%= render "index", posts: @posts %>
         <%= paginate @posts %>
       </div>

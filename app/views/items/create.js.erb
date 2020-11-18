@@ -1,2 +1,5 @@
+<%# 持ち物登録 %>
 $('.item__list').html("<%= j(render "items/itemlist", items: @items) %>")
+
+<%# 持ち物入力フォーム初期化 %>
 $('#item_name').val('')

@@ -1,13 +1,16 @@
+<%# レシピ一覧ページ %>
 <main>
   <div class="container">
     <div class="row">
-      <%# レシピタグ検索フォーム %>
+      <%# レシピ一覧サイドバー %>
       <div class="tag-sidebar col-2 my-1 px-3">
         <%= render "/shared/index_sidebar", tags: @tags %>
       </div>
 
-      <%# レシピ一覧 %>
+      <%# レシピ一覧メイン %>
       <div class="post-recipe-index col-10 my-3 px-3">
+
+        <%# タイトルバー %>
         <div class="titlebar">
           <h2>Recipes　<%= @title %></h2>
 
@@ -19,6 +22,7 @@
           <% end %>
         </div>
 
+        <%# レシピ一覧 %>
         <%= render "index", recipes: @recipes %>
         <%= paginate @recipes %>
       </div>

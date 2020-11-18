@@ -10,18 +10,17 @@ class PostsController < ApplicationController
       
       if params[:search].present?
         @title = "検索結果：#{params[:search]}"
-        @posts = Post.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(12)
+        @posts = Post.where("title LIKE ?", "%#{params[:search]}%")
       else
         @title = "検索結果がありません"
-        @posts = @posts.order(id: "DESC").page(params[:page]).per(12)
       end
 
     elsif params[:tag_name]
-      @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).per(12)
+      @posts = Post.tagged_with("#{params[:tag_name]}")
       @title = "検索結果：#{params[:tag_name]}"
       
     elsif params[:bookmarks]
-      @posts = current_user.bookmark_post.order(id: "DESC").page(params[:page]).per(12)
+      @posts = current_user.bookmark_post
 
       if current_user.bookmark_post.present?
         @title = "ブックマーク"
@@ -30,14 +29,16 @@ class PostsController < ApplicationController
       end
 
     else
-      @posts = Post.all.order(id: "DESC").page(params[:page]).per(12)
       @title = "ALL"
     end
+
+    @posts = @posts.order(id: "DESC").page(params[:page]).per(12)
   end
 
   def show
     @post = Post.find(params[:id])
-    @footprint = @post.footprint + 1
+    @footprint = @post.footprint
+    @footprint = @footprint + 1 unless @post.user_id == current_user.id
     @post.update(footprint: @footprint)
     @comments = Comment.where(post_id: params[:id])
   end
@@ -49,20 +50,20 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    result = false
     result = Vision.get_image_data(@post.post_images[0].url)
 
-    if result == true
-
-      if @post.save
-        flash[:success] = "投稿を保存しました"
-        redirect_to post_path(@post.id)
-      else
-        flash[:error] = "保存に失敗しました"
-        render "new"
-      end
-
-    else
+    if result.blank?
       flash[:error] = "画像が不適切です"
+      render "new"
+      return
+    end
+
+    if @post.save
+      flash[:success] = "投稿を保存しました"
+      redirect_to post_path(@post.id)
+    else
+      flash[:error] = "保存に失敗しました"
       render "new"
     end
   end
@@ -74,6 +75,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     @post.post_images = post_params[:post_images]
+    result = false
 
     if post_params[:post_images].present?
       result = Vision.get_image_data(@post.post_images[0].url)
@@ -81,16 +83,17 @@ class PostsController < ApplicationController
       result = true
     end
     
-    if result == true
-      if @post.update(post_params)
-        flash[:success] = "編集を保存しました"
-        redirect_to post_path(@post.id)
-      else
-        flash[:error] = "保存に失敗しました"
-        render "edit"
-      end
-    else
+    if result.blank?
       flash[:error] = "画像が不適切です"
+      render "edit"
+      return
+    end
+
+    if @post.update(post_params)
+      flash[:success] = "編集を保存しました"
+      redirect_to post_path(@post.id)
+    else
+      flash[:error] = "保存に失敗しました"
       render "edit"
     end
   end

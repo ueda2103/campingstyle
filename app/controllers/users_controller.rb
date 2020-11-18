@@ -9,14 +9,13 @@ class UsersController < ApplicationController
       
       if params[:search].present?
         @title = "検索結果：#{params[:search]}"
-        @users = @users.where("family_name LIKE ?", "%#{params[:search]}%").page(params[:page]).per(10)
+        @users = @users.where("family_name LIKE ?", "%#{params[:search]}%")
       else
         @title = "検索結果がありません"
-        @users = @users.page(params[:page]).per(10)
       end
 
     elsif params[:followed]
-      @users = current_user.followed_user.page(params[:page]).per(10)
+      @users = current_user.followed_user
 
       if current_user.followed_user.present?
         @title = "フォロー"
@@ -25,7 +24,7 @@ class UsersController < ApplicationController
       end
 
     elsif params[:follower]
-      @users = current_user.follower_user.page(params[:page]).per(10)
+      @users = current_user.follower_user
 
       if current_user.follower_user.present?
         @title = "フォロワー"
@@ -35,8 +34,9 @@ class UsersController < ApplicationController
 
     else
       @title = "ALL"
-      @users = @users.page(params[:page]).per(10)
     end
+
+    @users = @users.order(id: "DESC").page(params[:page]).per(10)
   end
 
   def show
@@ -72,22 +72,25 @@ class UsersController < ApplicationController
   def update
     @user = User.find(current_user.id)
     @user.user_image = user_params[:user_image]
+    result = false
+
     if user_params[:user_image].present?
       result = Vision.get_image_data(@user.user_image.url)
     else
       result = true
     end
 
-    if result == true
-      if @user.update(user_params)
-        flash[:success] = "編集を保存しました"
-        redirect_to user_path(current_user.id)
-      else
-        flash[:error] = "保存に失敗しました"
-        render "edit"
-      end
-    else
+    if result.blank?
       flash[:error] = "画像が不適切です"
+      render "edit"
+      return
+    end
+
+    if @user.update(user_params)
+      flash[:success] = "編集を保存しました"
+      redirect_to user_path(current_user.id)
+    else
+      flash[:error] = "保存に失敗しました"
       render "edit"
     end
   end

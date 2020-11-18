@@ -1,16 +1,10 @@
-<%- if controller_name != 'sessions' %>
-  <p class="col-6 mt-3">会員の方はトップページの<br>
-    <%= link_to "ログインフォーム", new_session_path(resource_name) %>　からログインしてください。
-  </p>
-<% end %>
-
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "新規登録", new_registration_path(resource_name), class: "btn_green" %>
+<%- if devise_mapping.registerable? && controller_name != 'registrations' && controller_name != 'passwords' %>
+  <%= link_to "新規会員登録", new_registration_path(resource_name), class: "btn_green" %>
   <%= link_to "ゲストログイン", user_guest_session_path, method: :post, class: "btn_blue login-form__guest-btn ml-3" %><br />
 <% end %>
 
 <%# if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%# link_to "パスワードを忘れた場合", new_password_path(resource_name), class: "d-inline-block mt-3" %>
+  <%# link_to "パスワードを忘れましたか？", new_password_path(resource_name), class: "d-inline-block mt-3" %>
 <%# end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
