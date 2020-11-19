@@ -5,7 +5,7 @@
   <% if favorite_base.favorited_by?(current_user) %>
     <%= link_to favorite_path(favorite_base.favorited_by(current_user), favorite_base_id: favorite_base.id, base_type: base_type(favorite_base)), method: :delete, remote: true do %>
       <p class="d-inline-block">
-        <i class="fas fa-heart fa-pink"></i>
+        <i class="fas fa-heart fa-lg fa-pink"></i>
         <%= favorite_base.favorite_users.count %>件
       </p>
     <% end %>
@@ -14,7 +14,7 @@
   <% else %>
     <%= link_to favorites_path(favorite_base_id: favorite_base.id, base_type: base_type(favorite_base)), method: :post, remote: true do %>
       <p class="d-inline-block">
-        <i class="far fa-heart fa-pink"></i>
+        <i class="far fa-heart fa-lg fa-pink"></i>
         <%= favorite_base.favorite_users.count %>件
       </p>
     <% end %>
@@ -23,7 +23,7 @@
 <%# 未ログイン時いいね機能をOFFにし、いいねの数のみ表示 %>
 <% else %>
     <p class="d-inline-block">
-      <i class="fas fa-heart fa-pink"></i>
+      <i class="fas fa-heart fa-lg fa-pink"></i>
       <%= favorite_base.favorite_users.count %>件
     </p>
 <% end %>

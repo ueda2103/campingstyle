@@ -1,4 +1,5 @@
-<main class="main__background">
+<%# 新規登録ページ %>
+<main class="main__background main__background__user">
   <div class="container">
     <div class="row">
       <%= form_with model: @user, url: user_registration_path, method: :post, local: true, class: "user-form my-5" do |f| %>

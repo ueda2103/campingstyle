@@ -46,11 +46,15 @@ h5 {
 
 h6, td, p, a, input, textarea, label {
   font-size: 1.5rem;
+  color: #000000;
+
+  &:hover {
+    color: #000000;
+  }
 }
 
-p, a {
-  font-size: 1.25rem;
-  margin: 0;
+p {
+  margin-bottom: 0;
 }
 
 
@@ -124,9 +128,41 @@ p, a {
   }
 }
 
+.btn_red_mini {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #ffffff;
+  border: none;
+  background-color: #ff0000;
+  text-decoration: none;
+  
+  &:hover {
+    color: #ffffff;
+    text-decoration: none;
+  }
+}
+
 .btn_green {
   display: inline-block;
   padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #ffffff;
+  border: none;
+  background-color: #00ff00;
+  text-decoration: none;
+  
+  &:hover {
+    color: #ffffff;
+    text-decoration: none;
+  }
+}
+
+.btn_green_mini {
+  display: inline-block;
+  font-size: 0.75rem;
   padding-left: 15px;
   padding-right: 15px;
   color: #ffffff;
@@ -161,7 +197,6 @@ p, a {
 }
 
 .form {
-  display: flex;
   align-items: center;
 
   label {
@@ -169,8 +204,8 @@ p, a {
   }
 
   input {
-    margin-left: 10px;
-    height: 15px;
+    font-size: 1rem;
+    width: 100%;
   }
 }
 
@@ -198,153 +233,7 @@ p, a {
   background-color: #ff0000;
 }
 
-// メイン
 
-.tag-sidebar {
-  
-  table {
-    width: 100%;
-    margin-top: 30px;
-    border-left: 2px solid #00ff00;
-    
-    thead {
-      background-color: #00ff00;
-
-      tr {
-
-        td {
-          font-size: 1.25rem;
-        }
-      }
-    }
-
-    tbody {
-
-      tr {
-
-        td {
-          padding: 5px;
-          border-bottom: 1px solid #00ff00;
-
-          a {
-            color: #ff9900;
-            font-weight: bold;
-          }
-        }
-      }
-    }
-  }
-}
-
-.post-recipe-index {
-
-  .form {
-    margin-bottom: 10px;
-  }
-
-  .card-box {
-    display: flex;
-    flex-wrap: wrap;
-    
-    .card {
-      margin: 4px;
-      padding: 5px;
-      text-align: center;
-      border: 3px solid #4edb1f;
-      border-radius: 20px;
-      background-color: #ffffff;
-  
-      .image {
-        border-radius: 20px;
-      }
-
-      .card-title {
-        margin-top: 5px;
-        margin-bottom: 0;
-      }
-
-      .card-icon {
-        display: flex;
-        justify-content: center;
-
-        .favorites {
-
-          p {
-            color: #000000;
-          }
-        }  
-        
-        .comments {
-          margin-left: 10px;
-          margin-right: 10px;
-          margin-bottom: 10px;
-        }
-      }
-
-      .user-body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .user-body__right {
-          margin-left: 10px;
-
-          .relationships {
-            margin-bottom: 5px;
-          }
-
-          a {
-            width: 100%;
-            padding-top: 2px;
-            padding-bottom: 2px;
-          }
-        }
-      }
-    }
-  }
-}
-
-// 新規・編集投稿およびレシピ
-.post-recipe__body {
-  flex-wrap: wrap;
-  
-  label {
-    display: block;
-    font-size: 1.25rem;
-  }
-
-  .title input, .tag input {
-    width: 50%;
-    height: 20px;
-  }
-
-  .post-recipe__left {
-    width: 50%;
-  }
-
-  .img-box {
-    width: 90%;
-    height: 370px;
-  }
-
-  .post-recipe__right {
-    width: 50%;
-  }
-
-  textarea {
-    width: 90%;
-    height: 250px;
-  }
-
-  .action {
-    text-align: center;
-
-    input, a {
-      width: 100px;
-      margin-right: 20px;
-    }
-  }
-}
 
 .food-table, .flow-table {
   width: 70%;
@@ -362,152 +251,7 @@ p, a {
   }
 }
 
-.show__title {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 10px;
-  margin-bottom: 10px;
 
-  h2 {
-    border-bottom: 2px solid #00ff00;
-  }
-}
-
-.show__user-body {
-  display: flex;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-bottom: 15px;
-  border-bottom: 5px solid #00ff00;
-
-  .user-body__left {
-    margin-left: 20px;
-  }
-
-  .user-body__center {
-    margin-left: 10px;
-    margin-right: 10px;
-    text-align: center;
-
-    a {
-      width: 100px;
-      padding: 2px;
-      margin-top: 5px;
-    }
-  }
-
-  .user-body__right {
-    display: flex;
-    align-items: center;
-
-    p {
-      font-size: 1rem;
-      margin-left: 5px;
-      margin-right: 5px;
-      color: #000000;
-    }
-  }
-}
-
-.show_right {
-
-  h2 {
-    margin-bottom: 10px;
-    border-bottom: 2px solid #00ff00;
-  }
-
-  form {
-    display: flex;
-    align-items: center;
-    
-    textarea {
-      width: 80%;
-      height: 50px;
-      margin-right: 20px;
-    }
-    
-    input {
-      height: 50px;
-      color: #ffffff;
-      background-color: #0000ff;
-      border-radius: 5px;
-    }
-  }
-}
-
-.comment__list {
-  margin-top: 30px;
-  
-  .comment-item {
-    display: flex;
-    margin-bottom: 10px;
-    
-    .comment-body {
-      display: flex;
-      align-items: center;
-      width: 80%;
-      margin-bottom: 10px;
-      
-      p {
-        display: inline-block;
-        width: 80%;
-        height: 50px;
-        padding: 5px;
-        margin-left: 10px;
-        margin-right: 20px;
-        border: 1px solid #000000;
-      }
-
-      a {
-        height: 50px;
-        padding: 0;
-        padding-left: 5px;
-        padding-right: 5px;
-        line-height: 50px;
-      }
-    }
-  }
-}
-
-.show__text {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-top: 20px;
-  border-top: 5px solid #ff9900;
-  border-bottom: 5px solid #ff9900;
-  
-  p {
-    width: 100%;
-    height: 100px;
-    border: 1px solid #000000;
-  }
-}
-
-.show__food {
-  margin-top: 20px;
-
-  h2 {
-    margin-bottom: 10px;
-    border-bottom: 2px solid #00ff00;
-  }
-
-  p {
-    padding-left: 50px;
-  }
-}
-
-.show__flow {
-  margin-top: 20px;
-
-  h2 {
-    margin-bottom: 10px;
-    border-bottom: 2px solid #00ff00;
-  }
-
-  ol {
-    padding-left: 60px;
-  }
-}
 
 .titlebar {
   display: flex;
@@ -540,33 +284,6 @@ div.field_with_errors {
 
   input, textarea {
     background-color: #dd7e7e;
-  }
-}
-
-.pagination {
-  justify-content: center;
-  margin-top: 40px;
-  
-  .page-item {
-    border-radius: 50%;
-    
-    a {
-      color: #097a09 !important;
-    }
-  }
-
-  .active {
-    border-radius: 50%;
-    
-    a {
-      padding: 2px;
-      padding-left: 4px;
-      padding-right: 4px;
-      background: #ffffff !important;
-      border-color: #ffffff !important;
-      border-radius: 50%;
-      border: 5px solid #ff9900 !important;
-    }
   }
 }
 
@@ -708,16 +425,27 @@ header {
 main {
   position: relative;
   padding-top: 80px;
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
 }
 
 
 // メイン背景
 .main__background {
-  background-image: image-url("main-background.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+
+.main__background__user {
+  background-image: image-url("main-background.jpg");
+}
+
+.main__background__post {
+  background-image: image-url("parallax-1.jpg");
+}
+
+.main__background__recipe {
+  background-image: image-url("parallax-2.jpg");
 }
 
 
@@ -776,6 +504,10 @@ main {
 
   h4 {
     position: relative;
+    height: 50px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     &:after {
       content: "";
@@ -800,6 +532,11 @@ main {
     &:hover {
       transform: translateY(-30px);
     }
+
+    .card-text {
+      height: 90px;
+      overflow-y: scroll;
+    }
   }
 }
 
@@ -820,6 +557,355 @@ main {
 
 .img-bg-02 {
   background-image: image-url("parallax-2.jpg");
+}
+
+
+// 一覧ページサイドバー
+.sidebar {
+  max-height: 600px;
+
+  h6 {
+    font-weight: bold;
+    border-left: 4px solid #00ff00;
+  }
+
+  .tag-sidebar {
+    max-height: 400px;
+    overflow: scroll;
+
+    table {
+      width: 100%;
+          
+      td {
+        padding: 3px;
+        border-bottom: 2px solid #ffffff;
+        
+        a {
+          display: block;
+          width: 100%;
+          font-size: 1.25rem;
+          
+          &:hover {
+            text-decoration: none;
+          }
+        }
+        
+        &:hover {
+          transition: all 0.3s;
+          border-bottom: 2px solid #00ff00;
+        }
+      }
+    }
+  }
+}
+
+
+// 一覧ページメイン
+.post-recipe-index {
+
+  .card-box {
+    display: flex;
+    flex-wrap: wrap;
+    
+    .card {
+      width: 250px;
+      margin: 10px;
+      padding: 10px;
+      text-align: center;
+      border-radius: 0px;
+      background-color: #ffffff;
+
+      .card-title {
+        width: 200px;
+        margin: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        border-bottom: 2px solid #ff9900;
+      }
+
+      .card-icon {
+        display: flex;
+        justify-content: center;
+
+        .favorites {
+
+          p {
+            color: #000000;
+          }
+        }
+        
+        .comments {
+          margin-left: 10px;
+          margin-right: 10px;
+          margin-bottom: 10px;
+        }
+      }
+
+      .user-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .user-body__right {
+          margin-left: 10px;
+
+          .relationships {
+            margin-bottom: 5px;
+          }
+
+          a {
+            width: 100%;
+            padding-top: 2px;
+            padding-bottom: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// 詳細ページ
+.show_left {
+
+  
+  .show__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+    h3 {
+      max-width: 320px;
+      border-bottom: 2px solid #00ff00;
+    }
+
+    a {
+      font-size: 1.25rem;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+  }
+  
+  .show__user-body {
+    display: flex;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 5px solid #00ff00;
+    
+    .user-body__left {
+      margin-left: 20px;
+    }
+    
+    .user-body__center {
+      margin-left: 10px;
+      margin-right: 10px;
+      text-align: center;
+      
+      a {
+        width: 100px;
+        padding: 2px;
+        margin-top: 5px;
+      }
+    }
+    
+    .user-body__right {
+      display: flex;
+      align-items: center;
+      
+      p {
+        font-size: 1rem;
+        margin-left: 5px;
+        margin-right: 5px;
+        color: #000000;
+      }
+    }
+  }
+  
+  .tag-list {
+    
+    .btn_blue_mini {
+      margin-bottom: 5px;
+    }
+  }
+  
+  .show__text {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    border-top: 5px solid #ff9900;
+    border-bottom: 5px solid #ff9900;
+    
+    p {
+      width: 100%;
+      min-height: 100px;
+    }
+  }
+}
+
+.show_right {
+
+  h4 {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #00ff00;
+  }
+
+  form {
+    display: flex;
+    align-items: center;
+    
+    textarea {
+      width: 80%;
+      height: 50px;
+      margin-right: 20px;
+    }
+    
+    input {
+      height: 50px;
+      color: #ffffff;
+      background-color: #0000ff;
+      border-radius: 5px;
+    }
+  }
+}
+
+.comment__list {
+  margin-top: 30px;
+  
+  .comment-item {
+    display: flex;
+    margin-bottom: 10px;
+    
+    .comment-body {
+      display: flex;
+      align-items: center;
+      width: 80%;
+      margin-bottom: 10px;
+      
+      p {
+        display: inline-block;
+        width: 80%;
+        min-height: 50px;
+        padding: 5px;
+        margin-left: 10px;
+        margin-right: 20px;
+        border: 1px solid #000000;
+      }
+
+      a {
+        height: 50px;
+        padding: 0;
+        padding-left: 5px;
+        padding-right: 5px;
+        line-height: 50px;
+      }
+    }
+  }
+}
+
+.show__food {
+  margin-top: 20px;
+
+  h5 {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #00ff00;
+  }
+
+  p {
+    margin-left: 50px;
+    border-bottom: 2px solid #cccccc;
+  }
+}
+
+.show__flow {
+  margin-top: 20px;
+
+  h5 {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #00ff00;
+  }
+
+  ol {
+    padding-left: 60px;
+
+    li {
+      font-size: 1.5rem;
+      border-bottom: 2px solid #cccccc;
+    }
+  }
+}
+
+
+// 新規・編集投稿およびレシピ
+.post-recipe__body {
+  flex-wrap: wrap;
+  
+  label {
+    display: block;
+    font-size: 1.25rem;
+  }
+
+  .title input, .tag input {
+    width: 50%;
+    height: 20px;
+  }
+
+  .post-recipe__left {
+    width: 50%;
+  }
+
+  .img-box {
+    width: 90%;
+    height: 370px;
+  }
+
+  .post-recipe__right {
+    width: 50%;
+  }
+
+  textarea {
+    width: 90%;
+    height: 250px;
+  }
+
+  .action {
+    text-align: center;
+
+    input, a {
+      width: 100px;
+      margin-right: 20px;
+    }
+  }
+}
+
+
+// ページネーション
+.pagination {
+  justify-content: center;
+  margin-top: 40px;
+  border: none;
+  color: #696969;
+  background-color: #ffffff;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  .page-link {
+    color: #ff9900 !important;
+  }
+
+  .active a {
+    color: #ffffff !important;
+    background: #ff9900 !important;
+    border-color: #ff9900 !important;
+    border-radius: 50%;
+  }
+
+  li a:hover {
+    border-radius: 50%;
+  }
 }
 
 

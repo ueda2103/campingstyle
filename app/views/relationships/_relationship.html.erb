@@ -2,7 +2,7 @@
   <%# カレントユーザーの投稿場合マイページリンク %>
   <% if follower == current_user %>
     <div class="user-edit">
-      <%= link_to "マイページ", user_path(current_user.id), class: "btn_green" %>
+      <%= link_to "マイページ", user_path(current_user.id), class: "btn_green_mini" %>
     </div>
 
   <%# カレントユーザー以外の投稿の場合フォローリンク %>
@@ -10,11 +10,11 @@
 
     <%# フォロー解除リンク %>
     <% if follower.follower_by?(current_user) %>
-      <%= link_to "フォロー解除", relationship_path(follower.follower_by(current_user), user_id: follower.id), method: :delete, remote: true, class: "btn_red" %>
+      <%= link_to "フォロー解除", relationship_path(follower.follower_by(current_user), user_id: follower.id), method: :delete, remote: true, class: "btn_red_mini" %>
 
     <%# フォローリンク %>
     <% else %>
-      <%= link_to "フォロー", relationships_path(user_id: follower.id), method: :post, remote: true, class: "btn_blue" %>
+      <%= link_to "フォロー", relationships_path(user_id: follower.id), method: :post, remote: true, class: "btn_blue_mini" %>
     <% end %>
   <% end %>
 <% end %>

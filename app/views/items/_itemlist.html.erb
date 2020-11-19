@@ -4,7 +4,7 @@
     <% items.each do |i| %>
       <tr>
         <td><%= i.name %></td>
-        <td><%= link_to i.status, item_path(i.id), method: :patch, remote: true, class: "btn_blue" %></td>
+        <td><%= link_to i.status, item_path(i.id), method: :patch, remote: true, class: "item__status btn_yellow" %></td>
         <td><%= link_to "削除", item_path(i.id), method: :delete, remote: true, class: "btn_red" %></td>
       </tr>
     <% end %>

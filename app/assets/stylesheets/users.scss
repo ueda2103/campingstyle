@@ -130,10 +130,14 @@
 
 // ユーザー詳細ページサイドバー
 .user__info {
+  min-width: 160px;
   text-align: center;
 
   a {
-    width: 80%;
+    width: 90%;
+    font-size: 1rem;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 }
 
@@ -141,28 +145,47 @@
 .current-user__body {
 
   .item__form {
-    margin-left: 10%;
     
-    label {
-      font-size: 1rem;
-      margin: auto 0;
+    .form {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+
+      label {
+        font-size: 1.5rem;
+        margin: auto 0;
+      }
+      
+      input {
+        font-size: 1.25rem;
+        width: 300px;
+        margin-right: 20px;
+
+        &:last-child {
+          width: 100px;
+        }
+      }
     }
   }
 
   .item__list {
     
     table {
-      margin: 0 auto;
 
       tr {
 
         td {
+          font-size: 1.25rem;
           border-bottom: 2px solid #df7716;
           padding-right: 20px;
           
           &:first-child {
-            width: 15vw;
+            min-width: 15vw;
             padding-left: 20px;
+          }
+
+          a {
+            font-size: 1.25rem;
           }
         }
       }

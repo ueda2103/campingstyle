@@ -1,15 +1,15 @@
 <%# マイページサイドバー %>
-<h2>My Page</h2>
+<h4>My Page</h4>
 <%= image_tag current_user.user_image.thumb.url, size: "70x70", class: "user-icon mb-1" %>
 <p class="mb-1"><%= current_user.family_name + current_user.given_name %></p>
 <p class="mb-4"><%= current_user.family_name_kana + current_user.given_name_kana %></p>
-<%= link_to "プロフィール編集", edit_user_path(current_user.id), class: "btn_blue mb-1" %>
-<%= link_to "パスワード変更", edit_user_password_path(current_user.id), class: "btn_blue mb-1" %>
-<%= link_to "follow user", users_path(followed: current_user.followed), class: "btn_blue mb-1" %>
-<%= link_to "follower", users_path(follower: current_user.follower), class: "btn_blue mb-1" %>
-<%= link_to "My Posts", users_posts_path(current_user.id), class: "btn_blue mb-1" %>
-<%= link_to "Posts BM", posts_path(bookmarks: current_user.bookmarks), class: "btn_blue mb-1" %>
-<%= link_to "New Post", new_post_path, class: "btn_green mb-1" %>
-<%= link_to "My Camping Meals", users_recipes_path(current_user.id), class: "btn_blue mb-1" %>
-<%= link_to "Camping Meals BM", recipes_path(bookmarks: current_user.bookmarks), class: "btn_blue mb-1" %>
-<%= link_to "New Camping Meal", new_recipe_path, class: "btn_green mb-1" %>
+<%= link_to "プロフィール編集", edit_user_path(current_user.id), class: "btn_blue_mini mb-1" %>
+<%= link_to "パスワード変更", edit_user_password_path(current_user.id), class: "btn_blue_mini mb-1" %>
+<%= link_to "follow user", users_path(followed: current_user.followed), class: "btn_blue_mini mb-1" %>
+<%= link_to "follower", users_path(follower: current_user.follower), class: "btn_blue_mini mb-1" %>
+<%= link_to "My Posts", users_posts_path(current_user.id), class: "btn_blue_mini mb-1" %>
+<%= link_to "Posts BM", posts_path(bookmarks: current_user.bookmarks), class: "btn_blue_mini mb-1" %>
+<%= link_to "New Post", new_post_path, class: "btn_green_mini mb-1" %>
+<%= link_to "My Camping Meals", users_recipes_path(current_user.id), class: "btn_blue_mini mb-1" %>
+<%= link_to "Camping Meals BM", recipes_path(bookmarks: current_user.bookmarks), class: "btn_blue_mini mb-1" %>
+<%= link_to "New Camping Meal", new_recipe_path, class: "btn_green_mini mb-1" %>

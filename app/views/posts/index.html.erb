@@ -1,9 +1,9 @@
 <%# 投稿一覧ページ %>
-<main>
+<main class="main__background main__background__post">
   <div class="container">
     <div class="row">
       <%# 投稿一覧サイドバー %>
-      <div class="tag-sidebar col-2 my-1 px-3">
+      <div class="sidebar col-2 bg-white my-3 px-3">
         <%= render "/shared/index_sidebar", tags: @tags %>
       </div>
 
@@ -11,15 +11,10 @@
       <div class="post-recipe-index col-10 my-3 px-3">
 
         <%# タイトルバー %>
-        <div class="titlebar">
-          <h2>Posts　<%= @title %></h2>
+        <div class="titlebar bg-white">
+          <h4 class="m-3">Posts　<%= @title %></h4>
 
           <%= render "/shared/flash" %>
-
-          <%= form_with url: posts_path, method: :get, local: true, class: "form" do |f| %>
-            <%= f.text_field :search %>
-            <%= f.submit "検索", class: "btn_blue_mini" %>
-          <% end %>
         </div>
 
         <%# 投稿一覧 %>

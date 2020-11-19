@@ -1,4 +1,4 @@
-<%# 投稿のタグ検索欄 %>
+<%# 投稿のタグ欄 %>
 <% if /post/ =~ request.fullpath %>
   <% tag_list.each do |tag| %>
     <%= link_to posts_path(tag_name: tag), class: "btn_blue_mini" do %>
@@ -6,7 +6,7 @@
     <% end %>
   <% end %>
 
-<%# レシピのタグ検索欄 %>
+<%# レシピのタグ欄 %>
 <% else %>
   <% tag_list.each do |tag| %>
     <%= link_to recipes_path(tag_name: tag), class: "btn_blue_mini" do %>

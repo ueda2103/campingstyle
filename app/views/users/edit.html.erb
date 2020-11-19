@@ -1,11 +1,11 @@
 <%# 会員情報編集ページ %>
-<main>
+<main class="main__background main__background__user">
   <div class="container">
     <div class="row">
-      <h2 class="offset-3 col-3 mt-3">会員情報編集</h2>
-      <%= form_with model: @user, local: true, class: "user-form" do |f| %>
+      <%= form_with model: @user, local: true, class: "user-form my-5" do |f| %>
+        <h5 class="mb-5">会員情報編集</h5>
 
-        <div class="user-icon__wrapper">
+        <div class="user-icon__wrapper mb-3">
           <%= image_tag @user.user_image.thumb.url, size: "70x70", class: "user-icon img_prev" %>
           <button>
             <%= f.file_field :user_image, class: "img" %>
@@ -15,81 +15,85 @@
         <table>
           <tbody>
             <tr>
-              <td><%= f.label :family_name, "名前" %></td>
-              <td><%= f.text_field :family_name, autofocus: true, autocomplete: "family_name" %></td>
-              <td><%= f.text_field :given_name, autofocus: true, autocomplete: "given_name" %></td>
-            </tr>
-            <tr>
-              <% if @user.errors.include?(:family_name) || @user.errors.include?(:given_name) %>
-                <td class="red">
-                  <%= @user.errors.full_messages_for(:family_name).first %><br>
-                  <%= @user.errors.full_messages_for(:given_name).first %>
-                </td>
-              <% end %>
-            </tr>
-
-            <tr>
-              <td><%= f.label :family_name_kana, "フリガナ" %></td>
-              <td><%= f.text_field :family_name_kana, autofocus: true, autocomplete: "family_name_kana" %></td>
-              <td><%= f.text_field :given_name_kana, autofocus: true, autocomplete: "given_name_kana" %></td>
-            </tr>
-            <tr>
-              <% if @user.errors.include?(:family_name_kana) || @user.errors.include?(:given_name_kana) %>
-                <td class="red">
-                  <%= @user.errors.full_messages_for(:family_name_kana).first %><br>
-                  <%= @user.errors.full_messages_for(:given_name_kana).first %>
-                </td>
-              <% end %>
+              <td><%= f.label :family_name, "名前", class: "need" %></td>
+              <td>
+                <%= f.text_field :family_name, autofocus: true, autocomplete: "family_name" %>
+                <% if @user.errors.include?(:family_name) || @user.errors.include?(:given_name) %>
+                  <span class="red"><%= @user.errors.full_messages_for(:family_name).first %></span>
+                <% end %>
+              </td>
+              <td>
+                <%= f.text_field :given_name, autofocus: true, autocomplete: "given_name", class: "need" %>
+                <% if @user.errors.include?(:family_name) || @user.errors.include?(:given_name) %>
+                  <span class="red"><%= @user.errors.full_messages_for(:given_name).first %></span>
+                <% end %>
+              </td>
             </tr>
 
             <tr>
-              <td><%= f.label :email, "メールアドレス" %></td>
-              <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
-            </tr>
-            <tr>
-              <% if @user.errors.include?(:email) %>
-                <td class="red"><%= @user.errors.full_messages_for(:email).first %></td>
-              <% end %>
-            </tr>
-
-            <tr>
-              <td><%= f.label :postal_code, "郵便番号(ハイフンなし)" %></td>
-              <td><%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %></td>
-            </tr>
-            <tr>
-              <% if @user.errors.include?(:postal_code) %>
-                <td class="red"><%= @user.errors.full_messages_for(:postal_code).first %></td>
-              <% end %>
+              <td><%= f.label :family_name_kana, "フリガナ", class: "need" %></td>
+              <td>
+                <%= f.text_field :family_name_kana, autofocus: true, autocomplete: "family_name_kana" %>
+                <% if @user.errors.include?(:family_name_kana) || @user.errors.include?(:given_name_kana) %>
+                  <span class="red"><%= @user.errors.full_messages_for(:family_name_kana).first %></span>
+                <% end %>
+              </td>
+              <td>
+                <%= f.text_field :given_name_kana, autofocus: true, autocomplete: "given_name_kana" %>
+                <% if @user.errors.include?(:family_name_kana) || @user.errors.include?(:given_name_kana) %>
+                  <span class="red"><%= @user.errors.full_messages_for(:given_name_kana).first %></span>
+                <% end %>
+              </td>
             </tr>
 
             <tr>
-              <td><%= f.label :prefecture_code, "都道府県" %></td>
-              <td><%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :name, :name, autofocus: true %></td>
-            </tr>
-            <tr>
-              <% if @user.errors.include?(:prefecture_code) %>
-                <td class="red"><%= @user.errors.full_messages_for(:prefecture_code).first %></td>
-              <% end %>
-            </tr>
-
-            <tr>
-              <td><%= f.label :city, "市区町村" %></td>
-              <td><%= f.text_field :city, autofocus: true, autocomplete: "city" %></td>
-            </tr>
-            <tr>
-              <% if @user.errors.include?(:city) %>
-                <td class="red"><%= @user.errors.full_messages_for(:city).first %></td>
-              <% end %>
+              <td><%= f.label :email, "メールアドレス", class: "need" %></td>
+              <td>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                <% if @user.errors.include?(:email) %>
+                  <span class="red"><%= @user.errors.full_messages_for(:email).first %></span>
+                <% end %>
+              </td>
             </tr>
 
             <tr>
-              <td><%= f.label :street, "番地" %></td>
-              <td><%= f.text_field :street, autofocus: true, autocomplete: "street" %></td>
+              <td><%= f.label :postal_code, "郵便番号(ハイフンなし)", class: "need" %></td>
+              <td>
+                <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
+                <% if @user.errors.include?(:postal_code) %>
+                  <span class="red"><%= @user.errors.full_messages_for(:postal_code).first %></span>
+                <% end %>
+              </td>
             </tr>
+
             <tr>
-              <% if @user.errors.include?(:street) %>
-                <td class="red"><%= @user.errors.full_messages_for(:street).first %></td>
-              <% end %>
+              <td><%= f.label :prefecture_code, "都道府県", class: "need" %></td>
+              <td>
+                <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :name, :name, autofocus: true %>
+                <% if @user.errors.include?(:prefecture_code) %>
+                  <span class="red"><%= @user.errors.full_messages_for(:prefecture_code).first %></span>
+                <% end %>
+              </td>
+            </tr>
+
+            <tr>
+              <td><%= f.label :city, "市区町村", class: "need" %></td>
+              <td>
+                <%= f.text_field :city, autofocus: true, autocomplete: "city" %>
+                <% if @user.errors.include?(:city) %>
+                  <span class="red"><%= @user.errors.full_messages_for(:city).first %></span>
+                <% end %>
+              </td>
+            </tr>
+
+            <tr>
+              <td><%= f.label :street, "番地", class: "need" %></td>
+              <td>
+                <%= f.text_field :street, autofocus: true, autocomplete: "street" %>
+                <% if @user.errors.include?(:street) %>
+                  <span class="red"><%= @user.errors.full_messages_for(:street).first %></span>
+                <% end %>
+              </td>
             </tr>
 
             <tr>
@@ -98,20 +102,20 @@
             </tr>
 
             <tr>
-              <td><%= f.label :telephone_number, "電話番号(ハイフンなし)" %></td>
-              <td><%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %></td>
-            </tr>
-            <tr>
-              <% if @user.errors.include?(:telephone_number) %>
-                <td class="red"><%= @user.errors.full_messages_for(:telephone_number).first %></td>
-              <% end %>
+              <td><%= f.label :telephone_number, "電話番号(ハイフンなし)", class: "need" %></td>
+              <td>
+                <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
+                <% if @user.errors.include?(:telephone_number) %>
+                  <span class="red"><%= @user.errors.full_messages_for(:telephone_number).first %></span>
+                <% end %>
+              </td>
             </tr>
           </tbody>
         </table>
 
         <div class="user-form__field">
           <%= f.submit "編集内容を保存する", class: "btn_blue" %>
-          <%= link_to "削除", users_withdrawal_path(current_user.id), class: "btn_red" %>
+          <%= link_to "削除", users_withdrawal_path(current_user.id), class: "btn_red ml-3" %>
         </div>
       <% end %>
     </div>

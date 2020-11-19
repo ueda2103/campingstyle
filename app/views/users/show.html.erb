@@ -1,23 +1,23 @@
 <%# マイページ %>
-<main>
+<main class="main__background main__background__user">
   <div class="container">
     <div class="row">
       <%# マイページサイドバー %>
-      <div class="user__info col-2 mt-2">
+      <div class="user__info col-2 bg-white my-4 py-4">
         <%= render "mypage_sidebar", user: @user %>
       </div>
 
       <%# マイページ持ち物リスト %>
-      <div class="current-user__body col-10 mt-2">
-        <div class="items">
+      <div class="current-user__body col-10 my-4">
+        <div class="items bg-white p-4">
           <div class="item__form">
-            <h2>持ち物リスト</h2>
+            <h4>持ち物リスト</h4>
 
             <%# 持ち物リスト入力フォーム %>
             <%= form_with model: @item, url: items_path, class: "form" do |f| %>
               <%= f.label :name, "持ち物：" %>
               <%= f.text_field :name %>
-              <%= f.submit "登録", class: "btn_blue_mini" %>
+              <%= f.submit "登録", class: "btn_blue" %>
             <% end %>
           </div>
 
