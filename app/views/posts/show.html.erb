@@ -11,7 +11,6 @@
         <div class="show__title">
           <h3><%= @post.title %></h3>
 
-          <%= render "/shared/flash" %>
           <div class="bookmark_<%= @post.id %>">
             <%= render "bookmarks/bookmark", bookmark_base: @post %>
           </div>

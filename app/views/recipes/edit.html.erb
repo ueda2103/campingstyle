@@ -2,17 +2,17 @@
 <main>
   <div class="container">
     <div class="row">
+      <h4 class="my-4">レシピ編集</h4>
 
       <%# ページ上段 %>
-      <%= form_with model: @recipe, url: recipe_path(@recipe.id), local: true, class: "post-recipe__body col-12 d-flex mt-3" do |f| %>
+      <%= form_with model: @recipe, url: recipe_path(@recipe.id), local: true, class: "new-edit__body col-12 d-flex" do |f| %>
 
         <%# ページ左上 %>
-        <div class="post-recipe__left">
+        <div class="new-edit__left w-50 p-3 mb-4">
 
           <%# タイトル入力フォーム %>
           <div class="title">
             <%= f.label :title, "タイトル", class: "need" %>
-            <%= render "/shared/flash" %>
             <%= f.text_field :title, autofocus: true %>
             <% if @recipe.errors.include?(:title) %>
               <span class="red"><%= @recipe.errors.full_messages_for(:title).first %></span>
@@ -21,11 +21,12 @@
 
           <%# 画像投稿フォーム %>
           <div class="img my-4">
+            <%= f.label :recipe_images, "写真", class: "need" %>
             <div class="img-box mb-2">
               <%= image_tag @recipe.recipe_images[0].to_s, size: "550x350", class: "main-img img_prev" %>
             </div>
             <button>
-              <%= f.file_field :recipe_images, multiple: true, class: "img need_long" %>
+              <%= f.file_field :recipe_images, multiple: true, class: "img" %>
             </button>
             <% if @recipe.errors.include?(:recipe_images) %>
               <span class="red"><%= @recipe.errors.full_messages_for(:recipe_images).first %></span>
@@ -34,7 +35,13 @@
         </div>
 
         <%# ページ右上 %>
-        <div class="post-recipe__right">
+        <div class="new-edit__right w-50 p-3 mb-4">
+
+          <%# タグ付けフォーム %>
+          <div class="tag">
+            <%= f.label :tag_list, "タグ" %>
+            <%= f.text_field :tag_list, value: @recipe.tag_list.join(','), id: "tags" %>
+          </div>
 
           <%# 詳細入力フォーム %>
           <div class="text my-4">
@@ -45,18 +52,18 @@
             <% end %>
           </div>
 
-          <div class="action">
-            <%= f.submit "編集", autofocus: true, class: "btn_blue" %>
-            <%= link_to "削除", recipe_path(@recipe.id), method: :delete, data: {confirm: "本当に削除しますか"}, class: "btn_red" %>
+          <div class="edit-action text-center mb-4">
+            <%= f.submit "編集", autofocus: true, class: "d-inline-block btn_blue" %>
+            <%= link_to "削除", recipe_path(@recipe.id), method: :delete, data: {confirm: "本当に削除しますか"}, class: "d-inline-block btn_red ml-5" %>
           </div>
         </div>
       <% end %>
 
       <%# ページ下段 %>
-      <div class="post-recipe__body col-12 d-flex mt-5">
+      <div class="new-edit__body new-edit__body_under col-12 d-flex mt-5">
 
         <%# ページ左下 %>
-        <div class="post-recipe__left">
+        <div class="new-edit__left w-50 p-3 mb-4">
 
           <%# 材料入力フォーム %>
           <%= form_with model: @food, url: foods_path do |f| %>
@@ -66,23 +73,25 @@
             <%= f.submit "追加", class: "btn_blue" %>
           <% end %>
 
-          <div class="food__list mt-4">
+          <div class="food__list mt-5">
             <%= render "foods/food", foods: @foods %>
           </div>
         </div>
 
         <%# ページ右下 %>
-        <div class="post-recipe__right">
+        <div class="new-edit__right w-50 p-3 mb-4">
 
           <%# 作り方入力フォーム %>
           <%= form_with model: @flow, url: flows_path do |f| %>
             <%= f.label :body, "作り方", class: "need" %>
-            <%= f.text_field :body, autofocus: true, class: "flow-text" %>
-            <%= f.hidden_field :recipe_id, value: @recipe.id %>
-            <%= f.submit "追加", class: "btn_blue" %>
+            <div class="edit-flow__form">
+              <%= f.text_area :body, autofocus: true, class: "flow-text ml-0 mr-2" %>
+              <%= f.hidden_field :recipe_id, value: @recipe.id %>
+              <%= f.submit "追加", class: "btn_blue ml-0" %>
+            </div>
           <% end %>
 
-          <div class="flow__list mt-4">
+          <div class="flow__list mt-5">
             <%= render "flows/flow", flows: @flows %>
           </div>
         </div>

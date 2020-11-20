@@ -2,16 +2,17 @@
 <main>
   <div class="container">
     <div class="row">
+      <h4 class="my-4">投稿編集</h4>
 
       <%# 投稿入力フォーム %>
-      <%= form_with model: @post, local: true, class: "post-recipe__body col-12 d-flex mt-3" do |f| %>
+      <%= form_with model: @post, local: true, class: "new-edit__body col-12 d-flex" do |f| %>
+
         <%# ページ左側 %>
-        <div class="post-recipe__left">
+        <div class="new-edit__left w-50 p-3 mb-4">
 
           <%# タイトル入力フォーム %>
           <div class="title">
-            <%= f.label :title, "タイトル" %>
-            <%= render "/shared/flash" %>
+            <%= f.label :title, "タイトル", class: "need" %>
             <%= f.text_field :title, autofocus: true %>
             <% if @post.errors.include?(:title) %>
               <span class="red"><%= @post.errors.full_messages_for(:title).first %></span>
@@ -20,6 +21,7 @@
 
           <%# 画像投稿フォーム %>
           <div class="img my-4">
+            <%= f.label :post_images, "写真", class: "need" %>
             <div class="img-box mb-2">
               <%= image_tag @post.post_images[0].to_s, size: "550x350", class: "main-img img_prev" %>
             </div>
@@ -33,20 +35,26 @@
         </div>
 
         <%# ページ右側 %>
-        <div class="post-recipe__right">
+        <div class="new-edit__right w-50 p-3 mb-4">
+
+          <%# タグ付けフォーム %>
+          <div class="tag">
+            <%= f.label :tag_list, "タグ" %>
+            <%= f.text_field :tag_list, value: @post.tag_list.join(','), id: "tags" %>
+          </div>
 
           <%# 詳細入力フォーム %>
           <div class="text my-4">
-            <%= f.label :body, "詳細" %><br>
+            <%= f.label :body, "詳細", class: "need" %>
             <%= f.text_area :body, autofocus: true %>
             <% if @post.errors.include?(:body) %>
               <span class="red"><%= @post.errors.full_messages_for(:body).first %></span>
             <% end %>
           </div>
           
-          <div class="action">
-            <%= f.submit "編集", class: "btn_blue" %>
-            <%= link_to "削除", post_path(@post.id), method: :delete, data: {confirm: "本当に削除しますか"}, class: "btn_red" %>
+          <div class="edit-action text-center mb-4">
+            <%= f.submit "編集", class: "d-inline-block btn_blue" %>
+            <%= link_to "削除", post_path(@post.id), method: :delete, data: {confirm: "本当に削除しますか"}, class: "d-inline-block btn_red ml-5" %>
           </div>
         </div>
       <% end %>

@@ -2,12 +2,12 @@
 <main>
   <div class="container">
     <div class="row">
-      <h2 class="my-3">新規レシピ</h2>
+      <h4 class="my-3">新規レシピ</h4>
 
-      <%= form_with model: @recipe, url: recipes_path(@recipe.id), local: true, class: "post-recipe__body d-flex col-12" do |f| %>
+      <%= form_with model: @recipe, url: recipes_path(@recipe.id), local: true, class: "new-edit__body d-flex col-12" do |f| %>
 
         <%# ページ左側 %>
-        <div class="post-recipe__left">
+        <div class="new-edit__left w-50 p-3 mb-4">
 
           <%# タイトル入力フォーム %>
           <div class="title">
@@ -20,6 +20,7 @@
 
           <%# 画像投稿フォーム %>
           <div class="img my-4">
+            <%= f.label :recipe_images, "写真", class: "need" %>
             <div class="img-box mb-2">
               <%= image_tag @recipe.recipe_images[0].to_s, size: "550x350", class: "main-img img_prev" %>
             </div>
@@ -33,12 +34,12 @@
         </div>
 
         <%# ページ右側 %>
-        <div class="post-recipe__right">
+        <div class="new-edit__right w-50 p-3 mb-4">
 
           <%# タグ付けフォーム %>
           <div class="tag">
             <%= f.label :tag_list, "タグ" %>
-            <%= f.text_field :tag_list, id: "tags" %>
+            <%= f.text_field :tag_list, value: @recipe.tag_list.join(','), id: "tags" %>
           </div>
 
           <%# 本文入力フォーム %>

@@ -53,12 +53,13 @@ h6, td, p, a, input, textarea, label {
   }
 }
 
+span {
+  font-size: 1.25rem;
+}
+
 p {
   margin-bottom: 0;
 }
-
-
-
 
 .red {
   color: #ff0000;
@@ -223,36 +224,6 @@ p {
   background-color: #ff0000;
 }
 
-.need_long::after {
-  content: "必須";
-  font-size: 0.5rem;
-  padding: 2px;
-  margin-left: 120px;
-  color: #ffffff;
-  border-radius: 2px;
-  background-color: #ff0000;
-}
-
-
-
-.food-table, .flow-table {
-  width: 70%;
-  margin: 0 auto;
-
-  tr {
-    border-bottom: 2px solid #000000;
-
-    td {
-
-      &:first-child {
-        width: 80%;
-      }
-    }
-  }
-}
-
-
-
 .titlebar {
   display: flex;
   justify-content: space-between;
@@ -261,6 +232,7 @@ p {
 .success {
   color: #00ff00;
   font-weight: bold;
+  font-size: 1.5rem;
 
   &:before {
     font-family: "Font Awesome 5 free";
@@ -272,6 +244,7 @@ p {
 .error {
   color: #ff0000;
   font-weight: bold;
+  font-size: 1.5rem;
 
   &:before {
     font-family: "Font Awesome 5 free";
@@ -287,8 +260,12 @@ div.field_with_errors {
   }
 }
 
-.notice {
-  display: none !important;
+.notifications {
+  position: relative;
+  width: 100vw;
+  text-align: center;
+  padding-top: 80px;
+  background-color: #333333;
 }
 
 
@@ -424,8 +401,7 @@ header {
 // メイン
 main {
   position: relative;
-  padding-top: 80px;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 160px);
 }
 
 
@@ -840,21 +816,33 @@ main {
 
 
 // 新規・編集投稿およびレシピ
-.post-recipe__body {
+.new-edit__body {
   flex-wrap: wrap;
   
-  label {
+  .new-edit__left, .new-edit__right {
+    background-color: #cccccc;
+  }
+
+  label, input, textarea, ul, button, .img-box {
     display: block;
-    font-size: 1.25rem;
+    margin: auto;
+  }
+
+  label {
+    margin-bottom: 10px;
+  }
+
+  .main-img {
+    border: 1px solid #000000;
+    background-color: #ffffff;
   }
 
   .title input, .tag input {
-    width: 50%;
-    height: 20px;
+    width: 90%;
   }
 
-  .post-recipe__left {
-    width: 50%;
+  #tags {
+    display: none;
   }
 
   .img-box {
@@ -862,24 +850,83 @@ main {
     height: 370px;
   }
 
-  .post-recipe__right {
-    width: 50%;
+  .img, .tagit-label {
+    font-size: 1.25rem;
+  }
+
+  .tagit {
+    width: 90%;
+    border: 1px solid #000000;
+    background-color: #ffffff;
   }
 
   textarea {
     width: 90%;
-    height: 250px;
+    height: 350px;
   }
 
   .action {
-    text-align: center;
+    display: block;
+    margin: 0 auto;
+  }
+}
 
-    input, a {
-      width: 100px;
-      margin-right: 20px;
+
+// レシピ編集ページ
+.new-edit__body_under {
+
+  input, textarea {
+    display: inline-block;
+  }
+
+  .flow-text {
+    height: 66px;
+  }
+
+  #name, #body {
+    width: 70%;
+  }
+
+  .btn_blue, .btn_red {
+    font-size: 1.25rem;
+  }
+
+  .food-table, .flow-table {
+    width: 90%;
+    margin: 0 auto;
+  
+    tr {
+      
+      td {
+        
+        &:first-child {
+          border-bottom: 1px solid #999999;
+          width: 80%;
+        }
+      }
+    }
+  }
+
+  .edit-flow__form {
+    display: flex;
+    align-items: center;
+  }
+  
+  .flow-table {
+  
+    li {
+      font-size: 1.5rem;
+      
+      p {
+        display: inline-block;
+        width: 80%;
+        padding: 3px;
+        border-bottom: 1px solid #999999;
+      }
     }
   }
 }
+
 
 
 // ページネーション
