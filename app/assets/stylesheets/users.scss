@@ -1,14 +1,25 @@
 // ユーザー一覧
+.user-sidebar {
+  height: 200px;
+
+  h6 {
+    border-left: 5px solid #00ff00;
+    font-weight: bold;
+  }
+}
+
 .users {
 
   p {
-    font-size: 0.5rem;
+    font-size: 1.25rem;
   }
 
   .user-body {
+    width: 70%;
     justify-content: center;
     align-items: center;
     border-bottom: 2px solid #df7716;
+    margin: 0 auto;
 
     .user-body__text {
       width: 120px;

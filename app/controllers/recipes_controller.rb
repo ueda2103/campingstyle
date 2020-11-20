@@ -48,7 +48,7 @@ class RecipesController < ApplicationController
       @comments = Comment.where(recipe_id: @recipe.id)
 
       if @recipe.status == "非公開"
-        flash[:error] = "非公開のページです"
+        flash.now[:error] = "非公開のページです"
       end
     elsif @recipe.status == "非公開"
       flash[:error] = "非公開のページです"
@@ -64,10 +64,15 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
     result = false
-    result = Vision.get_image_data(@recipe.recipe_images[0].url)
+
+    if recipe_params[:recipe_images].present?
+      result = Vision.get_image_data(@recipe.recipe_images[0].url)
+    else
+      result = true
+    end
 
     if result.blank?
-      flash[:error] = "画像が不適切です"
+      flash.now[:error] = "画像が不適切です"
       render "new"
       return
     end
@@ -76,7 +81,7 @@ class RecipesController < ApplicationController
       flash[:success] = "フォーマットが作成されました"
       redirect_to edit_recipe_path(@recipe.id)
     else
-      flash[:error] = "保存に失敗しました"
+      flash.now[:error] = "保存に失敗しました"
       render "new"
     end
   end
@@ -101,7 +106,7 @@ class RecipesController < ApplicationController
     end
 
     if result.blank?
-      flash[:error] = "画像が不適切です"
+      flash.now[:error] = "画像が不適切です"
       render "edit"
       return
     end
@@ -113,16 +118,18 @@ class RecipesController < ApplicationController
         flash[:success] = "編集を保存しました"
         redirect_to recipe_path(@recipe.id)
       else
-        flash[:error] = "保存に失敗しました"
+        flash.now[:error] = "保存に失敗しました"
         render "edit"
       end
       
     else
-      if @recipe.update(status: "非公開")
+
+      if @recipe.update(recipe_params)
+        @recipe.update(status: "非公開")
         flash[:error] = "材料・手順がないため非公開で保存しました"
         redirect_to recipe_path(@recipe.id)
       else
-        flash[:error] = "保存に失敗しました"
+        flash.now[:error] = "保存に失敗しました"
         render "edit"
       end
     end

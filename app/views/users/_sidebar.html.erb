@@ -1,0 +1,7 @@
+<%# 名前検索フォーム %>
+<%= form_with url: users_path, method: :get, local: true, class: "form mt-5" do |f| %>
+  <h6 class="pl-2 mb-3">名前検索</h6>
+  <%= f.text_field :search_family_name, placeholder: "（例）山田", class: "mb-3" %>
+  <%= f.text_field :search_given_name, placeholder: "（例）太郎" %>
+  <%= f.submit "検索", class: "btn_blue py-1 mt-3" %>
+<% end %>
