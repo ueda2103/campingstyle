@@ -4,7 +4,7 @@
     <div class="row">
 
       <%# ページ左側 %>
-      <div class="show_left col-6 my-4">
+      <div class="show_left col-12 col-sm-6 my-4">
         <%= image_tag @post.post_images[0].to_s, size: "550x350", class: "main-img" %>
 
         <%# タイトルバー %>
@@ -20,20 +20,22 @@
         <div class="show__user-body">
 
           <%# ユーザー詳細左側 %>
-          <div class="user-body__left">
-            <%= link_to user_path(@post.user_id) do %>
-              <%= image_tag @post.user.user_image.thumb.url, size: "50x50", class: "user-icon" %>
-            <% end %>
-          </div>
+          <div class="user-body__left_wrapper d-flex">
+            <div class="user-body__left">
+              <%= link_to user_path(@post.user_id) do %>
+                <%= image_tag @post.user.user_image.thumb.url, size: "50x50", class: "user-icon" %>
+              <% end %>
+            </div>
 
-          <%# ユーザー詳細中央 %>
-          <div class="user-body__center">
-            <p>
-              <%= @post.user.family_name + @post.user.given_name %>
-            </p>
+            <%# ユーザー詳細中央 %>
+            <div class="user-body__center">
+              <p>
+                <%= @post.user.family_name + @post.user.given_name %>
+              </p>
 
-            <div class="relationship_<%= @post.user.id %>">
-              <%= render "relationships/relationship", follower: @post.user %>
+              <div class="relationship_<%= @post.user.id %>">
+                <%= render "relationships/relationship", follower: @post.user %>
+              </div>
             </div>
           </div>
 
@@ -62,7 +64,7 @@
       </div>
 
       <%# ページ右側 %>
-      <div class="show_right col-6 my-4">
+      <div class="show_right col-12 col-sm-6 my-4">
 
         <%# コメント %>
         <h4>Comment</h4>

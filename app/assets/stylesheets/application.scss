@@ -651,7 +651,6 @@ main {
 
 // 詳細ページ
 .show_left {
-
   
   .show__title {
     display: flex;
@@ -1009,7 +1008,7 @@ footer {
 
   .key-visual__title {
     align-items: flex-start !important;
-    margin-top: 80px;
+    margin-top: 100px;
     
     h1 {
       height: 100px;
@@ -1086,6 +1085,66 @@ footer {
     
     .card-box {
       justify-content: center;
+    }
+  }
+
+  .show_left {
+
+    .main-img {
+      width: 100%;
+      height: 250px;
+    }
+
+    .show__title {
+      display: block;
+      
+      h3 {
+        font-size: 2rem;
+        text-align: center;
+        max-width: 100%;
+        margin-bottom: 20px;
+      }
+    }
+
+    .show__user-body {
+      display: block;
+      border-top: 2px solid #00ff00;
+      border-bottom: 2px solid #00ff00;
+      margin-top: 20px;
+
+      .user-body__left_wrapper {
+        justify-content: center;
+        margin-top: 10px;
+
+        .user-body__left {
+          margin-left: 0;
+        }        
+      }
+
+      .user-body__right {
+        justify-content: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .comment-item {
+    display: block !important;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      p {
+        margin-left: 10px !important;
+      }
+    }
+
+    .comment-body, p {
+      width: 100% !important;
+      margin: 0 !important;
     }
   }
 }

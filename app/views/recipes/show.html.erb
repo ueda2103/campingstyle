@@ -4,7 +4,7 @@
     <div class="row">
 
       <%# ページ左側 %>
-      <div class="show_left col-6 mt-3">
+      <div class="show_left col-12 col-sm-6 mt-3">
         <%= image_tag @recipe.recipe_images[0].to_s, size: "550x350", class: "main-img" %>
 
         <%# タイトルバー %>
@@ -20,18 +20,20 @@
         <div class="show__user-body">
 
           <%# ユーザー詳細左側 %>
-          <div class="user-body__left">
-            <%= link_to user_path(@recipe.user_id) do %>
-              <%= image_tag @recipe.user.user_image.thumb.url, size: "50x50", class: "user-icon" %>
-            <% end %>
-          </div>
+          <div class="user-body__left_wrapper d-flex">
+            <div class="user-body__left">
+              <%= link_to user_path(@recipe.user_id) do %>
+                <%= image_tag @recipe.user.user_image.thumb.url, size: "50x50", class: "user-icon" %>
+              <% end %>
+            </div>
 
-          <%# ユーザー詳細中央 %>
-          <div class="user-body__center">
-            <%= @recipe.user.family_name + @recipe.user.given_name %>
+            <%# ユーザー詳細中央 %>
+            <div class="user-body__center">
+              <%= @recipe.user.family_name + @recipe.user.given_name %>
 
-            <div class="relationship_<%= @recipe.user.id %>">
-              <%= render "relationships/relationship", follower: @recipe.user %>
+              <div class="relationship_<%= @recipe.user.id %>">
+                <%= render "relationships/relationship", follower: @recipe.user %>
+              </div>
             </div>
           </div>
 
@@ -76,7 +78,7 @@
       </div>
 
       <%# ページ右側 %>
-      <div class="show_right col-6 mt-3">
+      <div class="show_right col-12 col-sm-6 mt-3">
 
         <%# コメント %>
         <h4>Comment</h4>
