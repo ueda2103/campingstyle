@@ -5,9 +5,9 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @tags = @posts.tag_counts_on(:tags)
-    
+
     if params[:search]
-      
+
       if params[:search].present?
         @title = "検索結果：#{params[:search]}"
         @posts = Post.where("title LIKE ?", "%#{params[:search]}%")
@@ -18,7 +18,7 @@ class PostsController < ApplicationController
     elsif params[:tag_name]
       @posts = Post.tagged_with("#{params[:tag_name]}")
       @title = "検索結果：#{params[:tag_name]}"
-      
+
     elsif params[:bookmarks]
       @posts = current_user.bookmark_post
 
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @footprint = @post.footprint
     if user_signed_in?
-      @footprint = @footprint + 1 unless @post.user_id == current_user.id
+      @footprint += 1 unless @post.user_id == current_user.id
     end
     @post.update(footprint: @footprint)
     @comments = Comment.where(post_id: params[:id])
@@ -89,7 +89,7 @@ class PostsController < ApplicationController
     else
       result = true
     end
-    
+
     if result.blank?
       flash.now[:error] = "画像が不適切です"
       render "edit"
@@ -119,8 +119,9 @@ class PostsController < ApplicationController
   end
 
   private
+
   def post_params
-    params.require(:post).permit({post_images: []}, :title, :body, :tag_list)
+    params.require(:post).permit({ post_images: [] }, :title, :body, :tag_list)
   end
 
   def check_user

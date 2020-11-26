@@ -7,7 +7,7 @@ class BookmarksController < ApplicationController
     if params[:base_type] == "post"
       @bookmark_base = Post.find(params[:bookmark_base_id])
       @bookmark = Bookmark.new(user_id: current_user.id, post_id: @bookmark_base.id)
-    
+
     # Recipeをブックマークする場合の処理
     else
       @bookmark_base = Recipe.find(params[:bookmark_base_id])
@@ -33,6 +33,7 @@ class BookmarksController < ApplicationController
   end
 
   private
+
   # ブックマーク削除実行ユーザーが対象のブックマーク作成ユーザーと同一であることの確認
   def check_user
     bookmark = Bookmark.find(params[:id])

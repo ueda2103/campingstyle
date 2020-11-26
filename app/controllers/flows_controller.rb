@@ -14,6 +14,7 @@ class FlowsController < ApplicationController
   end
 
   private
+
   def flow_params
     params.permit(:recipe_id, :body)
   end

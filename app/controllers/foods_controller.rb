@@ -6,7 +6,7 @@ class FoodsController < ApplicationController
     @food = Food.create(food_params)
     @foods = Food.where(recipe_id: @food.recipe_id)
   end
-  
+
   def destroy
     @food = Food.find(params[:id])
     @foods = Food.where(recipe_id: @food.recipe_id)
@@ -14,6 +14,7 @@ class FoodsController < ApplicationController
   end
 
   private
+
   def food_params
     params.permit(:recipe_id, :name)
   end

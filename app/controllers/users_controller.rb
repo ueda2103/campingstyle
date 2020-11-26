@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if params[:search_family_name] || params[:search_given_name]
       @users = @users.where("family_name LIKE ?", "%#{params[:search_family_name]}%")
       @users = @users.where("given_name LIKE ?", "%#{params[:search_given_name]}%")
-      
+
       if @users.count == 0
         @title = "検索結果がありません"
       else
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
       flash[:error] = "対象のユーザーは退会済です"
       redirect_to users_path
     end
-    
+
     if @user == current_user
       @item = Item.new
       @items = current_user.items
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = Post.where(user_id: params[:id]).page(params[:page]).per(9)
   end
-  
+
   def recipes
     @user = User.find(params[:id])
     @recipes = Recipe.where(user_id: params[:id]).page(params[:page]).per(9)
@@ -107,9 +107,10 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_params
     params.require(:user).permit(:user_image, :family_name, :given_name, :family_name_kana,
-     :given_name_kana, :email, :postal_code, :prefecture_code, :city, :street, :building, :telephone_number)
+                                 :given_name_kana, :email, :postal_code, :prefecture_code, :city, :street, :building, :telephone_number)
   end
 
   def check_user

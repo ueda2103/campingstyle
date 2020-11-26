@@ -7,7 +7,7 @@ class FavoritesController < ApplicationController
     if params[:base_type] == "post"
       @favorite_base = Post.find(params[:favorite_base_id])
       @favorite = Favorite.new(user_id: current_user.id, post_id: @favorite_base.id)
-    
+
     # Recipeにいいねする場合の処理
     else
       @favorite_base = Recipe.find(params[:favorite_base_id])
@@ -33,6 +33,7 @@ class FavoritesController < ApplicationController
   end
 
   private
+
   # いいね削除実行ユーザーが対象のいいね作成ユーザーと同一であることの確認
   def check_user
     favorite = Favorite.find(params[:id])

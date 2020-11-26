@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     # Postにコメントする場合の処理
     if @comment.post_id.present?
       @comments = Comment.where(post_id: @comment.post_id)
-    
+
     # Recipeにコメントする場合の処理
     else
       @comments = Comment.where(recipe_id: @comment.recipe_id)
@@ -31,6 +31,7 @@ class CommentsController < ApplicationController
   end
 
   private
+
   def comment_params
     params.permit(:user_id, :post_id, :recipe_id, :body)
   end
