@@ -2,7 +2,7 @@
 <main>
   <div class="container">
     <div class="row">
-      <h4 class="my-4">レシピ編集</h4>
+      <h4 class="new-edit__title my-4">レシピ編集</h4>
 
       <%# ページ上段 %>
       <%= form_with model: @recipe, url: recipe_path(@recipe.id), local: true, class: "new-edit__body col-12 d-flex" do |f| %>
@@ -53,7 +53,7 @@
           </div>
 
           <div class="edit-action text-center mb-4">
-            <%= f.submit "編集", autofocus: true, class: "d-inline-block btn_blue" %>
+            <%= f.submit "編集確定", autofocus: true, class: "d-inline-block btn_blue" %>
             <%= link_to "削除", recipe_path(@recipe.id), method: :delete, data: {confirm: "本当に削除しますか"}, class: "d-inline-block btn_red ml-5" %>
           </div>
         </div>

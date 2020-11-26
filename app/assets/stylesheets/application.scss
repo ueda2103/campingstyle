@@ -861,7 +861,6 @@ main {
   }
 
   .tagit {
-    width: 90%;
     border: 1px solid #000000;
     background-color: #ffffff;
   }
@@ -907,7 +906,7 @@ main {
         
         &:first-child {
           border-bottom: 1px solid #999999;
-          width: 80%;
+          width: 70%;
         }
       }
     }
@@ -925,7 +924,7 @@ main {
       
       p {
         display: inline-block;
-        width: 80%;
+        width: 70%;
         padding: 3px;
         border-bottom: 1px solid #999999;
       }
@@ -983,6 +982,7 @@ footer {
 }
 
 
+// レスポンシブ
 @media screen and (max-width: 1500px) {
   .key-visual h1 {
     padding-right: 40%;
@@ -994,10 +994,12 @@ footer {
 }
 
 @media screen and (max-width: 485px) {
+  // ヘッダー
   header {
     width: 100vw !important;
   }
 
+  // トップページ背景
   .background {
     width: 100vw !important;
 
@@ -1006,6 +1008,7 @@ footer {
     }
   }
 
+  // キービジュアル
   .key-visual__title {
     align-items: flex-start !important;
     margin-top: 100px;
@@ -1022,6 +1025,7 @@ footer {
     }
   }
 
+  // ログインフォーム
   .login-form__wrapper {
     width: 100% !important;
     bottom: 0 !important;
@@ -1034,6 +1038,7 @@ footer {
     }
   }
 
+  // トップページ
   .top-page .row {
     margin: 0;
   }
@@ -1061,6 +1066,7 @@ footer {
     }
   }
 
+  // パララックス
   .parallax-bg {
     height: 80vh;
   }
@@ -1078,6 +1084,7 @@ footer {
     }
   }
 
+  // 投稿・レシピ一覧
   .post-recipe-index {
     h4 {
       font-size: 1.5rem;
@@ -1129,6 +1136,7 @@ footer {
     }
   }
 
+  // コメント
   .comment-item {
     display: block !important;
 
@@ -1145,6 +1153,33 @@ footer {
     .comment-body, p {
       width: 100% !important;
       margin: 0 !important;
+    }
+  }
+
+  .new-edit__title {
+    margin-left: 20px;
+  }
+
+  // 新規投稿・編集
+  .new-edit__body {
+    display: block !important;
+
+    .new-edit__left, .new-edit__right {
+      width: 100% !important;
+      margin: 0 !important;
+
+      #post_post_images {
+        width: 100% !important;
+      }
+    }
+  }
+
+  .new-edit__body_under {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+
+    .new-edit__right {
+      padding-bottom: 20px !important;
     }
   }
 }
