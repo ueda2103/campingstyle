@@ -322,4 +322,22 @@
       }
     }
   }
+
+  // マイページ
+  .user__info a, .current-user__body label {
+    display: none !important;
+  }
+
+  .item__form h4 {
+    font-size: 1.5rem;
+  }
+
+  .item__list td {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
+    &:first-child {
+      width: 150px !important;
+    }
+  }
 }

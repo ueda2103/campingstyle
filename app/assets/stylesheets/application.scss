@@ -285,6 +285,17 @@ header {
   .nav-link {
     font-size: 1.5rem;
   }
+
+  .dropdown-taggle::after {
+    display: inline-block;
+    margin-left: 0.5rem;
+    vertical-align: 0.3rem;
+    content: "";
+    border-top: 0.5rem solid;
+    border-right: 0.5rem solid transparent;
+    border-bottom: 0;
+    border-left: 0.5rem solid transparent;
+  }
 }
 
 
