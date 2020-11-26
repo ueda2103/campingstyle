@@ -7,13 +7,13 @@
     <%# Postの場合のリンク %>
     <% if /post/ =~ request.fullpath %>
       <div class="post-edit">
-        <%= link_to "編集", edit_post_path(bookmark_base.id), class: "btn_green" %>
+        <%= link_to "編集", edit_post_path(bookmark_base.id), class: "btn_green_mini" %>
       </div>
     
     <%# Recipeの場合のリンク %>
     <% else %>
       <div class="post-edit">
-        <%= link_to "編集", edit_recipe_path(bookmark_base.id), class: "btn_green" %>
+        <%= link_to "編集", edit_recipe_path(bookmark_base.id), class: "btn_green_mini" %>
       </div>
     <% end %>
 
@@ -22,11 +22,11 @@
 
     <%# ブックマーク既済の場合destroyアクションへのリンクを付与 %>
     <% if bookmark_base.bookmark_by?(current_user) %>
-      <%= link_to "ブックマークを外す", bookmark_path(bookmark_base.bookmark_by(current_user), bookmark_base_id: bookmark_base.id, base_type: base_type(bookmark_base)), method: :delete, remote: true, class: "btn_red" %>
+      <%= link_to "ブックマーク解除", bookmark_path(bookmark_base.bookmark_by(current_user), bookmark_base_id: bookmark_base.id, base_type: base_type(bookmark_base)), method: :delete, remote: true, class: "btn_red_mini" %>
 
     <%# ブックマーク未済の場合createアクションへのリンクを付与 %>
     <% else %>
-      <%= link_to "ブックマーク", bookmarks_path(bookmark_base_id: bookmark_base.id, base_type: base_type(bookmark_base)), method: :post, remote: true, class: "btn_blue" %>
+      <%= link_to "ブックマーク", bookmarks_path(bookmark_base_id: bookmark_base.id, base_type: base_type(bookmark_base)), method: :post, remote: true, class: "btn_blue_mini" %>
     <% end %>
   <% end %>
 <% end %>

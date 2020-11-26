@@ -1,17 +1,32 @@
+<%# タイトル検索フォーム %>
+<% if /post/ =~ request.fullpath %>
+  <%= form_with url: posts_path, method: :get, local: true, class: "form mt-5" do |f| %>
+    <h6 class="pl-2 mb-3">タイトル検索</h6>
+    <%= f.text_field :search, placeholder: "（例）焚き火" %>
+    <%= f.submit "検索", class: "btn_blue py-1 mt-3" %>
+  <% end %>
+<% else %>
+  <%= form_with url: recipes_path, method: :get, local: true, class: "form mt-5" do |f| %>
+    <h6 class="pl-2 mb-3">タイトル検索</h6>
+    <%= f.text_field :search, placeholder: "（例）モーニング" %>
+    <%= f.submit "検索", class: "btn_blue py-1 mt-3" %>
+  <% end %>
+<% end %>
+
 <%# タグ検索フォーム %>
-<table>
-  <thead>
-    <tr><td>タグ検索</td></tr>
-  </thead>
-  <tbody>
-    <% if /post/ =~ request.fullpath %>
-      <% tags.each do |tag| %>
-        <tr><td><%= link_to tag.name, posts_path(tag_name: tag.name) %></td></tr>
+<h6 class="tag-title pl-2 mt-5">タグ検索</h6>
+<div class="tag-sidebar">
+  <table>
+    <tbody>
+      <% if /post/ =~ request.fullpath %>
+        <% tags.each do |tag| %>
+          <tr><td><%= link_to tag.name, posts_path(tag_name: tag.name) %></td></tr>
+        <% end %>
+      <% else %>
+        <% tags.each do |tag| %>
+          <tr><td><%= link_to tag.name, recipes_path(tag_name: tag.name) %></td></tr>
+        <% end %>
       <% end %>
-    <% else %>
-      <% tags.each do |tag| %>
-        <tr><td><%= link_to tag.name, recipes_path(tag_name: tag.name) %></td></tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>

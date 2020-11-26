@@ -4,12 +4,12 @@
     <div class="row">
 
       <%# ページ左側 %>
-      <div class="col-6 mt-3">
+      <div class="show_left col-12 col-sm-6 mt-3">
         <%= image_tag @recipe.recipe_images[0].to_s, size: "550x350", class: "main-img" %>
 
         <%# タイトルバー %>
         <div class="show__title">
-          <h2><%= @recipe.title %></h2>
+          <h3><%= @recipe.title %></h3>
 
           <div class="bookmark_<%= @recipe.id %>">
             <%= render "bookmarks/bookmark", bookmark_base: @recipe %>
@@ -20,18 +20,20 @@
         <div class="show__user-body">
 
           <%# ユーザー詳細左側 %>
-          <div class="user-body__left">
-            <%= link_to user_path(@recipe.user_id) do %>
-              <%= image_tag @recipe.user.user_image.thumb.url, size: "50x50", class: "user-icon" %>
-            <% end %>
-          </div>
+          <div class="user-body__left_wrapper d-flex">
+            <div class="user-body__left">
+              <%= link_to user_path(@recipe.user_id) do %>
+                <%= image_tag @recipe.user.user_image.thumb.url, size: "50x50", class: "user-icon" %>
+              <% end %>
+            </div>
 
-          <%# ユーザー詳細中央 %>
-          <div class="user-body__center">
-            <%= @recipe.user.family_name + @recipe.user.given_name %>
+            <%# ユーザー詳細中央 %>
+            <div class="user-body__center">
+              <%= @recipe.user.family_name + @recipe.user.given_name %>
 
-            <div class="relationship_<%= @recipe.user.id %>">
-              <%= render "relationships/relationship", follower: @recipe.user %>
+              <div class="relationship_<%= @recipe.user.id %>">
+                <%= render "relationships/relationship", follower: @recipe.user %>
+              </div>
             </div>
           </div>
 
@@ -42,9 +44,9 @@
               <%= render "favorites/favorite", favorite_base: @recipe %>
             </div>
 
-            <p>コメント　<i class="fas fa-comment fa-blue"></i><%= @recipe.comments.count %>件</p>
+            <p>コメント　<i class="fas fa-comment fa-lg fa-blue"></i><%= @recipe.comments.count %>件</p>
 
-            <p>足あと　<i class="fas fa-paw fa-brown"></i><%= @recipe.footprint %>件</p>
+            <p>足あと　<i class="fas fa-paw fa-lg fa-brown"></i><%= @recipe.footprint %>件</p>
           </div>
         </div>
 
@@ -58,7 +60,7 @@
 
         <%# レシピ材料 %>
         <div class="show__food">
-          <h2>材料</h2>
+          <h5>材料</h5>
           <% @foods.each do |f| %>
             <p><%= f.name %></p>
           <% end %>
@@ -66,7 +68,7 @@
 
         <%# レシピ作り方 %>
         <div class="show__flow">
-          <h2>作り方</h2>
+          <h5>作り方</h5>
           <ol>
             <% @flows.each do |f| %>
               <li><%= f.body %></li>
@@ -76,10 +78,10 @@
       </div>
 
       <%# ページ右側 %>
-      <div class="show_right col-6 mt-3">
+      <div class="show_right col-12 col-sm-6 mt-3">
 
         <%# コメント %>
-        <h2>Comment</h2>
+        <h4>Comment</h4>
         <% if user_signed_in? %>
           <%= form_with model: @comment, url: comments_path do |f| %>
             <%= f.text_area :body %>

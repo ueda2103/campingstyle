@@ -5,13 +5,14 @@ class UsersController < ApplicationController
   def index
     @users = User.where(is_deleted: "有効")
 
-    if params[:search]
+    if params[:search_family_name] || params[:search_given_name]
+      @users = @users.where("family_name LIKE ?", "%#{params[:search_family_name]}%")
+      @users = @users.where("given_name LIKE ?", "%#{params[:search_given_name]}%")
       
-      if params[:search].present?
-        @title = "検索結果：#{params[:search]}"
-        @users = @users.where("family_name LIKE ?", "%#{params[:search]}%")
-      else
+      if @users.count == 0
         @title = "検索結果がありません"
+      else
+        @title = "検索結果：#{params[:search_family_name]}　#{params[:search_given_name]}"
       end
 
     elsif params[:followed]
@@ -81,7 +82,7 @@ class UsersController < ApplicationController
     end
 
     if result.blank?
-      flash[:error] = "画像が不適切です"
+      flash.now[:error] = "画像が不適切です"
       render "edit"
       return
     end
@@ -90,7 +91,7 @@ class UsersController < ApplicationController
       flash[:success] = "編集を保存しました"
       redirect_to user_path(current_user.id)
     else
-      flash[:error] = "保存に失敗しました"
+      flash.now[:error] = "保存に失敗しました"
       render "edit"
     end
   end

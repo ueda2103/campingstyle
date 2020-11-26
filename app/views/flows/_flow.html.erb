@@ -1,11 +1,9 @@
 <%# 作り方リスト %>
-<table class="flow-table">
-  <tbody>
-    <% flows.each do |f| %>
-      <tr>
-        <td><%= f.body %></td>
-        <td><%= link_to "削除", flow_path(f.id), method: :delete, remote: true, class: "btn_red" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<ol class="flow-table">
+  <% flows.each do |f| %>
+      <li>
+        <p><%= f.body %></p>
+        <%= link_to "削除", flow_path(f.id), method: :delete, remote: true, class: "btn_red" %>
+      </li>
+  <% end %>
+</ol>

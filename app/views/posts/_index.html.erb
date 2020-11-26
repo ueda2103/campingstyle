@@ -6,7 +6,7 @@
         <%= image_tag post.post_images[0].to_s, size: "200x150", class: "image" %>
       <% end %>
 
-      <p class="card-title"><%= post.title %></p>
+      <p class="card-title mt-3 mb-3"><%= post.title %></p>
 
       <div class="card-icon">
         <div class="favorite_<%= post.id %> favorites">
@@ -14,12 +14,12 @@
         </div>
 
         <p class="comments">
-          <i class="fas fa-comment fa-blue"></i>
+          <i class="fas fa-comment fa-lg fa-blue"></i>
           <%= post.comments.count %>件
         </p>
 
         <p class="footprints">
-          <i class="fas fa-paw fa-brown"></i>
+          <i class="fas fa-paw fa-lg fa-brown"></i>
           <%= post.footprint %>件
         </p>
       </div>

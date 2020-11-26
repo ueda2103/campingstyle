@@ -1,25 +1,18 @@
 <%# レシピ一覧ページ %>
-<main>
+<main class="main__background main__background__recipe">
   <div class="container">
     <div class="row">
       <%# レシピ一覧サイドバー %>
-      <div class="tag-sidebar col-2 my-1 px-3">
+      <div class="sidebar col-12 col-sm-2 bg-white my-3 px-3">
         <%= render "/shared/index_sidebar", tags: @tags %>
       </div>
 
       <%# レシピ一覧メイン %>
-      <div class="post-recipe-index col-10 my-3 px-3">
+      <div class="post-recipe-index col-12 col-sm-10 my-3 px-3">
 
         <%# タイトルバー %>
-        <div class="titlebar">
-          <h2>Recipes　<%= @title %></h2>
-
-          <%= render "/shared/flash" %>
-
-          <%= form_with url: recipes_path, method: :get, local: true, class: "form" do |f| %>
-            <%= f.text_field :search %>
-            <%= f.submit "検索", class: "btn_blue_mini" %>
-          <% end %>
+        <div class="titlebar bg-white">
+          <h4 class="m-3">Recipes　<%= @title %></h4>
         </div>
 
         <%# レシピ一覧 %>

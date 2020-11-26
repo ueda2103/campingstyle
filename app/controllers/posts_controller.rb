@@ -38,7 +38,9 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @footprint = @post.footprint
-    @footprint = @footprint + 1 unless @post.user_id == current_user.id
+    if user_signed_in?
+      @footprint = @footprint + 1 unless @post.user_id == current_user.id
+    end
     @post.update(footprint: @footprint)
     @comments = Comment.where(post_id: params[:id])
   end
@@ -51,10 +53,15 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     result = false
-    result = Vision.get_image_data(@post.post_images[0].url)
+
+    if post_params[:post_images].present?
+      result = Vision.get_image_data(@post.post_images[0].url)
+    else
+      result = true
+    end
 
     if result.blank?
-      flash[:error] = "画像が不適切です"
+      flash.now[:error] = "画像が不適切です"
       render "new"
       return
     end
@@ -63,7 +70,7 @@ class PostsController < ApplicationController
       flash[:success] = "投稿を保存しました"
       redirect_to post_path(@post.id)
     else
-      flash[:error] = "保存に失敗しました"
+      flash.now[:error] = "保存に失敗しました"
       render "new"
     end
   end
@@ -84,7 +91,7 @@ class PostsController < ApplicationController
     end
     
     if result.blank?
-      flash[:error] = "画像が不適切です"
+      flash.now[:error] = "画像が不適切です"
       render "edit"
       return
     end
@@ -93,7 +100,7 @@ class PostsController < ApplicationController
       flash[:success] = "編集を保存しました"
       redirect_to post_path(@post.id)
     else
-      flash[:error] = "保存に失敗しました"
+      flash.now[:error] = "保存に失敗しました"
       render "edit"
     end
   end
