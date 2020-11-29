@@ -42,6 +42,7 @@ city_names = %w(青巻市 赤巻市 黄巻市)
     telephone_number: sprintf("0900000%04d", n * 10 + n),
     email: "#{fn[2]}.#{gn[2]}@example.jp",
     password: "password",
+    is_deleted: "有効"
   )
 end
 

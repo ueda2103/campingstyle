@@ -7,7 +7,7 @@ class RecipesController < ApplicationController
     @tags = @recipes.tag_counts_on(:tags)
 
     if params[:search]
-      
+
       if params[:search].present?
         @title = "検索結果：#{params[:search]}"
         @recipes = @recipes.where("title LIKE ?", "%#{params[:search]}%").order(id: "DESC").page(params[:page]).per(12)
@@ -27,7 +27,7 @@ class RecipesController < ApplicationController
     elsif params[:tag_name]
       @recipes = @recipes.tagged_with("#{params[:tag_name]}")
       @title = "検索結果：#{params[:tag_name]}"
-      
+
     else
       @title = "ALL"
     end
@@ -40,7 +40,7 @@ class RecipesController < ApplicationController
     if @recipe.status == "公開" || @recipe.user_id == current_user.id
       @footprint = @recipe.footprint
       if user_signed_in?
-        @footprint = @footprint + 1 unless @recipe.user_id == current_user.id
+        @footprint += 1 unless @recipe.user_id == current_user.id
       end
       @recipe.update(footprint: @footprint)
       @foods = Food.where(recipe_id: @recipe.id)
@@ -112,7 +112,7 @@ class RecipesController < ApplicationController
     end
 
     if @recipe.flows.present? && @recipe.foods.present?
-      
+
       if @recipe.update(recipe_params)
         @recipe.update(status: "公開")
         flash[:success] = "編集を保存しました"
@@ -121,7 +121,7 @@ class RecipesController < ApplicationController
         flash.now[:error] = "保存に失敗しました"
         render "edit"
       end
-      
+
     else
 
       if @recipe.update(recipe_params)
@@ -148,8 +148,9 @@ class RecipesController < ApplicationController
   end
 
   private
+
   def recipe_params
-    params.require(:recipe).permit({recipe_images: []}, :title, :body, :status, :tag_list)
+    params.require(:recipe).permit({ recipe_images: [] }, :title, :body, :status, :tag_list)
   end
 
   def check_user

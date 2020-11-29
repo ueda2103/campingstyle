@@ -15,14 +15,14 @@ module Vision
       params = {
         requests: [{
           image: {
-            content: base64_image
+            content: base64_image,
           },
           features: [
             {
-              type: 'SAFE_SEARCH_DETECTION'
-            }
-          ]
-        }]
+              type: 'SAFE_SEARCH_DETECTION',
+            },
+          ],
+        }],
       }.to_json
 
       # Google Cloud Vision APIにリクエスト

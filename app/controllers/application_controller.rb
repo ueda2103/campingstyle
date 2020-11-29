@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
-
   private
+
   def check_guest
     email = current_user.email.downcase
     if email == "guest@example.com"

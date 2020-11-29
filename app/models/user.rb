@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable
+         :recoverable, :rememberable
 
   mount_uploader :user_image, UserImageUploader
 
@@ -16,16 +16,17 @@ class User < ApplicationRecord
   has_many  :followed_user,   through: :followed, source: :follower
   has_many  :follower_user,   through: :follower, source: :followed
 
-  KATAKANA = /\A[\p{katakana}\u{30fc}]+\z/
-  EMAIL = /\A\S+@\S+\.\S+\z/
-  POST = /\A\d{7}\z/
-  TELEPHONE = /\A\d{10,11}\z/
+  KATAKANA = /\A[\p{katakana}\u{30fc}]+\z/.freeze
+  EMAIL = /\A\S+@\S+\.\S+\z/.freeze
+  POST = /\A\d{7}\z/.freeze
+  TELEPHONE = /\A\d{10,11}\z/.freeze
 
-  validates :family_name, :given_name, :prefecture_code, :city, :street,:encrypted_password, presence: true
-  validates :family_name_kana, :given_name_kana, presence: true, format: {with: KATAKANA}
-  validates :postal_code, presence: true, format: {with: POST, allow_blank: true}
-  validates :telephone_number, presence: true, format: {with: TELEPHONE, allow_blank: true}
-  validates :email, presence: true, format: {with: EMAIL, allow_blank: true}, uniqueness: {case_sensitive: false}
+  validates :family_name, :given_name, :prefecture_code, :city, :street, :encrypted_password, presence: true
+  validates :family_name_kana, :given_name_kana, presence: true, format: { with: KATAKANA }
+  validates :postal_code, presence: true, format: { with: POST, allow_blank: true }
+  validates :telephone_number, presence: true, format: { with: TELEPHONE, allow_blank: true }
+  validates :email, presence: true, format: { with: EMAIL, allow_blank: true }, uniqueness: { case_sensitive: false }
+  validates :is_deleted, presence: true
 
   def follower_by?(user)
     follower.where(followed_id: user.id).exists?
@@ -46,10 +47,10 @@ class User < ApplicationRecord
     self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
 
-  enum is_deleted: {"退会済": true, "有効": false}
+  enum is_deleted: { "退会済": true, "有効": false }
 
   def active_for_authentication?
-    super && self.is_deleted == "有効"
+    super && is_deleted == "有効"
   end
 
   def self.guest
