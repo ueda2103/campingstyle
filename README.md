@@ -39,7 +39,7 @@ https://docs.google.com/spreadsheets/d/1q0l1PzF3Prp8Puh8I0V5sowZk9W78TdW-mcJCahR
 https://app.diagrams.net/#G14s4Lt5JD3_9rINAjZGIiwW0chYp4PSVY
 
 ### ER図
-https://drive.google.com/drive/u/0/folders/1XxI240jJn-upHf9fZZg21EN3pa_E-0vG
+https://docs.google.com/spreadsheets/d/1q0l1PzF3Prp8Puh8I0V5sowZk9W78TdW-mcJCahR5vc/edit#gid=2138600385
 
 ### ワイヤーフレーム
 https://app.diagrams.net/#G1Rwlul3_RKbDiCOgujalH-7fp2b1o72F0
