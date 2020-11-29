@@ -26,6 +26,7 @@ class User < ApplicationRecord
   validates :postal_code, presence: true, format: { with: POST, allow_blank: true }
   validates :telephone_number, presence: true, format: { with: TELEPHONE, allow_blank: true }
   validates :email, presence: true, format: { with: EMAIL, allow_blank: true }, uniqueness: { case_sensitive: false }
+  validates :is_deleted, presence: true
 
   def follower_by?(user)
     follower.where(followed_id: user.id).exists?
