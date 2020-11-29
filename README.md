@@ -1,11 +1,11 @@
 # Camping Style
-![BD8DDF75-4025-4C02-86FE-7992956F8D4B_1_105_c](https://user-images.githubusercontent.com/67679044/97265036-5153a100-1869-11eb-8864-613008fdad6d.jpeg)
+<img width="1872" alt="スクリーンショット 2020-11-29 21 40 56" src="https://user-images.githubusercontent.com/67679044/100542338-a16cbb80-328c-11eb-9082-9eccfb7e823c.png">
 
-![C9384747-45F9-4560-97D8-D9305768AD2C_1_105_c](https://user-images.githubusercontent.com/67679044/97265109-6cbeac00-1869-11eb-83b8-47936173ef27.jpeg)
+<img width="1872" alt="スクリーンショット 2020-11-29 21 41 53" src="https://user-images.githubusercontent.com/67679044/100542352-bba69980-328c-11eb-8c50-91eae83ff5ad.png">
 
-![9C6E1B0B-987C-421E-B406-9812F3EB3C68_1_105_c](https://user-images.githubusercontent.com/67679044/97265144-78aa6e00-1869-11eb-93a4-748d80617e7e.jpeg)
+<img width="1872" alt="スクリーンショット 2020-11-29 21 43 39" src="https://user-images.githubusercontent.com/67679044/100542367-cf520000-328c-11eb-8230-c1ebbedf9803.png">
 
-![65A09936-D4EF-4C5C-ACF2-4A67E6606E4A_1_105_c](https://user-images.githubusercontent.com/67679044/97265174-852ec680-1869-11eb-87bc-20cd99de7b8c.jpeg)
+<img width="1873" alt="スクリーンショット 2020-11-29 21 45 01" src="https://user-images.githubusercontent.com/67679044/100542377-dda01c00-328c-11eb-8a34-043ecac5efd8.png">
 
 ## サイト概要
 キャンパーのためのSNSサイトです。
@@ -44,17 +44,45 @@ https://drive.google.com/drive/u/0/folders/1XxI240jJn-upHf9fZZg21EN3pa_E-0vG
 ### ワイヤーフレーム
 https://app.diagrams.net/#G1Rwlul3_RKbDiCOgujalH-7fp2b1o72F0
 
-## 開発環境
-- OS：Linux(CentOS)
-- 言語：HTML,CSS,JavaScript,Ruby,SQL
-- フレームワーク：Ruby on Rails
-- JSライブラリ：jQuery
-- 仮想環境：Vagrant,VirtualBox
+## 使用技術一覧
+### フロントエンド
+- HTML/CSS
+- JavaScript/jQuery
+- Bootstrap4
+
+### バックエンド
+- Ruby/Ruby on Rails
+- MySQL
+
+### インフラ
+- Linux
+- Nginx/Puma
+- AWS(VPC/EC2/RDS/Route53)
+
+### 外部API
+- Google Vision API
+
+### テスト
+- RSpec
+
+### 静的コード解析
+- RuboCop
+
+### 自動デプロイ
+- Capistrano
+
+### 開発環境
+- MacOS
+- SQlite
+- Vagrant/VirtualBox
+
+### バージョン管理
+- Git/Github
 
 ## 使用素材
-- 写真
-morguefile https://morguefile.com/
-PAKUTASO https://www.pakutaso.com/
+- 写真  
+morguefile https://morguefile.com/  
+PAKUTASO https://www.pakutaso.com/  
 O-DAN https://o-dan.net/ja/
 - 動画
 GIFMAGAZINE https://gifmagazine.net/?locale=ja
