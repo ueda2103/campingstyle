@@ -30,19 +30,22 @@ SNSでのキャンパー同士の情報共有
 
 ## 設計書
 ### 機能一覧
-https://docs.google.com/spreadsheets/d/1eMhdsvmRd4ZL2UxQjKGYgmbj-fTQxF6zYT-a-YVjpEs/edit#gid=0
+https://docs.google.com/spreadsheets/d/1eMhdsvmRd4ZL2UxQjKGYgmbj-fTQxF6zYT-a-YVjpEs/edit?usp=sharing
 
 ### テーブル定義書
-https://docs.google.com/spreadsheets/d/1q0l1PzF3Prp8Puh8I0V5sowZk9W78TdW-mcJCahR5vc/edit#gid=2138600385
+https://docs.google.com/spreadsheets/d/1q0l1PzF3Prp8Puh8I0V5sowZk9W78TdW-mcJCahR5vc/edit?usp=sharing
 
 ### UI
-https://app.diagrams.net/#G14s4Lt5JD3_9rINAjZGIiwW0chYp4PSVY
+https://drive.google.com/file/d/14s4Lt5JD3_9rINAjZGIiwW0chYp4PSVY/view?usp=sharing
 
 ### ER図
-https://drive.google.com/drive/u/0/folders/1XxI240jJn-upHf9fZZg21EN3pa_E-0vG
+https://drive.google.com/file/d/1rWA5-AisbXf4W9GkDj566asJM0Geo3Pj/view?usp=sharing
 
 ### ワイヤーフレーム
-https://app.diagrams.net/#G1Rwlul3_RKbDiCOgujalH-7fp2b1o72F0
+https://drive.google.com/file/d/1Rwlul3_RKbDiCOgujalH-7fp2b1o72F0/view?usp=sharing
+
+### アプリケーション詳細設計
+https://docs.google.com/spreadsheets/d/1lmZHoxFxCAnaMnNGaQsh0a3JFjfB_Qz-n1Fpg0a8He8/edit?usp=sharing
 
 ## 使用技術一覧
 ### フロントエンド
